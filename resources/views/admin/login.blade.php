@@ -86,7 +86,7 @@
 
               </div>
               <div>
-                {!! Form::text('password','',['class' => 'form-control','placeholder'=>'Password','id'=>'acc_pass']); !!}
+                <input type="password" class="form-control" placeholder="Password" required="" name='password' id='acc_pass'/>
               </div>
               {!! Form::button('submit',['class'=>'btn btn-default submit','type'=>'submit','id'=>'sub_c'])!!}
               <div>
@@ -191,10 +191,13 @@ $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('conten
     });
 @endif
 @if($errors->has('password'))
-    layer.tips("{{$errors->first('password')}}", '#acc_pass', '#acc_pass'{
+
+    layer.tips("{{$errors->first('password')}}", '#acc_pass',{
+
         tipsMore: true
     });
 @endif
+
     </script>
   </body>
 </html>

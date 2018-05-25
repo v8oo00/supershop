@@ -18,8 +18,6 @@ class IndexController extends Controller
      */
     public function index(Request $Request)
     {
-        // dd($Request->session()->all());
-        // dd(Auth::guard('admin')->user());
         return view('admin.index1');
     }
 }

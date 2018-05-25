@@ -6,6 +6,7 @@ use App\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 
 class RegisterController extends Controller
 {
@@ -30,14 +31,14 @@ class RegisterController extends Controller
             'password.required'=>'密码不能为空',
             'password.min'=>'密码最少6位',
         ]);
-
+        $qq = randString(10);
         Admin::create([
             'name' => $request->name,
             'phone' => $request->phone,
             'avatar' =>'/admins/images/img.jpg',
             'last_login' =>000000000,
             'ip' => '127.0.0.1',
-            'qq' =>randString(10),
+            'qq'=> $qq,
             'password' => bcrypt($request->password),
         ]);
 
@@ -53,15 +54,14 @@ class RegisterController extends Controller
         $r = $Ucpaas -> SendSms('6401767b5b2a464e9bde32ba077cf94d',190547,$code,$request->phone,'');
         if(substr($r,21,6) == 000000){
             //存储到session里
-            $request->session()->put([
-                'code'=>[
-                    $code,
-                    'to'=>[
-                        $request->phone,
-                        'type'=>'mobile'
-                    ],
-                ],
-            ]);
+            $data = [
+            	$code,
+            	'to'=>[
+            		$request->phone,
+            		'type'=>'mobile'
+            	],
+            ];
+            Redis::setex('code', 180, serialize($data));
             return ['state'=>true,'info'=>'发送验证码成功请注意查收'];
         }else{
             return ['state'=>false,'info'=>'发送验证码失败请稍后尝试'];
@@ -73,14 +73,17 @@ class RegisterController extends Controller
         // dump($request->session()->all());
 
         // dump($request->all());
-        if($request->session()->has('code')){
-             $code= $request->session()->get('code');
+        $code=unserialize(Redis::get('code'));
+
+        if($code){
 
             if($code[0]==$request->code && $code['to'][0]==$request->phone){
-                    return 'true';
-                }else{
-                    return 'false';
-                }
+                return 'true';
+            }else{
+                return 'false';
+            }
+        }else{
+            return 'false';
         }
 
 

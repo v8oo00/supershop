@@ -152,22 +152,6 @@
                   </li>
                 </ul>
               </div>
-
-              <div class="menu_section">
-                <h3>SuperBusiness</h3>
-                <ul class="nav side-menu">
-                  <li><a><i class="fa fa-archive"></i>我的店铺<span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="e_commerce.html">E-commerce</a></li>
-                      <li><a href="projects.html">Projects</a></li>
-                      <li><a href="project_detail.html">Project Detail</a></li>
-                      <li><a href="contacts.html">Contacts</a></li>
-                      <li><a href="profile.html">Profile</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-
             </div>
             <!-- /sidebar menu -->
 
@@ -182,7 +166,6 @@
               <a data-toggle="tooltip" data-placement="top" title="Lock">
                 <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
               </a>
-
               <a data-toggle="tooltip" data-placement="top" title="Logout" href="{{ url('/admin/logout')}}"
                                    onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
