@@ -86,11 +86,11 @@
 
               </div>
               <div>
-                {!! Form::text('password','',['class' => 'form-control','placeholder'=>'Password','id'=>'acc_pass']); !!}
+                <input type="password" class="form-control" placeholder="Password" required="" name='password' id='acc_pass'/>
               </div>
               {!! Form::button('submit',['class'=>'btn btn-default submit','type'=>'submit','id'=>'sub_c'])!!}
               <div>
-                
+
               </div>
 
               <div class="clearfix"></div>
@@ -134,7 +134,7 @@ $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('conten
                     if($('#phone_v').val()){
                       $.ajax({
                         type:"post",
-                        url:'{{url("admin/ucpaas_vcode")}}', 
+                        url:'{{url("admin/ucpaas_vcode")}}',
                         dataType: 'text',
                         data:{'phone':$('#phone_v').val()},
                         success:function(data){
@@ -167,7 +167,7 @@ $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('conten
         $('#sub_c').click(function(){
             $.ajax({
                 type:"post",
-                url:'{{url("admin/ucpaas_check")}}', 
+                url:'{{url("admin/ucpaas_check")}}',
                 dataType: 'text',
                 data:{'phone':$('#phone_v').val(),'code':$('#vcode_c').val()},
                 success:function(data){
@@ -186,11 +186,16 @@ $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('conten
         });
 
 @if($errors->has('name'))
-    layer.tips('{{ $errors->first("name") }}', '#acc_name');
+    layer.tips('{{ $errors->first("name") }}', '#acc_name',{
+        tipsMore: true
+    });
 @endif
 @if($errors->has('password'))
-    layer.tips("{{$errors->first('password')}}", '#acc_pass');
+    layer.tips("{{$errors->first('password')}}", '#acc_pass'{
+        tipsMore: true
+    });
 @endif
+
     </script>
   </body>
 </html>

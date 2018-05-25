@@ -20,7 +20,7 @@
     <link href="/admins/vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
     <link href="/admins/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-    
+
     <!-- bootstrap-progressbar -->
     <link href="/admins/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
     <!-- JQVMap -->
@@ -152,22 +152,6 @@
                   </li>
                 </ul>
               </div>
-
-              <div class="menu_section">
-                <h3>SuperBusiness</h3>
-                <ul class="nav side-menu">
-                  <li><a><i class="fa fa-archive"></i>我的店铺<span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="e_commerce.html">E-commerce</a></li>
-                      <li><a href="projects.html">Projects</a></li>
-                      <li><a href="project_detail.html">Project Detail</a></li>
-                      <li><a href="contacts.html">Contacts</a></li>
-                      <li><a href="profile.html">Profile</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-
             </div>
             <!-- /sidebar menu -->
 
@@ -182,9 +166,14 @@
               <a data-toggle="tooltip" data-placement="top" title="Lock">
                 <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="{{ url('/admin/logout')}}"
+                                   onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                    <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                </a>
+                <form id="logout-form" action="{{ url('/admin/logout')}}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                </form>
             </div>
             <!-- /menu footer buttons -->
           </div>
@@ -289,7 +278,7 @@
 
         <!-- page content -->
         <div class="right_col" role="main">
-          
+
 
 
         @yield('content')
@@ -340,7 +329,7 @@
     <!-- Custom Theme Scripts -->
     <script src="/admins/build/js/custom.min.js"></script>
     @section('js')
-    
+
     @show
   </body>
 </html>
