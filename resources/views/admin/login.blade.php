@@ -191,7 +191,9 @@ $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('conten
     });
 @endif
 @if($errors->has('password'))
-    layer.tips("{{$errors->first('password')}}", '#acc_pass'{
+
+    layer.tips("{{$errors->first('password')}}", '#acc_pass',{
+
         tipsMore: true
     });
 @endif

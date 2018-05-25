@@ -169,11 +169,13 @@
               <a data-toggle="tooltip" data-placement="top" title="Logout" href="{{ url('/admin/logout')}}"
                                    onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
-                    <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-                </a>
-                <form id="logout-form" action="{{ url('/admin/logout')}}" method="POST" style="display: none;">
-                    {{ csrf_field() }}
-                </form>
+                                    <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                                </a>
+
+                                <form id="logout-form" action="{{ url('/admin/logout')}}" method="POST"
+                                      style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
             </div>
             <!-- /menu footer buttons -->
           </div>

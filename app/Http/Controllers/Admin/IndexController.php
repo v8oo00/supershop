@@ -18,7 +18,6 @@ class IndexController extends Controller
      */
     public function index(Request $Request)
     {
-
         return view('admin.index1');
     }
 }
