@@ -27,6 +27,12 @@
     <link href="/admins/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
     <!-- bootstrap-daterangepicker -->
     <link href="/admins/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <!-- Datatables -->
+    <link href="/admins/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="/admins/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="/admins/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="/admins/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="/admins/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
     <link href="/admins/build/css/custom.min.css" rel="stylesheet">
@@ -66,12 +72,8 @@
                   </li>
                   <li><a><i class="fa fa-user"></i> 前台用户管理 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="form.html">General Form</a></li>
-                      <li><a href="form_advanced.html">Advanced Components</a></li>
-                      <li><a href="form_validation.html">Form Validation</a></li>
-                      <li><a href="form_wizards.html">Form Wizard</a></li>
-                      <li><a href="form_upload.html">Form Upload</a></li>
-                      <li><a href="form_buttons.html">Form Buttons</a></li>
+                      <li><a href="{{ action('Admin\HomeUserController@index')}}">浏览用户</a></li>
+                      <li><a href="{{ action('Admin\HomeUserController@create')}}">添加用户</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-users"></i> 后台用户管理<span class="fa fa-chevron-down"></span></a>
@@ -334,6 +336,22 @@
     <!-- bootstrap-daterangepicker -->
     <script src="/admins/vendors/moment/min/moment.min.js"></script>
     <script src="/admins/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <!-- Datatables -->
+    <script src="/admins/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="/admins/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="/admins/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="/admins/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="/admins/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="/admins/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="/admins/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="/admins/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="/admins/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="/admins/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="/admins/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="/admins/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script src="/admins/vendors/jszip/dist/jszip.min.js"></script>
+    <script src="/admins/vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="/admins/vendors/pdfmake/build/vfs_fonts.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="/admins/build/js/custom.min.js"></script>
     @section('js')
