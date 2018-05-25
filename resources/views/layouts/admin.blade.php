@@ -108,6 +108,12 @@
                       <li><a href="fixed_footer.html">Fixed Footer</a></li>
                     </ul>
                   </li>
+                  <li><a><i class="fa fa-shopping-cart"></i> 角色管理 <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="fixed_sidebar.html">Fixed Sidebar</a></li>
+                      <li><a href="fixed_footer.html">Fixed Footer</a></li>
+                    </ul>
+                  </li>
                   <li><a><i class="fa fa-shopping-cart"></i> 商品管理 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="fixed_sidebar.html">Fixed Sidebar</a></li>
