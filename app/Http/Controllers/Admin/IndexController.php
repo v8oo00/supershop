@@ -12,14 +12,14 @@ class IndexController extends Controller
     {
 
     }
-    
+
     /**
      * 显示后台管理模板首页
      */
     public function index(Request $Request)
     {
         // dd($Request->session()->all());
-        dd(Auth::guard('admin')->user());
+        // dd(Auth::guard('admin')->user());
         return view('admin.index1');
     }
 }

@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
-   
+
     public function __construct()
     {
 
@@ -37,10 +37,11 @@ class RegisterController extends Controller
             'avatar' =>'/admins/images/img.jpg',
             'last_login' =>000000000,
             'ip' => '127.0.0.1',
+            'qq' =>randString(10),
             'password' => bcrypt($request->password),
         ]);
 
-        return redirect()->action('Admin\LoginController@showLoginForm',[parameters]);
+        return redirect()->action('Admin\LoginController@showLoginForm');
     }
 
     public function ucpaas_vcode(Request $request)
@@ -82,7 +83,7 @@ class RegisterController extends Controller
                 }
         }
 
-        
+
     }
 
     /**
