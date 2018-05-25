@@ -34,6 +34,14 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('ucpaas_vcode', 'Admin\RegisterController@ucpaas_vcode');
     Route::post('ucpaas_check', 'Admin\RegisterController@ucpaas_check');
 
+
+    Route::post('logout', 'Admin\LoginController@logout');
+
+    //前台用户管理模块
+    Route::get('homeuser', 'Admin\HomeUserController@index');
+    Route::get('homeuser/create', 'Admin\HomeUserController@create');
+    Route::post('homeuser/store', 'Admin\HomeUserController@store');
+
     //退出登录
     Route::post('logout', 'Admin\LoginController@logout');
 
@@ -41,4 +49,5 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('role','Admin\RoleController@index');
     Route::get('role/add','Admin\RoleController@add');
     Route::post('role/store','Admin\RoleController@store');
+
 });

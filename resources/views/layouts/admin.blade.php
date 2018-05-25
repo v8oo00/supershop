@@ -72,12 +72,8 @@
                   </li>
                   <li><a><i class="fa fa-user"></i> 前台用户管理 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="form.html">General Form</a></li>
-                      <li><a href="form_advanced.html">Advanced Components</a></li>
-                      <li><a href="form_validation.html">Form Validation</a></li>
-                      <li><a href="form_wizards.html">Form Wizard</a></li>
-                      <li><a href="form_upload.html">Form Upload</a></li>
-                      <li><a href="form_buttons.html">Form Buttons</a></li>
+                      <li><a href="{{ action('Admin\HomeUserController@index')}}">浏览用户</a></li>
+                      <li><a href="{{ action('Admin\HomeUserController@create')}}">添加用户</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-users"></i> 后台用户管理<span class="fa fa-chevron-down"></span></a>
