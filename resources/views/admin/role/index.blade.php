@@ -36,17 +36,18 @@
                       <th>Action</th>
                     </tr>
                   </thead>
-                  <tbody v-for="item in items" :key='item.id'>
-                    <tr v-for='value in item'>
-                        <template  v-for='v in value' >
-                            <td :key="v">@{{v}}</td>
-                        </template>
-                        <td>
-                            <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
-                            <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
-                        </td>
-                    </tr>
+                  <tbody v-for="item in items">
+                        @foreach($roles as $role )
+                            <tr>
+                                <td>{{$role['id']}}</td>
+                                <td>{{$role['r_name']}}</td>
+                                <td>{{$role['desc']}}</td>
+                                <td>
+                                    <a href="{{action('Admin\RoleController@edit',$role['id'])}}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+                                    <a href="{{action('Admin\RoleController@delete',$role['id'])}}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                                </td>
+                            </tr>
+                        @endforeach
                   </tbody>
                 </table>
 
@@ -57,15 +58,6 @@
 @endsection
 
 @section('js')
-<script type="text/javascript">
-var homeusers = new Vue({
-    el:'.homeusers',
-    data:{
-        items:[
-            {!! $roleasds !!}
-        ]
-    }
-})
-</script>
+
 
 @endsection

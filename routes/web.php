@@ -49,5 +49,16 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('role','Admin\RoleController@index');
     Route::get('role/add','Admin\RoleController@add');
     Route::post('role/store','Admin\RoleController@store');
+    Route::get('role/edit/{id}','Admin\RoleController@edit');
+    Route::post('role/edit','Admin\RoleController@update');
+    Route::get('role/delete/{id}','Admin\RoleController@delete');
 
+    //订单管理模块
+    Route::get('order','Admin\OrderController@index');
+    Route::post('order/check_status','Admin\OrderController@check_status');
+
+    //活动管理模块
+    Route::get('activity','Admin\ActivityController@index');
+    Route::get('activity/create','Admin\ActivityController@create');
+    Route::post('activity/store','Admin\ActivityController@store');
 });

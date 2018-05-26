@@ -10,10 +10,9 @@ class RoleController extends Controller
 {
     //
     public function index(){
-        $role=Role::get()->toArray();
-        $roleasds = json_encode($role);
+        $roles=Role::get()->toArray();
         // dd($roles);
-        return view('admin.role.index',compact('roleasds'));
+        return view('admin.role.index',compact('roles'));
     }
 
     public function add(){
@@ -30,6 +29,37 @@ class RoleController extends Controller
             return redirect()->action('Admin\RoleController@index');
         }else{
             return back();
+        }
+    }
+
+    public function edit(Request $request){
+        $roles=Role::findOrFail($request->id);
+        // dd($roles);
+        return view('admin.role.edit',compact('roles'));
+    }
+
+    public function update(Request $request){
+        $role = Role::find($request->id);
+        $role->r_name = $request->r_name;
+        $role->desc = $request->desc;
+        $res = $role->save();
+
+        if($res){
+            return redirect()->action('Admin\RoleController@index');
+        }else{
+            return back();
+        }
+    }
+
+    public function delete(Request $request){
+        // dd($request->id);
+
+        $res = Role::destroy($request->id);
+
+        if($res){
+            return redirect()->action('Admin\RoleController@index');
+        }else{
+            return redirect()->action('Admin\RoleController@index');
         }
     }
 }
