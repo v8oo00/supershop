@@ -38,6 +38,9 @@
 
     <!-- Custom Theme Style -->
     <link href="/admins/build/css/custom.min.css" rel="stylesheet">
+    @section('css')
+
+    @show
   </head>
 
   <body class="nav-md">
@@ -109,22 +112,20 @@
                   </li>
                   <li><a><i class="fa fa-shopping-cart"></i> 商品管理 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="fixed_sidebar.html">Fixed Sidebar</a></li>
-                      <li><a href="fixed_footer.html">Fixed Footer</a></li>
+                      <li><a href="asdasd.html">商品浏览</a></li>
                     </ul>
                   </li>
 
                   <li><a><i class="fa fa-barcode"></i> 订单管理 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="fixed_sidebar.html">Fixed Sidebar</a></li>
-                      <li><a href="fixed_footer.html">Fixed Footer</a></li>
+                      <li><a href="{{action('Admin\OrderController@index')}}">订单浏览</a></li>
                     </ul>
                   </li>
 
                   <li><a><i class="fa fa-gift"></i> 活动管理 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="fixed_sidebar.html">Fixed Sidebar</a></li>
-                      <li><a href="fixed_footer.html">Fixed Footer</a></li>
+                      <li><a href="{{action('Admin\ActivityController@index')}}">活动浏览</a></li>
+                      <li><a href="{{action('Admin\ActivityController@create')}}">活动添加</a></li>
                     </ul>
                   </li>
 
@@ -271,8 +272,13 @@
     <script src="/admins/vendors/jszip/dist/jszip.min.js"></script>
     <script src="/admins/vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="/admins/vendors/pdfmake/build/vfs_fonts.js"></script>
+
     <!-- Switchery -->
     <script src="/admins/vendors/switchery/dist/switchery.min.js"></script>
+
+    <!-- validator -->
+    <script src="/admins/vendors/validator/validator.js"></script>
+
     <!-- Custom Theme Scripts -->
     <script src="/admins/build/js/custom.min.js"></script>
     @section('js')

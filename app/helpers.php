@@ -1,4 +1,4 @@
-<?php 
+<?php
 	/**
 	  * 产生随机数串
 	* @param integer $len 随机数字长度
@@ -12,5 +12,21 @@
 	    $chars = str_shuffle($chars);
 	    $str = substr($chars, 0, $len);
 	    return $str;
+	}
+
+	function getOrderAddressById($id){
+		return App\Address::findOrFail($id)['province'].App\Address::findOrFail($id)['city'].App\Address::findOrFail($id)['county'].App\Address::findOrFail($id)['street'];
+	}
+
+	function ChangeCalendarFormat($str,$a,$b){
+		$arr = array_reverse(explode('-',$str));
+
+		$str_a = $arr[$a];
+		$str_b = $arr[$b];
+
+		$arr[$a] = $str_b;
+		$arr[$b] = $str_a;
+
+		return implode('/',$arr);
 	}
 ?>

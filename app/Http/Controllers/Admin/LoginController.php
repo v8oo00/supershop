@@ -20,7 +20,7 @@ class LoginController extends Controller
 use AuthenticatesUsers, AuthenticatesLogout {
             AuthenticatesLogout::logout insteadof AuthenticatesUsers;
         }
-    
+
 
     /**
      * Where to redirect users after login / registration.

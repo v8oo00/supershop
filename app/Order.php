@@ -4,28 +4,26 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class Order extends Model
 {
     //
     //指定表名
-    protected $table = 'roles';
+    protected $table = 'orders';
 
     //指定主键
     protected $primaryKey = 'id';
 
     //是否开启时间戳
-    public $timestamps = false;
+    public $timestamps = true;
 
     //设置时间戳格式为Unix
     // protected $dateFormat = 'U';
 
     //过滤字段，只有包含的字段才能被更新
-    protected $fillable = ['r_name','desc'];
+    protected $fillable = ['order_num','uid','address_id','total','status'];
 
-    //一个角色可以被多个后台用户使用
-    public function adminusers(){
-        return $this->hasMany('App\Admin');
-    }
-
+    //隐藏字段
+    protected $hidden = ['created_at'];
+    
 
 }

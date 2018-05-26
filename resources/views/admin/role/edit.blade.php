@@ -13,7 +13,7 @@
                  </div>
                  <div class="x_content">
 
-                {!! Form::open(['url' => 'admin/role/store','method' => 'POST','class'=>'form-horizontal form-label-left','novalidate'=>'']) !!}
+                {!! Form::open(['url' => 'admin/role/edit','method' => 'POST','class'=>'form-horizontal form-label-left','novalidate'=>'']) !!}
                      <p>角色定义是指 不同<code>角色</code>且<code>权限</code>不同
                      </p>
                      <span class="section">Create Form</span>
@@ -22,7 +22,9 @@
                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Role Name <span class="required">*</span>
                        </label>
                        <div class="col-md-6 col-sm-6 col-xs-12">
-                         <input id="r_name" class="form-control col-md-7 col-xs-12" name="r_name" placeholder="Please Down Role's Name" required="required" type="text">
+                           <input class="form-control col-md-7 col-xs-12" name="id" placeholder="Please Down Role's Name" required="required" type="hidden" value='{{$roles["id"]}}'>
+
+                         <input id="r_name" class="form-control col-md-7 col-xs-12" name="r_name" placeholder="Please Down Role's Name" required="required" type="text" value='{{$roles["r_name"]}}'>
                        </div>
                      </div>
 
@@ -30,7 +32,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">Textarea <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <textarea id="textarea" required="required" name="desc" class="form-control col-md-7 col-xs-12" style="resize: none;"></textarea>
+                          <textarea id="textarea" required="required" name="desc" class="form-control col-md-7 col-xs-12" style="resize: none;" >{{$roles["desc"]}}</textarea>
                         </div>
                       </div>
 
@@ -41,6 +43,7 @@
                          <button id="send" type="submit" class="btn btn-success">Submit</button>
                        </div>
                      </div>
+                   </form>
                    {!! Form::close() !!}
                  </div>
                </div>
@@ -51,5 +54,5 @@
 
 @section('js')
 <!-- validator -->
-
+<script src="/admins/vendors/validator/validator.js"></script>
 @endsection

@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class Activity extends Model
 {
-    //
+
     //指定表名
-    protected $table = 'roles';
+    protected $table = 'activities';
 
     //指定主键
     protected $primaryKey = 'id';
@@ -20,12 +20,8 @@ class Role extends Model
     // protected $dateFormat = 'U';
 
     //过滤字段，只有包含的字段才能被更新
-    protected $fillable = ['r_name','desc'];
+    protected $fillable = ['name','rule','image','route','start_time','end_time'];
 
-    //一个角色可以被多个后台用户使用
-    public function adminusers(){
-        return $this->hasMany('App\Admin');
-    }
-
-
+    //隐藏字段
+    protected $hidden = ['updated_at','created_at'];
 }
