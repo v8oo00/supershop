@@ -21,6 +21,7 @@ class CreateAdminsTable extends Migration
             $table->bigInteger('phone')->unique();
             $table->bigInteger('qq')->unique();
             $table->string('avatar');
+            $table->integer('status')->default(1);
             $table->integer('last_login');
             $table->string('ip');
             $table->rememberToken();

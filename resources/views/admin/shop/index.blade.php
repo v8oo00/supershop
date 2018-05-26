@@ -4,7 +4,7 @@
 <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
               <div class="x_title">
-                <h2>Browse<small>HomeUsers</small></h2>
+                <h2>Browse<small>Shops</small></h2>
                 <ul class="nav navbar-right panel_toolbox">
                   <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                   </li>
@@ -24,46 +24,49 @@
               </div>
               <div class="x_content">
                 <p class="text-muted font-13 m-b-30">
-                  Show the information of foreground users
+                  Show all the shops in the mall
                 </p>
 
-                <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap homeusers" cellspacing="0" width="100%">
+                <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                   <thead>
                     <tr>
                       <th>ID</th>
-                      <th>Name</th>
-                      <th>Email</th>
-                      <th style="text-align:center">Status</th>
+                      <th>Avatar</th>
+                      <th>User_Name</th>
+                      <th>Shop_Name</th>
+                      <th>Phone</th>
+                      <th>desc</th>
+                      <th>Address</th>
+                      <th>Status</th>
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach($homeUsers as $homeUser)
+                    @foreach($shops as $shop)
                         <tr>
-                            <td>{{ $homeUser->id }}</td>
-                            <td>{{ $homeUser->name }}</td>
-                            <td>{{ $homeUser->email }}</td>
-                            <td style="text-align:center"><input type="checkbox" class="js-switch" @if($homeUser->status==1) checked @endif onchange="fun(this)" /></td>
+                            <td style="line-height:50px;">{{ $shop->id }}</td>
+                            <td style="text-align:center;"><img src="{{ $shop->avatar }}" style="width:50px;height:50pxl;border-radius:50px;"></td>
+                            <td style="line-height:50px;">{{ $shop->user->name }}</td>
+                            <td style="line-height:50px;">{{ $shop->name }}</td>
+                            <td style="line-height:50px;">{{ $shop->phone }}</td>
+                            <td style="line-height:50px;">{{ $shop->desc }}</td>
+                            <td style="line-height:50px;">{{ $shop->address }}</td>
+                            <td style="padding-top:20px;"><input type="checkbox" class="js-switch" @if($shop->status==1) checked @endif onchange="fun(this)" /></td>
                         </tr>
                     @endforeach
                   </tbody>
                 </table>
-
-
               </div>
             </div>
           </div>
 @endsection
 
-@section('js')
 <script type="text/javascript">
     function fun(obj){
         var id = $(obj).parents('tr').find('td:eq(0)').html();
         $.ajax({
-            url:"{{ action('Admin\HomeUserController@status') }}",
+            url:"{{ action('Admin\ShopController@status') }}",
             data:{id:id},
             type:'get'
         });
     }
 </script>
-
-@endsection

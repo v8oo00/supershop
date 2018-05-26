@@ -15,7 +15,7 @@ class Admin extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'password','avatar','phone','last_login','ip','qq','role_id'
+        'name', 'password','avatar','phone','last_login','ip','qq','role_id','status',
     ];
 
     /**
@@ -27,5 +27,9 @@ class Admin extends Authenticatable
         'password', 'remember_token',
     ];
 
+    //一个用户可以选择一个角色
+    public function role(){
+        return $this->belongsTo('App\Role','role_id','id');
+    }
 
 }

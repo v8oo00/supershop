@@ -22,8 +22,10 @@ class Role extends Model
     //过滤字段，只有包含的字段才能被更新
     protected $fillable = ['r_name','desc'];
 
-    //隐藏字段
-    // protected $hidden = ['password'];
+    //一个角色可以被多个后台用户使用
+    public function adminusers(){
+        return $this->hasMany('App\Admin');
+    }
 
 
 }

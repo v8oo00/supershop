@@ -33,6 +33,8 @@
     <link href="/admins/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="/admins/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="/admins/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+    <!-- Switchery -->
+    <link href="/admins/vendors/switchery/dist/switchery.min.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
     <link href="/admins/build/css/custom.min.css" rel="stylesheet">
@@ -81,30 +83,19 @@
                   </li>
                   <li><a><i class="fa fa-users"></i> 后台用户管理<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="general_elements.html">General Elements</a></li>
-                      <li><a href="media_gallery.html">Media Gallery</a></li>
-                      <li><a href="typography.html">Typography</a></li>
-                      <li><a href="icons.html">Icons</a></li>
-                      <li><a href="glyphicons.html">Glyphicons</a></li>
-                      <li><a href="widgets.html">Widgets</a></li>
-                      <li><a href="invoice.html">Invoice</a></li>
-                      <li><a href="inbox.html">Inbox</a></li>
-                      <li><a href="calendar.html">Calendar</a></li>
+                      <li><a href="{{action('Admin\AdminUserController@index')}}">浏览用户</a></li>
+                      <li><a href="{{action('Admin\AdminUserController@create')}}">添加用户</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-google-wallet"></i> 商家店铺管理 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="tables.html">Tables</a></li>
-                      <li><a href="tables_dynamic.html">Table Dynamic</a></li>
+                      <li><a href="{{action('Admin\ShopController@index')}}">浏览店铺</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-sort-numeric-asc"></i> 商品分类管理 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="chartjs.html">Chart JS</a></li>
-                      <li><a href="chartjs2.html">Chart JS2</a></li>
-                      <li><a href="morisjs.html">Moris JS</a></li>
-                      <li><a href="echarts.html">ECharts</a></li>
-                      <li><a href="other_charts.html">Other Charts</a></li>
+                      <li><a href="{{action('Admin\CateController@index')}}">浏览分类</a></li>
+                      <li><a href="{{action('Admin\CateController@create')}}">添加分类</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-tags"></i> 商品标签管理 <span class="fa fa-chevron-down"></span></a>
@@ -281,8 +272,13 @@
     <script src="/admins/vendors/jszip/dist/jszip.min.js"></script>
     <script src="/admins/vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="/admins/vendors/pdfmake/build/vfs_fonts.js"></script>
+
+    <!-- Switchery -->
+    <script src="/admins/vendors/switchery/dist/switchery.min.js"></script>
+
     <!-- validator -->
     <script src="/admins/vendors/validator/validator.js"></script>
+
     <!-- Custom Theme Scripts -->
     <script src="/admins/build/js/custom.min.js"></script>
     @section('js')
