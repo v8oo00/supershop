@@ -41,6 +41,22 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('homeuser', 'Admin\HomeUserController@index');
     Route::get('homeuser/create', 'Admin\HomeUserController@create');
     Route::post('homeuser/store', 'Admin\HomeUserController@store');
+    Route::get('homeuser/status', 'Admin\HomeUserController@status');
+
+    //后台用户管理模块
+    Route::get('adminuser', 'Admin\AdminUserController@index');
+    Route::get('adminuser/create', 'Admin\AdminUserController@create');
+    Route::post('adminuser/store', 'Admin\AdminUserController@store');
+    Route::get('adminuser/status', 'Admin\AdminUserController@status');
+
+    //后台店铺模块
+    Route::get('shop', 'Admin\ShopController@index');
+    Route::get('shop/status', 'Admin\ShopController@status');
+
+    //后台商品分类模块
+    Route::get('cate', 'Admin\CateController@index');
+    Route::get('cate/create', 'Admin\CateController@create');
+    Route::post('cate/store', 'Admin\CateController@store');
 
     //退出登录
     Route::post('logout', 'Admin\LoginController@logout');

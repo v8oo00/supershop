@@ -26,4 +26,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token','created_at','updated_at',
     ];
+
+    //一个用户可以有多个店铺
+    public function shops(){
+        return $this->hasMany('App\Shop');
+    }
 }
