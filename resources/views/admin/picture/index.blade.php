@@ -6,7 +6,7 @@
 <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
               <div class="x_title">
-                <h2>Activity's<small>List</small></h2>
+                <h2>Pciture's<small>List</small></h2>
                 <ul class="nav navbar-right panel_toolbox">
                   <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                   </li>
@@ -17,41 +17,30 @@
               </div>
               <div class="x_content">
                 <p class="text-muted font-13 m-b-30">
-                  Show the Activity of users
+                  Show the Picture of users
                 </p>
 
                 <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap homeusers" cellspacing="0" width="100%">
                   <thead>
                     <tr>
                       <th>ID</th>
-                      <th>活动名称</th>
-                      <th>活动规则</th>
-                      <th >活动宣传图</th>
-                      <th>活动地址</th>
-                      <th>活动开始时间</th>
-                      <th>活动结束时间</th>
-                      <th>活动操作</th>
+                      <th>轮播图片</th>
+                      <th>图片地址</th>
+                      <th>图片操作</th>
                     </tr>
                   </thead>
                   <tbody v-for="item in items">
-
-
-                      @foreach($activitys as $activity)
+                      @foreach($pictures as $picture)
                         <tr>
-                        <td>{{$activity->id}}</td>
-                        <td>{{$activity->name}}</td>
-                        <td>{{$activity->rule}}</td>
+                        <td>{{$picture->id}}</td>
                         <td style='text-align:center;'>
-                            <button type="button" name="button" img-src='{{$activity->image}}' class='btn btn-defaut btn-xs pigimg'>点击查看图片</button>
+                            <button type="button" name="button" img-src='{{$picture->image}}' class='btn btn-defaut btn-xs pigimg'>点击查看图片</button>
                         </td>
-                        <td>{{$activity->route}}</td>
-                        <td>{{date('Y-m-d',$activity->start_time)}}</td>
-                        <td>{{date('Y-m-d',$activity->end_time)}}</td>
+                        <td>{{$picture->route}}</td>
                         <td>
-                            <a href="{{action('Admin\ActivityController@edit',$activity->id)}}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-                            <a href="{{action('Admin\ActivityController@delete',$activity->id)}}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                            <a href="{{action('Admin\PictureController@edit',$picture->id)}}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+                            <a href="{{action('Admin\PictureController@delete',$picture->id)}}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
                         </td>
-
                     </tr>
                       @endforeach
                   </tbody>

@@ -98,12 +98,6 @@
                       <li><a href="{{action('Admin\CateController@create')}}">添加分类</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-tags"></i> 商品标签管理 <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="fixed_sidebar.html">Fixed Sidebar</a></li>
-                      <li><a href="fixed_footer.html">Fixed Footer</a></li>
-                    </ul>
-                  </li>
                   <li><a><i class="fa fa-shopping-cart"></i> 角色管理 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{action('Admin\RoleController@index')}}">角色浏览</a></li>
@@ -112,7 +106,7 @@
                   </li>
                   <li><a><i class="fa fa-shopping-cart"></i> 商品管理 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="asdasd.html">商品浏览</a></li>
+                      <li><a href="{{action('Admin\CommodityController@index')}}">商品浏览</a></li>
                     </ul>
                   </li>
 
@@ -131,8 +125,8 @@
 
                   <li><a><i class="fa fa-image"></i> 轮播图管理 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="fixed_sidebar.html">Fixed Sidebar</a></li>
-                      <li><a href="fixed_footer.html">Fixed Footer</a></li>
+                      <li><a href="{{action('Admin\PictureController@index')}}">轮播图浏览</a></li>
+                      <li><a href="{{action('Admin\PictureController@create')}}">轮播图添加</a></li>
                     </ul>
                   </li>
 

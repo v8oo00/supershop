@@ -20,23 +20,8 @@ class ActivityController extends Controller
     }
 
     public function store(Request $request){
-        $first_arr = explode(' - ',$request->reservation);
 
-        $str = [];
-
-        foreach($first_arr  as $k=>$v){
-            $arr = array_reverse(explode('/',$v));
-
-            $str_a = $arr[1];
-            $str_b = $arr[2];
-
-            $arr[1] = $str_b;
-            $arr[2] = $str_a;
-
-            $str[$k] = implode('-',$arr);
-        }
-        // dump($str);
-         // $pic=$request->all();
+        $str = ChangeCalendarDays($request->reservation);
 
          $destinationPath = "/admins/images/".date("Ym/d", time());
 
@@ -64,6 +49,69 @@ class ActivityController extends Controller
          }else{
              return back();
          }
+    }
 
+    public function edit(Request $request){
+        // echo "aaaaa";
+        $activity = Activity::findOrFail($request->id);
+
+        // dd($activity);
+
+        return view('admin.activity.edit',compact('activity'));
+    }
+
+    public function update(Request $request){
+        // dd($request->all());
+        $activity = Activity::findOrFail($request->id);
+
+        $str = ChangeCalendarDays($request->reservation);
+
+        if($request->hasFile('image')){
+
+            $destinationPath = "/admins/images/".date("Ym/d", time());
+
+            $upload_path = public_path() . '/' . $destinationPath;
+
+            $file = $request->file('image');
+
+            $extension = strtolower($file->getClientOriginalExtension()) ?: 'png';
+            $file_name = md5($file->getClientOriginalName()).time().'.'.$extension;
+
+            $res = $file->move($upload_path,$file_name);
+
+            $res = $activity->update([
+                'name'=>$request->name,
+                'route'=>$request->route,
+                'rule'=>$request->rule,
+                'image'=>$destinationPath.'/'.$file_name,
+                'start_time'=>strtotime($str[0]),
+                'end_time'=>strtotime($str[1])
+            ]);
+        }else{
+            $res = $activity->update([
+                'name'=>$request->name,
+                'route'=>$request->route,
+                'rule'=>$request->rule,
+                'start_time'=>strtotime($str[0]),
+                'end_time'=>strtotime($str[1])
+            ]);
+        }
+
+        if($res){
+            return redirect()->action('Admin\ActivityController@index');
+        }else{
+            return back();
+        }
+    }
+
+    public function delete(Request $request){
+        // dd($request->id);
+        $res = Activity::destroy($request->id);
+
+        if($res){
+            return redirect()->action('Admin\ActivityController@index');
+        }else{
+            return redirect()->action('Admin\ActivityController@index');
+        }
     }
 }
