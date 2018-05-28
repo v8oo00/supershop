@@ -80,4 +80,20 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('activity','Admin\ActivityController@index');
     Route::get('activity/create','Admin\ActivityController@create');
     Route::post('activity/store','Admin\ActivityController@store');
+    Route::get('activity/edit/{id}','Admin\ActivityController@edit');
+    Route::post('activity/edit','Admin\ActivityController@update');
+    Route::get('activity/delete/{id}','Admin\ActivityController@delete');
+
+
+    //轮播图管理模块
+    Route::get('picture','Admin\PictureController@index');
+    Route::get('picture/create','Admin\PictureController@create');
+    Route::post('picture/store','Admin\PictureController@store');
+    Route::get('picture/edit/{id}','Admin\PictureController@edit');
+    Route::post('picture/update','Admin\PictureController@update');
+    Route::get('picture/delete/{id}','Admin\PictureController@delete');
+
+
+    //商品管理模块
+    Route::get('commodity','Admin\CommodityController@index');
 });

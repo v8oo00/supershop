@@ -38,7 +38,7 @@
                             <tr>
                                 <td>{{$order['id']}}</td>
                                 <td>{{$order['order_num']}}</td>
-                                <td>{{App\Admin::findOrFail($order['uid'])['name']}}</td>
+                                <td>{{App\User::findOrFail($order['uid'])['name']}}</td>
                                 <td>{{App\Address::findOrFail($order['address_id'])['username']}}</td>
                                 <td>{{App\Address::findOrFail($order['address_id'])['userphone']}}</td>
                                 <td>{{getOrderAddressById($order['address_id'])}}</td>
@@ -79,10 +79,13 @@ $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('conten
             success:function(data){
                 if(data=='info'){
                     $(this).attr('class','btn btn-round btn-info btn-xs enter_order');
+                    $(this).html('未处理');
                 }else if(data=='warning'){
                     $(this).attr('class','btn btn-round btn-warning btn-xs enter_order');
+                    $(this).html('已发货');
                 }else if(data=='danger'){
                     $(this).attr('class','btn btn-round btn-danger btn-xs enter_order');
+                    $(this).html('已收货');
                 }
             }.bind(this),
             error: function(xhr, type){

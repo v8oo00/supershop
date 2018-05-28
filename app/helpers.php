@@ -29,4 +29,23 @@
 
 		return implode('/',$arr);
 	}
+
+	function ChangeCalendarDays($string){
+		$first_arr = explode(' - ',$string);
+
+        $str = [];
+
+        foreach($first_arr  as $k=>$v){
+            $arr = array_reverse(explode('/',$v));
+
+            $str_a = $arr[1];
+            $str_b = $arr[2];
+
+            $arr[1] = $str_b;
+            $arr[2] = $str_a;
+
+            $str[$k] = implode('-',$arr);
+        }
+		return $str;
+	}
 ?>

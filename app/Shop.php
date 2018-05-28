@@ -13,4 +13,8 @@ class Shop extends Model
     public function user(){
         return $this->belongsTo('App\User');
     }
+
+    public function commodity(){
+        return $this->hasMany('App\Commodity','shop_id','id');
+    }
 }
