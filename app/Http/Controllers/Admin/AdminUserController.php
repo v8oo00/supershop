@@ -35,7 +35,7 @@ class AdminUserController extends Controller
             'ip' => '127.0.0.1'
         ]);
 
-        return view('Admin\AdminUser.index');
+        return redirect()->action('Admin\AdminUserController@index');
     }
 
     //修改管理者的状态

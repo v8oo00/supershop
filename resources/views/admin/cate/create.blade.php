@@ -37,7 +37,9 @@
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <select class="form-control" name="pid">
                     <option value="0">顶级分类</option>
-
+                    @foreach($cates as $cate)
+                        <option value="{{ $cate->id }}" @if($cate->id == $id) selected @endif>{{ $cate->cate }}</option>
+                    @endforeach
                   </select>
                 </div>
               </div>

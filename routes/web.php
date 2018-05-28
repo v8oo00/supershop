@@ -57,6 +57,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('cate', 'Admin\CateController@index');
     Route::get('cate/create', 'Admin\CateController@create');
     Route::post('cate/store', 'Admin\CateController@store');
+    Route::post('cate/update', 'Admin\CateController@update');
+    Route::get('cate/delete', 'Admin\CateController@delete');
+    Route::get('cate/chaxun', 'Admin\CateController@chaxun');
 
     //退出登录
     Route::post('logout', 'Admin\LoginController@logout');

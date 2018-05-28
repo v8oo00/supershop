@@ -35,6 +35,8 @@
     <link href="/admins/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
     <!-- Switchery -->
     <link href="/admins/vendors/switchery/dist/switchery.min.css" rel="stylesheet">
+    <!-- layer -->
+    <link rel="stylesheet" href='{{asset("layer/theme/default/layer.css")}}'>
 
     <!-- Custom Theme Style -->
     <link href="/admins/build/css/custom.min.css" rel="stylesheet">
@@ -272,6 +274,8 @@
 
     <!-- validator -->
     <script src="/admins/vendors/validator/validator.js"></script>
+    <!-- layer -->
+    <script src="{{asset('/layer/layer.js')}}"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="/admins/build/js/custom.min.js"></script>
