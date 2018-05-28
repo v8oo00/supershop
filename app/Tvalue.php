@@ -25,7 +25,5 @@ class Tvalue extends Model
     //隐藏字段
     protected $hidden = ['created_at','updated_at'];
 
-    public function HasOneTag(){
-        return $this->hasOne('App\Tag');
-    }
+    
 }
