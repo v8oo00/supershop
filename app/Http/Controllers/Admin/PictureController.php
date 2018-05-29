@@ -108,6 +108,12 @@ class PictureController extends Controller
         // dd($request->id);
         $res = Picture::destroy($request->id);
 
+        $arr = Picture::get();
+        // dd($arr);
+
+        foreach($arr as $key =>$v){
+            Picture::findOrFail($v->id)->update(['id'=>$key+1]);
+        }
         if($res){
             return redirect()->action('Admin\PictureController@index');
         }else{

@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use App\Commodity;
+use App\Compic;
 class CommodityController extends Controller
 {
     //
@@ -39,6 +41,33 @@ class CommodityController extends Controller
             }
         }
         // 返回上传图片路径，用于保存到数据库中
-        return $filePath;
+        // return $filePath;
+        foreach($filePath as $k=>$v){
+            Compic::create([
+                'c_id'=>$request->c_id,
+                'image'=>$v
+            ]);
+        }
+    }
+
+    public function status(Request $request){
+        $pic = Compic::findOrFail($request->id);
+
+        if($pic->status == 1){
+            $pic->update(['status'=>0]);
+        }else{
+            $pic->update(['status'=>1]);
+        }
+    }
+
+    public function status_com(Request $request){
+        $com = Commodity::findOrFail($request->id);
+        // dd($com);
+        if($com->status == 1){
+            $com->update(['status'=>0]);
+        }else{
+            $com->update(['status'=>1]);
+        }
+
     }
 }

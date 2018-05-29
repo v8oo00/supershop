@@ -83,6 +83,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('activity/edit/{id}','Admin\ActivityController@edit');
     Route::post('activity/edit','Admin\ActivityController@update');
     Route::get('activity/delete/{id}','Admin\ActivityController@delete');
+    Route::get('activity/addcom/{id}','Admin\ActivityController@addcom');
+    Route::get('activity/com_status','Admin\ActivityController@com_status');
+    Route::post('activity/add_com','Admin\ActivityController@activity_commodity');
 
 
     //轮播图管理模块
@@ -98,4 +101,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('commodity','Admin\CommodityController@index');
     Route::get('commodity/pic/{id}','Admin\CommodityController@com_pic');
     Route::post('commodity/pic_upload','Admin\CommodityController@pic_upload');
+    Route::get('commodity/status','Admin\CommodityController@status');
+    Route::get('commodity/status_com','Admin\CommodityController@status_com');
 });

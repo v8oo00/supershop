@@ -25,6 +25,7 @@ class CreateCommoditiesTable extends Migration
             $table->bigInteger('click_num');
             $table->longText('detail');
             $table->integer('status')->default(1);
+            $table->integer('activity_id')->default(0);
             $table->timestamps();
         });
     }

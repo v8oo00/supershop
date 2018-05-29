@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Activity;
+use App\Commodity;
 
 class ActivityController extends Controller
 {
@@ -112,6 +113,34 @@ class ActivityController extends Controller
             return redirect()->action('Admin\ActivityController@index');
         }else{
             return redirect()->action('Admin\ActivityController@index');
+        }
+    }
+
+    public function addcom(Request $request){
+        // dd($request->id);
+        $act_coms = Activity::findOrFail($request->id)->commodities;
+
+        $act_id = $request->id;
+
+        $commodities = Commodity::where('activity_id','=','0')->where('status','=',1)->get();
+        // dd($commodities);
+
+        return view('admin.activity.actcom',compact(['act_coms','act_id','commodities']));
+    }
+
+    public function com_status(Request $request){
+        $com = Commodity::findOrFail($request->id);
+
+        if($com->activity_id == 0){
+            $com->update(['activity_id'=>$request->activity_id]);
+        }else{
+            $com->update(['activity_id'=>0]);
+        }
+    }
+
+    public function activity_commodity(Request $request){
+        foreach($request->id as $k=>$v){
+            Commodity::findOrFail($v)->update(['activity_id'=>$request->activity_id]);
         }
     }
 }

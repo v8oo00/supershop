@@ -24,12 +24,20 @@
                     <thead>
                         <tr>
                             <th>ID</th>
+                            <th>商品</th>
                             <th>商品图片</th>
                             <th>图片状态</th>
-                            <th>图片操作</th>
                         </tr>
                     </thead>
                     <tbody v-for="item in items">
+                        @foreach($pictures as $picture)
+                            <tr>
+                                <td>{{$picture->id}}</td>
+                                <td>{{$picture->commodity->name}}</td>
+                                <td style="text-align:center;"><button type="button" name="button" img-src='{{$picture->image}}' class='btn btn-defaut btn-xs pigimg'>点击查看图片</button></td>
+                                <td><input type="checkbox" class="js-switch" @if($picture->status==1) checked @endif onchange="fun(this)" /></td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -51,6 +59,12 @@
         </div>
     </div>
 </div>
+
+<div id="outerdiv" style="position:fixed;top:0;left:0;background:rgba(0,0,0,0.7);z-index:2;width:100%;height:100%;display:none;">
+    <div id="innerdiv" style="position:absolute;">
+        <img id="bigimg" style="border:5px solid #fff;" src="" />
+    </div>
+</div>
 @endsection
 
 @section('js')
@@ -67,7 +81,7 @@ $("#fileUploadContent").initUpload({
     //"maxFileNumber":3,//文件个数限制，为整数
     //"filelSavePath":"",//文件上传地址，后台设置的根目录
     "beforeUpload":beforeUploadFun,//在上传前执行的函数
-    //"onUpload":onUploadFun，//在上传后执行的函数
+    "onUpload":onUploadFun,//在上传后执行的函数
     //autoCommit:true,//文件是否自动上传
     "fileType":['png','jpg']//文件类型限制，默认不限制，注意写的是文件后缀
 });
@@ -75,14 +89,68 @@ function beforeUploadFun(opt){
     opt.otherData =[{"name":"c_id","value":"{{$com_id}}"}];
 }
 function onUploadFun(opt,data){
-    alert(data);
-    uploadTools.uploadError(opt);//显示上传错误
-    uploadTools.uploadSuccess(opt);//显示上传成功
+    layer.msg('上传成功',{time: 1000},function(){
+                        window.location.reload();
+                    });
+
 }
 
 function testUpload(){
 	var opt = uploadTools.getOpt("fileUploadContent");
 	uploadEvent.uploadFileEvent(opt);
+}
+
+$(".pigimg").click(function(){
+    var _this = $(this);
+    imgShow("#outerdiv", "#innerdiv", "#bigimg", _this);
+});
+
+function imgShow(outerdiv, innerdiv, bigimg, _this){
+    var src = _this.attr("img-src");
+    $(bigimg).attr("src", src);
+
+
+    $("<img/>").attr("src", src).load(function(){
+        var windowW = $(window).width();
+        var windowH = $(window).height();
+        var realWidth = this.width;
+        var realHeight = this.height;
+        var imgWidth, imgHeight;
+        var scale = 0.8;
+
+        if(realHeight>windowH*scale) {
+            imgHeight = windowH*scale;
+            imgWidth = imgHeight/realHeight*realWidth;
+            if(imgWidth>windowW*scale) {
+                imgWidth = windowW*scale;
+            }
+        } else if(realWidth>windowW*scale) {
+            imgWidth = windowW*scale;
+                        imgHeight = imgWidth/realWidth*realHeight;
+        } else {
+            imgWidth = realWidth;
+            imgHeight = realHeight;
+        }
+                $(bigimg).css("width",imgWidth);
+
+        var w = (windowW-imgWidth)/2;
+        var h = (windowH-imgHeight)/2;
+        $(innerdiv).css({"top":h, "left":w});
+        $(outerdiv).fadeIn("fast");
+    });
+
+    $(outerdiv).click(function(){
+        $(this).fadeOut("fast");
+    });
+}
+
+function fun(obj){
+    var id = $(obj).parents('tr').find('td:eq(0)').html();
+    $.ajax({
+        url:"{{ action('Admin\CommodityController@status') }}",
+        data:{id:id},
+        type:'get'
+    });
 }
 </script>
 @endsection

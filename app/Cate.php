@@ -10,6 +10,10 @@ class Cate extends Model
     protected $table = 'cates';
 
     protected $fillable = [
-        'cate','pid','path', 
+        'cate','pid','path',
     ];
+
+    public function commofitys(){
+        return $this->hasMany('App\Commodity','cate_id','id');
+    }
 }

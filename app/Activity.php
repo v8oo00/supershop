@@ -24,4 +24,8 @@ class Activity extends Model
 
     //隐藏字段
     protected $hidden = ['updated_at','created_at'];
+
+    public function commodities(){
+        return $this->hasMany('App\Commodity','activity_id','id');
+    }
 }
