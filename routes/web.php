@@ -96,4 +96,6 @@ Route::group(['prefix' => 'admin'], function () {
 
     //商品管理模块
     Route::get('commodity','Admin\CommodityController@index');
+    Route::get('commodity/pic/{id}','Admin\CommodityController@com_pic');
+    Route::post('commodity/pic_upload','Admin\CommodityController@pic_upload');
 });

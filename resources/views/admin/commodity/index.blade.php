@@ -45,6 +45,7 @@
                                 <td>{{$commodity->detail}}</td>
                                 <td>
                                     <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">管理标签</button>
+                                    <a class="btn btn-primary btn-xs" href='{{action("Admin\CommodityController@com_pic",$commodity->id)}}'>管理商品图片</a>
                                 </td>
                             </tr>
                         @endforeach

@@ -32,4 +32,8 @@ class Commodity extends Model
     public function tags(){
         return $this->hasMany('App\Tag','c_id','id');
     }
+
+    public function compictures(){
+        return $this->hasMany('App\Compic','c_id','id');
+    }
 }
