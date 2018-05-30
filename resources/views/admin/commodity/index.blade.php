@@ -291,7 +291,8 @@ function del(){
             });
         });
 
-})
+    });
+}
 
 function fun(obj){
     var id = $(obj).parents('tr').find('td:eq(0)').html();
