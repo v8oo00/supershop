@@ -38,7 +38,7 @@
                   <select class="form-control" name="pid">
                     <option value="0">顶级分类</option>
                     @foreach($cates as $cate)
-                        <option value="{{ $cate->id }}" @if($cate->id == $id) selected @endif>{{ $cate->cate }}</option>
+                        <option value="{{ $cate->id }}" @if($cate->id == $id) selected @endif @if($cate->pid != 0) disabled @endif >{{ $cate->cate }}</option>
                     @endforeach
                   </select>
                 </div>
@@ -50,6 +50,11 @@
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <input id="name" class="form-control col-md-7 col-xs-12" name="cate" placeholder="Fill in the cate name" required="required" type="text">
                 </div>
+                @if($errors->has('cate'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('cate') }}</strong>
+                    </span>
+                @endif
               </div>
 
               <div class="ln_solid"></div>

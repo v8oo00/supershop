@@ -99,8 +99,18 @@ Route::group(['prefix' => 'admin'], function () {
 
     //商品管理模块
     Route::get('commodity','Admin\CommodityController@index');
+
+    //获取标签及标签值
+    Route::get('commodity/tags','Admin\CommodityController@tags');
+
+    //添加标签和标签值
+    Route::post('commodity/tag_val/create','Admin\CommodityController@storetv');
+
+    //删除标签及标签值
+    Route::get('commodity/tag_val/delete','Admin\CommodityController@delete');
     Route::get('commodity/pic/{id}','Admin\CommodityController@com_pic');
     Route::post('commodity/pic_upload','Admin\CommodityController@pic_upload');
     Route::get('commodity/status','Admin\CommodityController@status');
     Route::get('commodity/status_com','Admin\CommodityController@status_com');
+
 });
