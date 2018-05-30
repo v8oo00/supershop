@@ -50,6 +50,7 @@
                         <td>
                             <a href="{{action('Admin\ActivityController@edit',$activity->id)}}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
                             <a href="{{action('Admin\ActivityController@delete',$activity->id)}}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                            <a href="{{action('Admin\ActivityController@addcom',$activity->id)}}" class="btn btn-primary btn-xs"><i class="fa fa-shopping-cart"></i> 查看活动商品</a>
                         </td>
 
                     </tr>

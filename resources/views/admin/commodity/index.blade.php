@@ -28,6 +28,8 @@
                             <th>商品销量</th>
                             <th>商品点击量</th>
                             <th>商品详情</th>
+                            <th>商品状态</th>
+                            <th>商品活动</th>
                             <th>商品操作</th>
                         </tr>
                     </thead>
@@ -36,15 +38,26 @@
                             <tr>
                                 <td>{{$commodity->id}}</td>
                                 <td>{{$commodity->name}}</td>
-                                <td>{{$commodity->cate_id}}</td>
+                                <td>{{$commodity->cate->cate}}</td>
                                 <td>{{$commodity->shop->name}}</td>
                                 <td>{{$commodity->desc}}</td>
                                 <td>{{$commodity->company}}</td>
                                 <td>{{$commodity->sale}}</td>
                                 <td>{{$commodity->click_num}}</td>
                                 <td>{{$commodity->detail}}</td>
+                                <td><input type="checkbox" class="js-switch" @if($commodity->status==1) checked @endif onchange="fun(this)" /></td>
                                 <td>
+                                    @if($commodity->activity_id == 0)
+                                        商品暂无参与活动
+                                    @else
+                                        {{$commodity->activity->name}}
+                                    @endif
+                                </td>
+                                <td>
+
                                     <button type="button" class="btn btn-primary btn-xs gltags" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">管理标签</button>
+                                    <a class="btn btn-primary btn-xs" href='{{action("Admin\CommodityController@com_pic",$commodity->id)}}'>管理商品图片</a>
+
                                 </td>
                             </tr>
                         @endforeach
@@ -133,6 +146,7 @@
 
 @section('js')
 <script type="text/javascript">
+
 
 $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
 
@@ -277,6 +291,14 @@ function del(){
             });
         });
 
+})
+
+function fun(obj){
+    var id = $(obj).parents('tr').find('td:eq(0)').html();
+    $.ajax({
+        url:"{{ action('Admin\CommodityController@status_com') }}",
+        data:{id:id},
+        type:'get'
     });
 }
 
