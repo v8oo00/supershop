@@ -44,7 +44,9 @@
                                 <td>{{$commodity->company}}</td>
                                 <td>{{$commodity->sale}}</td>
                                 <td>{{$commodity->click_num}}</td>
-                                <td>{{$commodity->detail}}</td>
+                                <td>
+                                    <a href="{{action('Admin\CommodityController@edit_com',$commodity->id)}}" class='btn btn-default btn-xs'>查看商品详情</a>
+                                </td>
                                 <td><input type="checkbox" class="js-switch" @if($commodity->status==1) checked @endif onchange="fun(this)" /></td>
                                 <td>
                                     @if($commodity->activity_id == 0)
@@ -54,10 +56,9 @@
                                     @endif
                                 </td>
                                 <td>
-
                                     <button type="button" class="btn btn-primary btn-xs gltags" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">管理标签</button>
-                                    <a class="btn btn-primary btn-xs" href='{{action("Admin\CommodityController@com_pic",$commodity->id)}}'>管理商品图片</a>
-
+                                    <a class="btn btn-primary btn-xs" href='{{action("Admin\CommodityController@com_pic",$commodity->id)}}'>管理图片</a>
+                                    <a class="btn btn-primary btn-xs" href='{{action("Admin\CommodityController@com_sku",$commodity->id)}}'>管理sku</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -146,162 +147,162 @@
 
 @section('js')
 <script type="text/javascript">
+    $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
 
-
-$.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
-
-//点击加号添加标签的框出来
-$('#out').click(function(){
-    if($(this).attr('out') == 'false'){
-        $('#tvborder').css({'height':'220px','transition':'all 0.2s'});
-        $(this).find('i').attr('class','glyphicon glyphicon-minus');
-        $(this).attr('out','true');
-    }else{
-        $('#tvborder').css({'height':'0px','transition':'all 0.2s'});
-        $(this).find('i').attr('class','glyphicon glyphicon-plus');
-        $(this).attr('out','false');
-    }
-});
-
-//当点击管理标签时触发
-$('.gltags').click(function(){
-    var id = $(this).parents('tr').find('td:eq(0)').html();
-    $.ajax({
-        url:"{{ action('Admin\CommodityController@tags')}}",
-        data:{id:id},
-        type:'get',
-        success:function(mes){
-            //如果有存在数据进行插入
-            if(mes != 'no'){
-                deal(mes);
-                del();
-            }else{
-                var message = $('#message').clone().show().addClass('tag_val');
-                message.find('td').html('<h4>此商品暂未添加标签及标签值！</h4>');
-                $('#tag_val_tou').after(message);
-            }
-
-        }
-    });
-
-    //当点击保存按钮时
-    $('#bc').click(function(){
-
-        if($('#tags_1').val() != '' && $('#name').val() != ''){
-            var tags = $('#name').val();
-            var vals = $('#tags_1').val();
-
-            $.ajax({
-                url:"{{action('Admin\CommodityController@storetv')}}",
-                data:{id:id,tag:tags,value:vals},
-                type:'post',
-                success:function(mes){
-                    if(mes == 'ok'){
-                        $('#name').val('');
-                        removeTag1();
-                        $('#tvborder').css({'height':'0px','transition':'all 0.2s'});
-                        $('#out').find('i').attr('class','glyphicon glyphicon-plus');
-                        $('#out').attr('out','false');
-                        //删除数据
-                        $('.tag_val').remove();
-
-                        //重新发送ajax
-                        $.ajax({
-                            url:"{{ action('Admin\CommodityController@tags')}}",
-                            data:{id:id},
-                            type:'get',
-                            success:function(mes){
-                                deal(mes);
-                                del();
-                            }
-                        });
-
-                        layer.msg('添加标签和标签值成功',{icon: 1});
-                    }else{
-                        layer.msg('添加标签和标签值失败',{icon: 2});
-                    }
-                }
-            });
+    //点击加号添加标签的框出来
+    $('#out').click(function(){
+        if($(this).attr('out') == 'false'){
+            $('#tvborder').css({'height':'220px','transition':'all 0.2s'});
+            $(this).find('i').attr('class','glyphicon glyphicon-minus');
+            $(this).attr('out','true');
         }else{
-            layer.msg('标签或标签值不能为空');
+            $('#tvborder').css({'height':'0px','transition':'all 0.2s'});
+            $(this).find('i').attr('class','glyphicon glyphicon-plus');
+            $(this).attr('out','false');
         }
     });
 
-    //当点击取消按钮时
-    $('#qx').click(function(){
-        $('#name').val('');
+    //当点击管理标签时触发
+    $('.gltags').click(function(){
+        var id = $(this).parents('tr').find('td:eq(0)').html();
+        $.ajax({
+            url:"{{ action('Admin\CommodityController@tags')}}",
+            data:{id:id},
+            type:'get',
+            success:function(mes){
+                //如果有存在数据进行插入
+                if(mes != 'no'){
+                    deal(mes);
+                    del();
+                }else{
+                    var message = $('#message').clone().show().addClass('tag_val');
+                    message.find('td').html('<h4>此商品暂未添加标签及标签值！</h4>');
+                    $('#tag_val_tou').after(message);
+                }
+
+            }
+        });
+
+        //当点击保存按钮时
+        $('#bc').click(function(){
+
+            if($('#tags_1').val() != '' && $('#name').val() != ''){
+                var tags = $('#name').val();
+                var vals = $('#tags_1').val();
+
+                $.ajax({
+                    url:"{{action('Admin\CommodityController@storetv')}}",
+                    data:{id:id,tag:tags,value:vals},
+                    type:'post',
+                    success:function(mes){
+                        if(mes == 'ok'){
+                            $('#name').val('');
+                            removeTag1();
+                            $('#tvborder').css({'height':'0px','transition':'all 0.2s'});
+                            $('#out').find('i').attr('class','glyphicon glyphicon-plus');
+                            $('#out').attr('out','false');
+                            //删除数据
+                            $('.tag_val').remove();
+
+                            //重新发送ajax
+                            $.ajax({
+                                url:"{{ action('Admin\CommodityController@tags')}}",
+                                data:{id:id},
+                                type:'get',
+                                success:function(mes){
+                                    deal(mes);
+                                    del();
+                                }
+                            });
+
+                            layer.msg('添加标签和标签值成功',{icon: 1});
+                        }else{
+                            layer.msg('添加标签和标签值失败',{icon: 2});
+                        }
+                    }
+                });
+            }else{
+                layer.msg('标签或标签值不能为空');
+            }
+        });
+
+        //当点击取消按钮时
+        $('#qx').click(function(){
+            $('#name').val('');
+            removeTag1();
+            $('#tvborder').css({'height':'0px','transition':'all 0.2s'});
+            $('#out').find('i').attr('class','glyphicon glyphicon-plus');
+            $('#out').attr('out','false');
+        });
+    });
+
+
+    //当关闭模态框时
+    $('#exampleModal').on('hidden.bs.modal',function(){
+        $('.tag_val').remove();
         removeTag1();
         $('#tvborder').css({'height':'0px','transition':'all 0.2s'});
         $('#out').find('i').attr('class','glyphicon glyphicon-plus');
         $('#out').attr('out','false');
     });
-});
 
-
-//当关闭模态框时
-$('#exampleModal').on('hidden.bs.modal',function(){
-    $('.tag_val').remove();
-    removeTag1();
-    $('#tvborder').css({'height':'0px','transition':'all 0.2s'});
-    $('#out').find('i').attr('class','glyphicon glyphicon-plus');
-    $('#out').attr('out','false');
-});
-
-//删除标签值
-function removeTag1(){
-    var tagval = $('#tags_1').val().split(',');
-    for(var o=0;o < tagval.length;o++){
-        $('#tags_1').removeTag(escape(tagval[o]));
+    //删除标签值
+    function removeTag1(){
+        var tagval = $('#tags_1').val().split(',');
+        for(var o=0;o < tagval.length;o++){
+            $('#tags_1').removeTag(escape(tagval[o]));
+        }
     }
-}
 
-//插入标签和标签值
-function deal(mes){
-    for(var i in mes){
-        var list = $('#tag_val').clone().show().removeAttr('id').addClass('tag_val');
-        list.find('td:eq(0)').html(i);
-        list.find('td:eq(1)').html(mes[i]['value']);
-        list.find('td:eq(2)').html('<a href="javascript:" v_id='+mes[i]['id']+' t_id='+mes[i]['t_id']+' class="btn btn-danger btn-xs delete"><i class="fa fa-trash-o"></i> Delete </a>');
-        $('#tag_val_tou').after(list);
+    //插入标签和标签值
+    function deal(mes){
+        for(var i in mes){
+            var list = $('#tag_val').clone().show().removeAttr('id').addClass('tag_val');
+            list.find('td:eq(0)').html(i);
+            list.find('td:eq(1)').html(mes[i]['value']);
+            list.find('td:eq(2)').html('<a href="javascript:" v_id='+mes[i]['id']+' t_id='+mes[i]['t_id']+' class="btn btn-danger btn-xs delete"><i class="fa fa-trash-o"></i> Delete </a>');
+            $('#tag_val_tou').after(list);
+        }
     }
-}
 
-//删除标签和标签值
-function del(){
-    $('.delete').click(function(){
-        var t_id = $(this).attr('t_id');
-        var v_id = $(this).attr('v_id');
-        var _this = $(this);
+    //删除标签和标签值
+    function del(){
+        $('.delete').click(function(){
+            var t_id = $(this).attr('t_id');
+            var v_id = $(this).attr('v_id');
+            var _this = $(this);
 
-        layer.confirm('您确定删除标签及标签值？', {
-          btn: ['确定','取消'] //按钮
-        }, function(){
-            $.ajax({
-                url:"{{ action('Admin\CommodityController@delete') }}",
-                data:{v_id:v_id,t_id:t_id},
-                type:'get',
-                success:function(mes){
-                    if(mes == 'ok'){
-                        _this.parents('tr').remove();
-                        layer.msg('标签及标签值删除成功', {icon: 1});
-                    }else{
-                        layer.msg('标签及标签值删除失败', {icon: 2});
+            layer.confirm('您确定删除标签及标签值？', {
+              btn: ['确定','取消'] //按钮
+            }, function(){
+                $.ajax({
+                    url:"{{ action('Admin\CommodityController@delete') }}",
+                    data:{v_id:v_id,t_id:t_id},
+                    type:'get',
+                    success:function(mes){
+                        if(mes == 'ok'){
+                            _this.parents('tr').remove();
+                            layer.msg('标签及标签值删除成功', {icon: 1});
+                        }else{
+                            layer.msg('标签及标签值删除失败', {icon: 2});
+                        }
                     }
-                }
+                });
             });
+
         });
+    }
 
-    });
-}
-
-function fun(obj){
-    var id = $(obj).parents('tr').find('td:eq(0)').html();
-    $.ajax({
-        url:"{{ action('Admin\CommodityController@status_com') }}",
-        data:{id:id},
-        type:'get'
-    });
-}
+    function fun(obj){
+        var id = $(obj).parents('tr').find('td:eq(0)').html();
+        $.ajax({
+            url:"{{ action('Admin\CommodityController@status_com') }}",
+            data:{id:id},
+            type:'get'
+        });
+    }
+</script>
+<script type="text/javascript">
 
 </script>
 @endsection

@@ -48,4 +48,8 @@
         }
 		return $str;
 	}
+
+	function explode_kvalue($str){
+		return explode(',',$str);
+	}
 ?>

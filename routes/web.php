@@ -99,6 +99,10 @@ Route::group(['prefix' => 'admin'], function () {
 
     //商品管理模块
     Route::get('commodity','Admin\CommodityController@index');
+    Route::get('commodity/add_com','Admin\CommodityController@add_com');
+    Route::post('commodity/create_com','Admin\CommodityController@create_com');
+    Route::get('commodity/edit_com/{id}','Admin\CommodityController@edit_com');
+    Route::post('commodity/update_com','Admin\CommodityController@update_com');
 
     //获取标签及标签值
     Route::get('commodity/tags','Admin\CommodityController@tags');
@@ -112,5 +116,12 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('commodity/pic_upload','Admin\CommodityController@pic_upload');
     Route::get('commodity/status','Admin\CommodityController@status');
     Route::get('commodity/status_com','Admin\CommodityController@status_com');
+
+    //商品sku模块
+    Route::get('commodity/sku/{id}','Admin\CommodityController@com_sku');
+    Route::post('commodity/create_sku','Admin\CommodityController@create_sku');
+    Route::post('commodity/check_sku','Admin\CommodityController@check_sku');
+    Route::get('commodity/del_sku/{id}','Admin\CommodityController@del_sku');
+    Route::post('commodity/update_sku','Admin\CommodityController@update_sku');
 
 });
