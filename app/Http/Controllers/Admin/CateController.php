@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Cate;
 use DB;
 use Illuminate\Http\Request;
+use App\Http\Requests\CateRequest;
 use App\Http\Controllers\Controller;
 
 class CateController extends Controller
@@ -26,7 +27,7 @@ class CateController extends Controller
     }
 
     //执行添加分类
-    public function store(Request $request){
+    public function store(CateRequest $request){
         if($request->pid == 0){
             Cate::create([
                 'cate' => $request->cate,

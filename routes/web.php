@@ -96,4 +96,13 @@ Route::group(['prefix' => 'admin'], function () {
 
     //商品管理模块
     Route::get('commodity','Admin\CommodityController@index');
+
+    //获取标签及标签值
+    Route::get('commodity/tags','Admin\CommodityController@tags');
+
+    //添加标签和标签值
+    Route::post('commodity/tag_val/create','Admin\CommodityController@storetv');
+
+    //删除标签及标签值
+    Route::get('commodity/tag_val/delete','Admin\CommodityController@delete');
 });

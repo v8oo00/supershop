@@ -271,7 +271,8 @@
 
     <!-- Switchery -->
     <script src="/admins/vendors/switchery/dist/switchery.min.js"></script>
-
+    <!-- jQuery Tags Input -->
+    <script src="/admins/vendors/jquery.tagsinput/src/jquery.tagsinput.js"></script>
     <!-- validator -->
     <script src="/admins/vendors/validator/validator.js"></script>
     <!-- layer -->
