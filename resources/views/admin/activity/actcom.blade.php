@@ -1,6 +1,8 @@
 @extends('layouts.admin')
 
 @section('css')
+<style >
+</style>
 @endsection
 @section('content')
 <div class="col-md-12 col-sm-12 col-xs-12">
@@ -95,7 +97,7 @@
                                                 <tbody>
                                                     @foreach($commodities as $commodity)
                                                         <tr>
-                                                            <td class='commodity_id_check'>
+                                                            <td class='commodity_id_check' style="text-align:center;">
                                                                 <input type="checkbox" name="commodity_id[]" value="{{$commodity->id}}">
                                                             </td>
                                                             <td>{{$commodity->id}}</td>
