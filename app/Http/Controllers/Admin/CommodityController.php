@@ -59,7 +59,7 @@ class CommodityController extends Controller
         }else{
             return 'no';
         }
-      
+    }
     //商品图片管理
     public function com_pic(Request $request){
         $pictures = Commodity::findOrFail($request->id)->compictures;
