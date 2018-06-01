@@ -44,4 +44,8 @@ class Commodity extends Model
     public function activity(){
         return $this->belongsTo('App\Activity','activity_id','id');
     }
+
+    public function skus(){
+        return $this->hasMany('App\Sku','c_id','id');
+    }
 }

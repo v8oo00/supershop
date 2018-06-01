@@ -21,8 +21,8 @@ class CreateCommoditiesTable extends Migration
             $table->text('desc');
             $table->string('company');
             $table->text('origin');
-            $table->bigInteger('sale');
-            $table->bigInteger('click_num');
+            $table->bigInteger('sale')->default(0);
+            $table->bigInteger('click_num')->default(0);
             $table->longText('detail');
             $table->integer('status')->default(1);
             $table->integer('activity_id')->default(0);

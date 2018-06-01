@@ -109,6 +109,7 @@
                   <li><a><i class="fa fa-shopping-cart"></i> 商品管理 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{action('Admin\CommodityController@index')}}">商品浏览</a></li>
+                      <li><a href="{{action('Admin\CommodityController@add_com')}}">商品添加</a></li>
                     </ul>
                   </li>
 
