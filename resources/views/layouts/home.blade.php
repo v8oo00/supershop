@@ -23,18 +23,13 @@
 	<link rel="stylesheet" href="/homes/css/yith-woocommerce-wishlist/style.css" />
 
 
-	<link rel="stylesheet" href="/homes/css/yith-woocommerce-wishlist/style.css" />
 	<link rel="stylesheet" href="/homes/css/custom.css" />
 	<link rel="stylesheet" href="/homes/css/app-orange.css" id="theme_color" />
 	<link rel="stylesheet" href="" id="rtl" />
 	<link rel="stylesheet" href="/homes/css/app-responsive.css" />
 </head>
 
-<body class="page page-id-6 home-style1">
-
-
-
-
+<body class="page page-id-6 home-style1 woocommerce-account woocommerce-page ">
 	<div class="body-wrapper theme-clearfix">
 		<header id="header" class="header header-style1">
 			<div class="header-top clearfix">
@@ -105,7 +100,7 @@
 										<div class="widget-inner">
 											<ul id="menu-my-account" class="menu">
 												<li class="menu-my-account">
-													<a class="item-link" href="my_account.html">
+													<a class="item-link" href="{{ action('AccountController@index') }}">
 														<span class="menu-title">My Account</span>
 													</a>
 												</li>
@@ -233,8 +228,8 @@
 												<ul class="minicart-content">
 													<li>
 														<a href="simple_product.html" class="product-image">
-															<img 	width="100" height="100" src="/homes/images/1903/45-150x150.jpg" class="attachment-100x100 size-100x100 wp-post-image" alt="" 
-															    srcset="/homes/images/1903/45-150x150.jpg 150w, /homes/images/1903/45-300x300.jpg 300w, /homes/images/1903/45-180x180.jpg 180w, images/1903/45.jpg 600w" 
+															<img 	width="100" height="100" src="/homes/images/1903/45-150x150.jpg" class="attachment-100x100 size-100x100 wp-post-image" alt=""
+															    srcset="/homes/images/1903/45-150x150.jpg 150w, /homes/images/1903/45-300x300.jpg 300w, /homes/images/1903/45-180x180.jpg 180w, images/1903/45.jpg 600w"
 																	sizes="(max-width: 100px) 100vw, 100px" />
 														</a>
 
@@ -544,38 +539,11 @@
 			</div>
 		</header>
 
+		@section('title')
+		@show
 
-		<div class="listings-title">
-			<div class="container">
-				<div class="wrap-title">
-					<h1>Home</h1>
-
-					<div class="bread">
-						<div class="breadcrumbs theme-clearfix">
-							<div class="container">
-								<ul class="breadcrumb">
-									<li>
-										<a href="#">Home</a>
-										<span class="go-page"></span>
-									</li>
-
-									<li class="active">
-										<span>Home</span>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-      <div class="container">
-			      <div class="row">
-                @section('content')
-                @show
-            </div>
-       </div>
+        @section('content')
+        @show
 
 
 		<footer id="footer" class="footer default theme-clearfix">

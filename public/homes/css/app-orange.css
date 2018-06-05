@@ -1338,7 +1338,7 @@ select:-webkit-autofill {
 .home-style5.page .listings-title,
 .footer-style-1 .ilove_breadcrumbs,
 .footer-style-1 .listings-title {
-  display: none;
+  display: block;
 }
 .home.page #contents,
 .home-style1.page #contents,
