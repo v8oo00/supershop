@@ -45,11 +45,11 @@
                                     <ul>
 
                                         <li>
-                                            <a href="{{action('AccountController@index')}}">Dashboard</a>
+                                            <a href="{{action('AccountController@index')}}">我的信息</a>
                                         </li>
 
                                         <li class="is-active">
-                                           <a href="{{action('AccountController@detail')}}">我的信息</a>
+                                           <a href="{{action('AccountController@detail')}}">修改密码</a>
                                         </li>
 
                                         <li>
@@ -64,24 +64,6 @@
 
                                 <div class="woocommerce-MyAccount-content">
 										<form class="edit-account" action="" method="post">
-											<p class="form-row form-row-first">
-												<label for="account_first_name">
-													Name
-													<span class="required">*</span>
-												</label>
-												<input type="text" class="input-text" name="account_first_name" id="account_first_name" value="Kaszas II">
-											</p>
-										  <div class="clear"></div>
-
-											<p class="form-row form-row-wide">
-												<label for="account_email">
-													Email address
-													<span class="required">*</span>
-												</label>
-
-												<input type="email" class="input-text" name="account_email" id="account_email" value="test@yahoo.com">
-											</p>
-
 											<fieldset>
 												<legend>Password Change</legend>
 												<p class="form-row form-row-wide">

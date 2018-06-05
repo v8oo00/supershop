@@ -43,11 +43,11 @@
                                     <ul>
 
                                         <li class="is-active">
-                                            <a href="{{action('AccountController@index')}}">Dashboard</a>
+                                            <a href="{{action('AccountController@index')}}">我的信息</a>
                                         </li>
 
                                         <li>
-                                           <a href="{{action('AccountController@detail')}}">我的信息</a>
+                                           <a href="{{action('AccountController@detail')}}">修改密码</a>
                                         </li>
 
                                         <li>
@@ -62,13 +62,7 @@
 
                                 <div class="woocommerce-MyAccount-content">
                                     <p>
-                                        Hello <strong>Tester</strong> (not Tester? <a href="create_account.html">Sign out</a>)
-                                    </p>
-                                    <p>
-                                        From your account dashboard you can view your
-                                        <a href="http://demo.smartaddons.com/templates/html/etrostore/order.html">recent orders</a>,
-                                        manage your <a href="http://demo.smartaddons.com/templates/html/etrostore/addresses.html">shipping and billing addresses</a>
-                                        and <a href="http://demo.smartaddons.com/templates/html/etrostore/account_details.html">edit your password and account details</a>.
+                                        
                                     </p>
                                 </div>
                             </div>
