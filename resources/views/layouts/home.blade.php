@@ -233,8 +233,8 @@
 												<ul class="minicart-content">
 													<li>
 														<a href="simple_product.html" class="product-image">
-															<img 	width="100" height="100" src="/homes/images/1903/45-150x150.jpg" class="attachment-100x100 size-100x100 wp-post-image" alt=""
-																	srcset="/homes/images/1903/45-150x150.jpg 150w, images/1903/45-300x300.jpg 300w, images/1903/45-180x180.jpg 180w, images/1903/45.jpg 600w"
+															<img 	width="100" height="100" src="/homes/images/1903/45-150x150.jpg" class="attachment-100x100 size-100x100 wp-post-image" alt="" 
+															    srcset="/homes/images/1903/45-150x150.jpg 150w, /homes/images/1903/45-300x300.jpg 300w, /homes/images/1903/45-180x180.jpg 180w, images/1903/45.jpg 600w" 
 																	sizes="(max-width: 100px) 100vw, 100px" />
 														</a>
 
@@ -544,6 +544,7 @@
 			</div>
 		</header>
 
+
 		<div class="listings-title">
 			<div class="container">
 				<div class="wrap-title">
@@ -569,6 +570,12 @@
 			</div>
 		</div>
 
+      <div class="container">
+			      <div class="row">
+                @section('content')
+                @show
+            </div>
+       </div>
 
 
 		<footer id="footer" class="footer default theme-clearfix">
@@ -828,22 +835,11 @@
 				</div>
 			</div>
 		</footer>
+
 	</div>
 
-	<!-- DIALOGS -->
-	<div class="modal fade" id="search_form" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="modal-dialog block-popup-search-form">
-			<form role="search" method="get" class="form-search searchform" action="">
-				<input type="text" value="" name="s" class="search-query" placeholder="Enter your keyword..." />
-
-				<button type="submit" class="fa fa-search button-search-pro form-button"></button>
-
-				<a href="javascript:void(0)" title="Close" class="close close-search" data-dismiss="modal">X</a>
-			</form>
-		</div>
-	</div>
-
-   <div class="modal fade" id="login_form" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- 登录模态框 -->
+    <div class="modal fade" id="login_form" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="modal-dialog block-popup-login">
 			<a href="javascript:void(0)" title="Close" class="close close-login" data-dismiss="modal">Close</a>
 
@@ -896,54 +892,6 @@
 
 	<a id="etrostore-totop" href="#"></a>
 
-	<div id="subscribe_popup" class="subscribe-popup" style="background: url(/homes/images/icons/bg_newsletter.jpg)">
-		<div class="subscribe-popup-container">
-			<h2>Join our newsletter</h2>
-			<div class="description">Subscribe now to get 40% of on any product!</div>
-			<div class="subscribe-form">
-				<form id="mc4wp-form-2" class="mc4wp-form mc4wp-form-275" method="post" data-id="275" data-name="">
-					<div class="mc4wp-form-fields">
-						<div class="newsletter-content">
-							<input type="email" class="newsletter-email" name="EMAIL" placeholder="Your email" required="" />
-							<input class="newsletter-submit" type="submit" value="Subscribe" />
-						</div>
-					</div>
-					<div class="mc4wp-response"></div>
-				</form>
-			</div>
-
-			<div class="subscribe-checkbox">
-				<label for="popup_check">
-					<input id="popup_check" name="popup_check" type="checkbox" />
-					<span>Don't show this popup again!</span>
-				</label>
-			</div>
-
-			<div class="subscribe-social">
-				<div class="subscribe-social-inner">
-					<a href="#" class="social-fb">
-						<span class="fa fa-facebook"></span>
-					</a>
-
-					<a href="#" class="social-tw">
-						<span class="fa fa-twitter"></span>
-					</a>
-
-					<a href="#" class="social-gplus">
-						<span class="fa fa-google-plus"></span>
-					</a>
-
-					<a href="#" class="social-pin">
-						<span class="fa fa-instagram"></span>
-					</a>
-
-					<a href="#" class="social-linkedin">
-						<span class="fa fa-pinterest-p"></span>
-					</a>
-				</div>
-			</div>
-		</div>
-	</div>
 	<script type="text/javascript" src="/homes/js/jquery/jquery.min.js"></script>
 	<script type="text/javascript" src="/homes/js/jquery/jquery-migrate.min.js"></script>
 	<script type="text/javascript" src="/homes/js/bootstrap.min.js"></script>
@@ -1001,5 +949,7 @@
       	b[c] += ( window.postMessage && request ? ' ' : ' no-' ) + cs;
    </script>
    <!--<![endif]-->
+   @section('js')
+   @show
    </body>
 </html>
