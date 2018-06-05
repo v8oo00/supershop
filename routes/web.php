@@ -19,6 +19,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+//个人中心
+Route::get('/account', 'AccountController@index');
+Route::get('/account/detail', 'AccountController@detail');
+
 Route::group(['prefix' => 'admin'], function () {
     //首页
     Route::group(['middleware' => 'auth.admin'], function () {
