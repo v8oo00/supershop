@@ -11,6 +11,7 @@
 	<!-- BOOTSTRAP 3.3.7 CSS -->
 	<link rel="stylesheet" href="/homes/css/bootstrap.min.css" />
 
+
 	<!-- SLICK v1.6.0 CSS -->
 	<link rel="stylesheet" href="/homes/css/slick-1.6.0/slick.css" />
 
@@ -27,6 +28,14 @@
 	<link rel="stylesheet" href="/homes/css/app-orange.css" id="theme_color" />
 	<link rel="stylesheet" href="" id="rtl" />
 	<link rel="stylesheet" href="/homes/css/app-responsive.css" />
+
+	<meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>{{ config('app.name', 'Laravel') }}</title>
+
+
+    <!-- Styles -->
+
 </head>
 
 <body class="page page-id-6 home-style1 woocommerce-account woocommerce-page ">
@@ -93,7 +102,7 @@
 
 						<div class="wrap-myacc pull-right">
 							<div class="sidebar-account pull-left">
-								<div class="account-title">My account</div>
+								<div class="account-title" style='@if(!Auth::check())border:0px;@endif'>My account</div>
 
 								<div id="my-account" class="my-account">
 									<div class="widget-1 widget-first widget nav_menu-4 widget_nav_menu">
@@ -108,12 +117,6 @@
 												<li class="menu-cart">
 													<a class="item-link" href="cart.html">
 														<span class="menu-title">Cart</span>
-													</a>
-												</li>
-
-												<li class="menu-checkout">
-													<a class="item-link" href="checkout.html">
-														<span class="menu-title">Checkout</span>
 													</a>
 												</li>
 
@@ -132,10 +135,11 @@
 												<div class="div-logined">
 													<ul>
 														<li>
+															@if(!Auth::check())
 															<a href="javascript:void(0);" data-toggle="modal" data-target="#login_form">
 																<span>Login</span>
 															</a>
-															<span class="wg">Welcome Guest</span>
+															@endif
 														</li>
 													</ul>
 												</div>
@@ -150,9 +154,17 @@
 									<div class="widget-inner">
 										<ul id="menu-checkout" class="menu">
 											<li class="menu-checkout">
-												<a class="item-link" href="checkout.html">
+
+												@if(Auth::check())
+												<a class="item-link" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+
 													<span class="menu-title">Checkout</span>
 												</a>
+
+												<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+		                                            {{ csrf_field() }}
+		                                        </form>
+												@endif
 											</li>
 										</ul>
 									</div>
@@ -784,7 +796,7 @@
 				<div class="container">
 					<!-- Copyright text -->
 					<div class="copyright-text pull-left">
-						<p>Copyright &copy; 2017.Company name All rights reserved.<a target="_blank" href="http://www.17sucai.com/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a></p>
+						<p>Copyright &copy; 2017.Company name All rights reserved.</p>
 					</div>
 
 					<div class="sidebar-copyright pull-right">
@@ -815,11 +827,12 @@
 				<strong>Sign in Or Register</strong>
 			</div>
 
-			<form action="" method="post" class="login">
+			<form class="form-horizontal" method="POST" action="{{ route('login') }}"class="login">
+				{{ csrf_field() }}
 				<div class="block-content">
 					<div class="col-reg registered-account">
 						<div class="email-input">
-							<input type="text" class="form-control input-text username" name="username" id="username" placeholder="Username" />
+							<input type="email" class="form-control input-text username" id="username" placeholder="Email" name="email" value="{{ old('email') }}" required autofocus>
 						</div>
 
 						<div class="pass-input">
@@ -827,7 +840,7 @@
 						</div>
 
 						<div class="ft-link-p">
-							<a href="#" title="Forgot your password">Forgot your password?</a>
+							Please fill in it carefully
 						</div>
 
 						<div class="actions">
@@ -850,7 +863,7 @@
 							<li>View and track orders and more</li>
 						</ul>
 
-						<a href="create_account.html" title="Register" class="btn-reg-popup">Create an account</a>
+						<a href="{{ route('register') }}" title="Register" class="btn-reg-popup">Create an account</a>
 					</div>
 				</div>
 			</form>
@@ -859,10 +872,10 @@
 	</div>
 
 	<a id="etrostore-totop" href="#"></a>
-
-	<script type="text/javascript" src="/homes/js/jquery/jquery.min.js"></script>
+	<script src="{{ asset('js/app.js') }}"></script>
+	<!-- <script type="text/javascript" src="/homes/js/jquery/jquery.min.js"></script> -->
 	<script type="text/javascript" src="/homes/js/jquery/jquery-migrate.min.js"></script>
-	<script type="text/javascript" src="/homes/js/bootstrap.min.js"></script>
+	<!-- <script type="text/javascript" src="/homes/js/bootstrap.min.js"></script> -->
 	<script type="text/javascript" src="/homes/js/jquery/js.cookie.min.js"></script>
 
 	<!-- OPEN LIBS JS -->
