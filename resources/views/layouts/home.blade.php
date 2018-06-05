@@ -11,7 +11,6 @@
 	<!-- BOOTSTRAP 3.3.7 CSS -->
 	<link rel="stylesheet" href="/homes/css/bootstrap.min.css" />
 
-
 	<!-- SLICK v1.6.0 CSS -->
 	<link rel="stylesheet" href="/homes/css/slick-1.6.0/slick.css" />
 
@@ -554,8 +553,13 @@
 		@section('title')
 		@show
 
-        @section('content')
-        @show
+		<div class="container">
+			<div class="row">
+				@section('content')
+		        @show
+			</div>
+		</div>
+
 
 
 		<footer id="footer" class="footer default theme-clearfix">
@@ -872,10 +876,10 @@
 	</div>
 
 	<a id="etrostore-totop" href="#"></a>
-	<script src="{{ asset('js/app.js') }}"></script>
-	<!-- <script type="text/javascript" src="/homes/js/jquery/jquery.min.js"></script> -->
+	<!-- <script src="{{ asset('js/app.js') }}"></script> -->
+	<script type="text/javascript" src="/homes/js/jquery/jquery.min.js"></script>
 	<script type="text/javascript" src="/homes/js/jquery/jquery-migrate.min.js"></script>
-	<!-- <script type="text/javascript" src="/homes/js/bootstrap.min.js"></script> -->
+	<script type="text/javascript" src="/homes/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/homes/js/jquery/js.cookie.min.js"></script>
 
 	<!-- OPEN LIBS JS -->
@@ -931,6 +935,7 @@
    </script>
    <!--<![endif]-->
    @section('js')
+
    @show
    </body>
 </html>
