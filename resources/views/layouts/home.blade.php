@@ -233,8 +233,8 @@
 												<ul class="minicart-content">
 													<li>
 														<a href="simple_product.html" class="product-image">
-															<img 	width="100" height="100" src="/homes/images/1903/45-150x150.jpg" class="attachment-100x100 size-100x100 wp-post-image" alt=""
-																	srcset="/homes/images/1903/45-150x150.jpg 150w, /homes/images/1903/45-300x300.jpg 300w, /homes/images/1903/45-180x180.jpg 180w, images/1903/45.jpg 600w"
+															<img 	width="100" height="100" src="/homes/images/1903/45-150x150.jpg" class="attachment-100x100 size-100x100 wp-post-image" alt="" 
+															    srcset="/homes/images/1903/45-150x150.jpg 150w, /homes/images/1903/45-300x300.jpg 300w, /homes/images/1903/45-180x180.jpg 180w, images/1903/45.jpg 600w" 
 																	sizes="(max-width: 100px) 100vw, 100px" />
 														</a>
 
@@ -544,12 +544,39 @@
 			</div>
 		</header>
 
-        <div class="container">
-			<div class="row">
+
+		<div class="listings-title">
+			<div class="container">
+				<div class="wrap-title">
+					<h1>Home</h1>
+
+					<div class="bread">
+						<div class="breadcrumbs theme-clearfix">
+							<div class="container">
+								<ul class="breadcrumb">
+									<li>
+										<a href="#">Home</a>
+										<span class="go-page"></span>
+									</li>
+
+									<li class="active">
+										<span>Home</span>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+      <div class="container">
+			      <div class="row">
                 @section('content')
                 @show
             </div>
-        </div>
+       </div>
+
 
 		<footer id="footer" class="footer default theme-clearfix">
 			<!-- Content footer -->
@@ -807,8 +834,7 @@
 					</div>
 				</div>
 			</div>
-		</foot
-        er>
+		</footer>
 
 	</div>
 
@@ -865,7 +891,6 @@
 	</div>
 
 	<a id="etrostore-totop" href="#"></a>
-
 
 	<script type="text/javascript" src="/homes/js/jquery/jquery.min.js"></script>
 	<script type="text/javascript" src="/homes/js/jquery/jquery-migrate.min.js"></script>
@@ -924,7 +949,6 @@
       	b[c] += ( window.postMessage && request ? ' ' : ' no-' ) + cs;
    </script>
    <!--<![endif]-->
-
    @section('js')
    @show
    </body>
