@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     |
     */
-    
+
     'name' => env('APP_NAME', 'Super Shop'),
 
     /*
@@ -177,6 +177,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        App\Providers\ComposerServiceProvider::class,
 
 
     ],
