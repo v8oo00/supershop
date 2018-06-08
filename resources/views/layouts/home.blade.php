@@ -225,120 +225,24 @@
 					<div class="product-menu-title">
 						<h2>All categories <i class="fa fa-arrow-circle-down"></i></h2>
 					</div>
-					<div class="product_vmegamenu" style="display:none">
+					<div class="product_vmegamenu" style="@if(isset($block))display:block; @else display:none; @endif">
 						<ul>
+							@foreach($cates as $cate)
 							<li>
-								<a href="#"><img src="/homes/img/menu-l/1.png" alt="" /> Automotive & Motorcycle</a></li>
-							<li>
-								<a href="#"><img src="/homes/img/menu-l/2.png" alt="" />Bags, Shoes & Accessories</a></li>
-							<li>
-								<a href="#"><img src="/homes/img/menu-l/3.png" alt="" /> Cameras & Photo</a>
-							</li>
-							<li>
-								<a href="#"><img src="/homes/img/menu-l/4.png" alt="" /> Computers & Networking</a>
-							</li>
-							<li>
-								<a href="#"><img src="/homes/img/menu-l/5.png" alt="" />Flashlights & Lamps</a>
-							</li>
-							<li>
-								<a href="#"  class="hover-icon"><img src="/homes/img/menu-l/6.png" alt="" />Laptops & Accessories</a>
-								<div class="vmegamenu">
-									<span>
-										<a href="#" class="vgema-title">Linux</a>
-										<a href="#">Edubuntu</a>
-										<a href="#">Kubuntu</a>
-										<a href="#">Lubuntu</a>
-										</span>
-										<span>
-											<a href="#" class="vgema-title">Mac </a>
-											<a href="#">Mac OS X 10.0</a>
-											<a href="#">Mac OS X 10.7</a>
-											<a href="#">OS X 10.11</a>
-										</span>
-									<span>
-										<a href="#" class="vgema-title">Ubuntu</a>
-										<a href="#">Ubuntu Server</a>
-										<a href="#">Ubuntu Studio</a>
-										<a href="#">Ubuntu TV</a>
-									</span>
-									<span>
-										<a href="#" class="vgema-title">Windows</a>
-										<a href="#">Windows 10</a>
-										<a href="#">Windows 7</a>
-										<a href="#">Windows 8.1</a>
-									</span>
+								<a href="#"  class="hover-icon"><img src="/homes/img/menu-l/22.png" alt="" style="width:42px;height:42px;"/>{{$cate['cate']}}</a>
+								<div class="vmegamenu @if(count($cate['son'])<=15) vmegamenu2 @endif">
+									@foreach(cate_all_son(count($cate['son']),$cate['id']) as $son)
+
+											<span>
+												@foreach($son as $mson)
+												<a href='#'>{{$mson['cate']}}</a>
+												@endforeach
+											</span>
+
+									@endforeach
 								</div>
 							</li>
-							<li>
-								<a href="#" class="hover-icon"><img src="/homes/img/menu-l/12.png" alt="" />Sports & Outdoors</a>
-								<div class="vmegamenu">
-									<span>
-										<a href="#" class="vgema-title">Electronic</a>
-										<a href="#">Bedroom</a>
-										<a href="#">Kitchen</a>
-										<a href="#">Living room</a>
-										<a href="#">Out door</a>
-									</span>
-									<span>
-										<a href="#" class="vgema-title">Lights</a>
-										<a href="#">All lights</a>
-										<a href="#">Bed room</a>
-										<a href="#">Living room</a>
-										<a href="#">Out door</a>
-									</span>
-									<span>
-										<a href="#" class="vgema-title">Television</a>
-										<a href="#">Samsung</a>
-										<a href="#">Samsung Oled</a>
-										<a href="#">Sony</a>
-										<a href="#">Sony Bravia</a>
-									</span>
-									<span>
-										<a href="#" class="vgema-title">Washing</a>
-										<a href="#">Commercial</a>
-										<a href="#">Front-Load </a>
-										<a href="#">Pedestal </a>
-										<a href="#">Top-Load </a>
-									</span>
-								</div>
-							</li>
-							<li>
-								<a href="#" class="hover-icon"><img src="/homes/img/menu-l/7.png" alt="" />Smartphone & Tablets</a>
-								<div class="vmegamenu vmegamenu2">
-									<span>
-										<a href="#" class="vgema-title">HandBags</a>
-										<a href="#">Kids</a>
-										<a href="#">Mens</a>
-										<a href="#">Student</a>
-										<a href="#">Women</a>
-									</span>
-									<span>
-										<a href="#" class="vgema-title">Clothing</a>
-										<a href="#">Children</a>
-										<a href="#">Kids</a>
-										<a href="#">Mens</a>
-										<a href="#">Womens</a>
-									</span>
-								</div>
-							</li>
-							<li>
-								<a href="#"><img src="/homes/img/menu-l/8.png" alt="" />Health & Beauty</a>
-							</li>
-							<li>
-								<a href="#"><img src="/homes/img/menu-l/9.png" alt="" />Toys & Hobbies</a>
-							</li>
-							<li>
-								<a href="#"><img src="/homes/img/menu-l/10.png" alt="" />Holiday Supplies & Gifts</a>
-							</li>
-							<li>
-								<a href="#"><img src="/homes/img/menu-l/11.png" alt="" />Jewelry & Watches</a>
-							</li>
-							<li>
-								<a href="#"><img src="/homes/img/menu-l/5.png" alt="" />Smartphone & Watches</a>
-							</li>
-							<li>
-								<a href="#"><img src="/homes/img/menu-l/4.png" alt="" />Health Watches</a>
-							</li>
+							@endforeach
 						</ul>
 					</div>
 				</div>
