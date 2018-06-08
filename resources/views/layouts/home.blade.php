@@ -16,7 +16,8 @@
 <link rel="stylesheet" href="/homes/css/bootstrap.min.css">
 @section('css')
 @show
-
+<!-- layer -->
+<link rel="stylesheet" href='{{asset("layer/theme/default/layer.css")}}'>
 
 <!-- font-awesome.min.css -->
 <link rel="stylesheet" href="/homes/css/font-awesome.min.css">
@@ -66,14 +67,23 @@
 						<ul>
 							<li class="slide-toggle"><a href="#"><i class="fa fa-user"></i> My Account</a>
 								<ul class="show-toggle">
-									<li><a href="#">register</a></li>
-									<li><a href="#">login</a></li>
-                                    <li><a href="{{ action('UserController@index') }}">Personal</li>
+									@if(!Auth::check())
+										<li><a href="{{ route('register') }}">register</a></li>
+										<li><a href="{{ route('login') }}">login</a></li>
+									@else
+                                    	<li><a href="{{ action('UserController@index') }}">Personal</li>
+									@endif
 								</ul>
 							</li>
 						</ul>
 						<ul>
-							<li><a href="#"><i class="fa fa-check"></i> Checkout</a></li>
+							@if(Auth::check())
+							<li><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fa fa-check"></i> Checkout</a>
+								<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+									{{ csrf_field() }}
+								</form>
+							</li>
+							@endif
 						</ul>
 					</div>
 				</div>
@@ -481,6 +491,8 @@
 <script src="/homes/js/plugins.js"></script>
 <!-- main.js -->
 <script src="/homes/js/main.js"></script>
+<!-- layer -->
+<script src="{{asset('/layer/layer.js')}}"></script>
 
 @section('js')
 @show
