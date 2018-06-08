@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
 <meta charset="utf-8">
@@ -14,10 +14,16 @@
 <!-- all css here -->
 <!-- bootstrap.min.css -->
 <link rel="stylesheet" href="/homes/css/bootstrap.min.css">
+@section('css')
+@show
+
+
 <!-- font-awesome.min.css -->
 <link rel="stylesheet" href="/homes/css/font-awesome.min.css">
 <!-- owl.carousel.css -->
+
 <link rel="stylesheet" href="/homes/css/owl.carousel.css">
+
 <!-- owl.carousel.css -->
 <link rel="stylesheet" href="/homes/css/meanmenu.min.css">
 <!-- shortcode/shortcodes.css -->
@@ -30,8 +36,8 @@
 <link rel="stylesheet" href="/homes/css/responsive.css">
 
 
-@section('css')
-@show
+
+
 
 
 <script src="/homes/js/vendor/modernizr-2.8.3.min.js"></script>
@@ -62,28 +68,12 @@
 								<ul class="show-toggle">
 									<li><a href="#">register</a></li>
 									<li><a href="#">login</a></li>
+                                    <li><a href="{{ action('UserController@index') }}">Personal</li>
 								</ul>
 							</li>
 						</ul>
 						<ul>
 							<li><a href="#"><i class="fa fa-check"></i> Checkout</a></li>
-						</ul>
-						<ul>
-							<li class="slide-toggle-2 text-uppercase"><a href="#"><i class="fa fa-usd"></i>USD</a>
-								<ul class="show-toggle-2">
-									<li><a href="#"><i class="fa fa-eur"></i> EUR</a></li>
-									<li><a href="#"><i class="fa fa-gbp"></i> GBP</a></li>
-									<li><a href="#"><i class="fa fa-usd"></i> USD</a></li>
-								</ul>
-							</li>
-						</ul>
-						<ul>
-							<li class="slide-toggle-3 text-uppercase"><a href="#">fr-ca</a>
-								<ul class="show-toggle-3">
-									<li><a href="#">en-gb</a></li>
-									<li><a href="#">fr-ca</a></li>
-								</ul>
-							</li>
 						</ul>
 					</div>
 				</div>
