@@ -8,6 +8,11 @@ use Auth;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     //个人中心页面
     public function index(){
         return view('home.user.index');

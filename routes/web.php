@@ -19,7 +19,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //个人中心
 Route::get('/account', 'UserController@index');
-Route::get('/account/updateAvatar', 'UserController@updateAvatar');
+Route::post('/account/updateAvatar', 'UserController@updateAvatar');
 
 Route::group(['prefix' => 'admin'], function () {
     //首页
