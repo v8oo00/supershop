@@ -165,6 +165,7 @@
     //当点击管理标签时触发
     $('.gltags').click(function(){
         var id = $(this).parents('tr').find('td:eq(0)').html();
+        $('#bc').attr('c_id',id);
         $.ajax({
             url:"{{ action('Admin\CommodityController@tags')}}",
             data:{id:id},
@@ -183,49 +184,6 @@
             }
         });
 
-        //当点击保存按钮时
-        $('#bc').click(function(){
-
-            if($('#tags_1').val() != '' && $('#name').val() != ''){
-                var tags = $('#name').val();
-                var vals = $('#tags_1').val();
-
-                $.ajax({
-                    url:"{{action('Admin\CommodityController@storetv')}}",
-                    data:{id:id,tag:tags,value:vals},
-                    type:'post',
-                    success:function(mes){
-                        if(mes == 'ok'){
-                            $('#name').val('');
-                            removeTag1();
-                            $('#tvborder').css({'height':'0px','transition':'all 0.2s'});
-                            $('#out').find('i').attr('class','glyphicon glyphicon-plus');
-                            $('#out').attr('out','false');
-                            //删除数据
-                            $('.tag_val').remove();
-
-                            //重新发送ajax
-                            $.ajax({
-                                url:"{{ action('Admin\CommodityController@tags')}}",
-                                data:{id:id},
-                                type:'get',
-                                success:function(mes){
-                                    deal(mes);
-                                    del();
-                                }
-                            });
-
-                            layer.msg('添加标签和标签值成功',{icon: 1});
-                        }else{
-                            layer.msg('添加标签和标签值失败',{icon: 2});
-                        }
-                    }
-                });
-            }else{
-                layer.msg('标签或标签值不能为空');
-            }
-        });
-
         //当点击取消按钮时
         $('#qx').click(function(){
             $('#name').val('');
@@ -234,6 +192,50 @@
             $('#out').find('i').attr('class','glyphicon glyphicon-plus');
             $('#out').attr('out','false');
         });
+    });
+
+    //当点击保存按钮时
+    $('#bc').click(function(){
+        var c_id = $('#bc').attr('c_id');
+
+        if($('#tags_1').val() != '' && $('#name').val() != ''){
+            var tags = $('#name').val();
+            var vals = $('#tags_1').val();
+
+            $.ajax({
+                url:"{{action('Admin\CommodityController@storetv')}}",
+                data:{id:c_id,tag:tags,value:vals},
+                type:'post',
+                success:function(mes){
+                    if(mes == 'ok'){
+                        $('#name').val('');
+                        removeTag1();
+                        $('#tvborder').css({'height':'0px','transition':'all 0.2s'});
+                        $('#out').find('i').attr('class','glyphicon glyphicon-plus');
+                        $('#out').attr('out','false');
+                        //删除数据
+                        $('.tag_val').remove();
+
+                        //重新发送ajax
+                        $.ajax({
+                            url:"{{ action('Admin\CommodityController@tags')}}",
+                            data:{id:c_id},
+                            type:'get',
+                            success:function(mes){
+                                deal(mes);
+                                del();
+                            }
+                        });
+
+                        layer.msg('添加标签和标签值成功',{icon: 1});
+                    }else{
+                        layer.msg('添加标签和标签值失败',{icon: 2});
+                    }
+                }
+            });
+        }else{
+            layer.msg('标签或标签值不能为空');
+        }
     });
 
 

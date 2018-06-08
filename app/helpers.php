@@ -52,4 +52,33 @@
 	function explode_kvalue($str){
 		return explode(',',$str);
 	}
+
+	function cate_all_son($s,$cate_id){
+
+		if($s <=10 ){
+			$array_num1 = [2,3];
+		}else if($s>10 && $s<=15){
+			$array_num1 = [3,4];
+		}else if($s>15 && $s<=20){
+			$array_num1 = [4,5];
+		}
+		$cate_son = App\Cate::where('pid','=',$cate_id)->get()->toArray();
+		$count_group = $array_num1[array_rand($array_num1)];
+		$group_num =  floor(count($cate_son)/$count_group);
+		$arr = array_group($cate_son,$count_group,$group_num);
+		return $arr;
+	}
+
+	function array_group($arrF,$user_count,$group_num){
+
+		for($i=0;$i<$user_count;$i++){
+			if($i == $user_count-1){
+				$arrT[] = array_slice($arrF, $i * $group_num );
+			}else{
+				$arrT[] = array_slice($arrF, $i * $group_num ,$group_num);
+			}
+		}
+
+		return $arrT;
+	}
 ?>
