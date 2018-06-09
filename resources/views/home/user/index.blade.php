@@ -24,8 +24,8 @@
                 <div id="ziavatar" style="width:350px;height:0px;position:absolute;top:0px;background-color:black;color:white;text-align:center;line-height:350px;font-size:25px;overflow:hidden;">点击修改头像</div>
             </div>
         </div>
-        <div class="col-md-8" style="padding:0px;border:1px solid red;">
-			<h2 style="font-size:25px;">Hello ! <strong>{{Auth::user()->name}}</strong></h2>
+        <div class="col-md-8" style="padding:0px;">
+			<h2 style="font-size:25px;">Hello ! <strong id="uname">{{Auth::user()->name}}</strong></h2>
 			<p>账户注册时间：{{Auth::user()->created_at}}</p>
             <form  action='' class="row form-horizontal"  style='padding-left:0px;padding-right:0px;' >
 				<div class='col-md-8' >
@@ -34,10 +34,10 @@
 						<label style="height:100%;padding-top:15px;font-weight:bold;text-align:left;" class='control-label col-md-2' for="nickname">昵称</label>
                         <div style="margin-top:10px;display:none;">
     						<div class="col-md-6">
-    							<input class='form-control'  value='' name='name' type="text">
+    							<input class='form-control'  value="{{Auth::user()->name}}" name='name' type="text">
     						</div>
                             <div class="col-sm-4">
-                                <button class="btn btn-default bc" style="margin-left:-10px;background-color:#0F88EB;color:white;width:64px;height:35px;" type="button">保存</button>
+                                <button class="btn btn-default bc bcmsg" style="margin-left:-10px;background-color:#0F88EB;color:white;width:64px;height:35px;" type="button">保存</button>
                                 <button class="btn btn-default qx" style="width:64px;height:35px;margin-left:10px;" type="button">取消</button>
                             </div>
                         </div>
@@ -56,17 +56,17 @@
 						<label style="height:100%;padding-top:15px;font-weight:bold;text-align:left;" class='control-label col-md-2' for="nickname">性别</label>
                         <div style="margin-top:10px;display:none;">
     						<div class="col-md-3" style="padding-top:6px;">
-    							<input class='form-control'  value='0' name='sex' type="radio" style="float:left;width:16px;height:16px;"><span style="float:left;margin-left:5px;margin-right:10px;">女</span>
-                                <input class="form-control" type="radio" name="sex" value="1" style="float:left;width:16px;height:16px;"><span style="float:left;margin-left:5px;margin-right:10px;">男</span>
+    							<input class='form-control'  value='0' name='sex' type="radio" style="float:left;width:16px;height:16px;" @if(Auth::user()->sex == 0) checked @endif /><span style="float:left;margin-left:5px;margin-right:10px;">女</span>
+                                <input class="form-control" type="radio" name="sex" value="1" style="float:left;width:16px;height:16px;" @if(Auth::user()->sex == 1) checked @endif /><span style="float:left;margin-left:5px;margin-right:10px;">男</span>
     						</div>
                             <div class="col-sm-7">
-                                <button class="btn btn-default bc" style="margin-left:-10px;background-color:#0F88EB;color:white;width:64px;height:35px;" type="button">保存</button>
+                                <button class="btn btn-default bc bcsex" style="margin-left:-10px;background-color:#0F88EB;color:white;width:64px;height:35px;" type="button">保存</button>
                                 <button class="btn btn-default qx" style="width:64px;height:35px;margin-left:10px;" type="button">取消</button>
                             </div>
                         </div>
                         <div class="shouhover">
                             <div class="col-sm-offset-2" style="height:52px;padding-left:10px;font-size:16px;">
-                                <span style="float:left;font-size:15px;margin-left:5px;line-height:50px;"></span>
+                                <span style="float:left;font-size:15px;margin-left:5px;line-height:50px;">@if(Auth::user()->sex == 0) 女 @elseif(Auth::user()->sex == 1) 男 @else 未知 @endif</span>
                                 <div style="float:left;color:#175199;margin-left:10px;" class="shou">
                                     <span style="height:100%;line-height:50px;font-size:12px;" class="glyphicon glyphicon-pencil"></span>
                                     <span>编辑性别</span>
@@ -79,16 +79,16 @@
 						<label style="height:100%;padding-top:15px;font-weight:bold;text-align:left;" class='control-label col-md-2' for="nickname">电话</label>
                         <div style="margin-top:10px;display:none;">
     						<div class="col-md-6">
-    							<input class='form-control'  value='' name='phone' type="tel">
+    							<input class='form-control'  value="@if(Auth::user()->phone != 0) {{Auth::user()->phone}} @endif" name='phone' type="tel">
     						</div>
                             <div class="col-sm-4">
-                                <button class="btn btn-default bc" style="margin-left:-10px;background-color:#0F88EB;color:white;width:64px;height:35px;" type="button">保存</button>
+                                <button class="btn btn-default bc bcmsg" style="margin-left:-10px;background-color:#0F88EB;color:white;width:64px;height:35px;" type="button">保存</button>
                                 <button class="btn btn-default qx" style="width:64px;height:35px;margin-left:10px;" type="button">取消</button>
                             </div>
                         </div>
                         <div class="shouhover">
                             <div class="col-sm-offset-2" style="height:52px;padding-left:10px;font-size:16px;">
-                                <span style="float:left;font-size:15px;margin-left:5px;line-height:50px;"></span>
+                                <span style="float:left;font-size:15px;margin-left:5px;line-height:50px;">@if(Auth::user()->phone != 0) {{Auth::user()->phone}} @endif</span>
                                 <div style="float:left;color:#175199;margin-left:10px;" class="shou">
                                     <span style="height:100%;line-height:50px;font-size:12px;" class="glyphicon glyphicon-phone"></span>
                                     <span>编辑电话</span>
@@ -101,16 +101,16 @@
 						<label style="height:100%;padding-top:15px;font-weight:bold;text-align:left;" class='control-label col-md-2' for="nickname">QQ</label>
                         <div style="margin-top:10px;display:none;">
     						<div class="col-md-6">
-    							<input class='form-control'  value='' name='qq' type="tel">
+    							<input class='form-control'  value="@if(Auth::user()->qq != 0) {{Auth::user()->qq}} @endif" name='qq' type="tel">
     						</div>
                             <div class="col-sm-4">
-                                <button class="btn btn-default bc" style="margin-left:-10px;background-color:#0F88EB;color:white;width:64px;height:35px;" type="button">保存</button>
+                                <button class="btn btn-default bc bcmsg" style="margin-left:-10px;background-color:#0F88EB;color:white;width:64px;height:35px;" type="button">保存</button>
                                 <button class="btn btn-default qx" style="width:64px;height:35px;margin-left:10px;" type="button">取消</button>
                             </div>
                         </div>
                         <div class="shouhover">
                             <div class="col-sm-offset-2" style="height:52px;padding-left:10px;font-size:16px;">
-                                <span style="float:left;font-size:15px;margin-left:5px;line-height:50px;"></span>
+                                <span style="float:left;font-size:15px;margin-left:5px;line-height:50px;">@if(Auth::user()->qq != 0) {{Auth::user()->qq}} @endif</span>
                                 <div style="float:left;color:#175199;margin-left:10px;" class="shou">
                                     <span style="height:100%;line-height:50px;font-size:12px;" class="glyphicon glyphicon-hand-right"></span>
                                     <span>编辑QQ</span>
@@ -123,16 +123,16 @@
 						<label style="height:100%;padding-top:15px;font-weight:bold;text-align:left;" class='control-label col-md-2' for="nickname">余额</label>
                         <div style="margin-top:10px;display:none;">
     						<div class="col-md-6">
-    							<input class='form-control'  value='' name='money' type="number">
+    							<input class='form-control' name='money' type="number" placeholder="请输入充值金额" />
     						</div>
                             <div class="col-sm-4">
-                                <button class="btn btn-default bc" style="margin-left:-10px;background-color:#0F88EB;color:white;width:64px;height:35px;" type="button">保存</button>
+                                <button class="btn btn-default bc cz" style="margin-left:-10px;background-color:#0F88EB;color:white;width:64px;height:35px;" type="button">充值</button>
                                 <button class="btn btn-default qx" style="width:64px;height:35px;margin-left:10px;" type="button">取消</button>
                             </div>
                         </div>
                         <div class="shouhover">
                             <div class="col-sm-offset-2" style="height:52px;padding-left:10px;font-size:16px;">
-                                <span style="float:left;font-size:15px;margin-left:5px;line-height:50px;"></span>
+                                <span style="float:left;font-size:15px;margin-left:5px;line-height:50px;">{{ Auth::user()->money }}</span><span style="float:left;line-height:50px;">￥</span>
                                 <div style="float:left;color:#175199;margin-left:10px;" class="shou">
                                     <span style="height:100%;line-height:50px;font-size:12px;" class="glyphicon glyphicon-info-sign"></span>
                                     <span>充值</span>
@@ -142,15 +142,13 @@
 					</div>
 
 				</div>
-
 			</form>
 
         </div>
 
 
 
-		</div>
-    </div>
+	</div>
 </div>
 <!-- 修改头像 -->
 
@@ -227,6 +225,7 @@
 <script type="text/javascript">
 $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
 
+//移动到头像选框时
 $('#up-img-touch').hover(function(){
     $('#ziavatar').css({
         'height':'350px',
@@ -286,5 +285,74 @@ $('.qx').click(function(){
     $(this).parent().parent().next().css('display','block');
     return false;
 });
+
+//获取单选框的值
+var sex = {{Auth::user()->sex}};
+
+$('input[name="sex"]').click(function(){
+    sex = $(this).val();
+});
+
+//修改性别
+$('.bcsex').click(function(){
+    var tthis = $(this);
+    $.ajax({
+        url:"{{ action('UserController@updateDetail') }}",
+        type:'post',
+        data:{name:'sex',value:sex},
+        success:function(mes){
+            if(mes == 'ok'){
+                tthis.parent().parent().next().children().children('span:eq(0)').html(tthis.parent().prev().find('input[value='+sex+']').next().html());
+                tthis.next().trigger('click');
+            }
+        }
+    });
+
+    return false;
+});
+
+//修改昵称 电话 QQ
+$('.bcmsg').click(function(){
+    var tthis = $(this);
+    var name = $(this).parent().prev().children('input').attr('name');
+    var value = $(this).parent().prev().children('input').val();
+    $.ajax({
+        url:"{{ action('UserController@updateDetail') }}",
+        type:'post',
+        data:{name:name,value:value},
+        success:function(mes){
+            if(mes == 'ok'){
+                if(name == 'name'){
+                    $('#uname').html(tthis.parent().prev().children('input').val());
+                }
+                tthis.parent().parent().next().children().children('span:eq(0)').html(tthis.parent().prev().children('input').val());
+                tthis.next().trigger('click');
+            }
+        }
+    });
+
+    return false;
+});
+
+//充值余额
+$('.cz').click(function(){
+    var tthis = $(this);
+    var money = $(this).parent().prev().children('input').val();
+    $.ajax({
+        url:"{{ action('UserController@cz') }}",
+        type:'post',
+        data:{money:money},
+        success:function(mes){
+            if(mes['result'] == 'ok'){
+                //修改余额
+                tthis.parent().parent().next().children().children('span:eq(0)').html(mes['money']);
+                tthis.next().trigger('click');
+            }
+        }
+    });
+    return false;
+});
+
+
 </script>
 @endsection

@@ -20,6 +20,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 //个人中心
 Route::get('/account', 'UserController@index');
 Route::post('/account/updateAvatar', 'UserController@updateAvatar');
+Route::post('/account/updateDetail', 'UserController@updateDetail');
+Route::post('/account/cz', 'UserController@cz');
 
 //分类页面
 Route::get('/cate/f_cate/{id}','CateController@lookfcate');
