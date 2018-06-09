@@ -69,6 +69,7 @@
 		return $arr;
 	}
 
+
 	function array_group($arrF,$user_count,$group_num){
 
 		for($i=0;$i<$user_count;$i++){
@@ -81,4 +82,41 @@
 
 		return $arrT;
 	}
+
+	function get_shop_info($com){
+
+		foreach($com as $commodity){
+            foreach($commodity->skus as $key=>$sku){
+                if($sku['stock'] != 0){
+                    $commodity['price'] = $sku->price;
+                    break;
+                }
+            }
+            foreach($commodity->compictures as $k=>$pic){
+                if($pic['status'] != 0){
+                    $commodity['picture'] = $pic->image;
+                    break;
+                }
+            }
+        }
+
+		return $com;
+	}
+
+	function findcate_byfcate_id($cate_id){
+		return App\Cate::where('pid','=',$cate_id)->get();
+	}
+
+	function check_skuid($arr1,$arr2){
+        if(count($arr1) == count($arr2)){
+            foreach($arr1 as $v){
+                if(!in_array($v,$arr2)){
+                    return false;
+                }
+            }
+            return true;
+        }else{
+            return false;
+        }
+    }
 ?>

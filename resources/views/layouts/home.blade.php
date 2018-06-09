@@ -3,12 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>Home</title>
+<title>SUPERSHOP!</title>
+
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-<link rel="icon" href="/homes/img/favicon.png" />
+<link rel="shortcut icon" href="/supershop.ico" />
 <!-- Place favicon.ico in the root directory -->
 
 <!-- all css here -->
@@ -36,16 +37,9 @@
 <!-- responsive.css -->
 <link rel="stylesheet" href="/homes/css/responsive.css">
 
-
-
-
-
-
 <script src="/homes/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <body>
-
-
 
 <!--[if lt IE 8]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -239,13 +233,13 @@
 						<ul>
 							@foreach($cates as $cate)
 							<li>
-								<a href="#"  class="hover-icon"><img src="/homes/img/menu-l/22.png" alt="" style="width:42px;height:42px;"/>{{$cate['cate']}}</a>
+								<a href="/cate/f_cate/{{$cate->id}}"  class="hover-icon"><img src="/homes/img/menu-l/22.png" alt="" style="width:42px;height:42px;"/>{{$cate['cate']}}</a>
 								<div class="vmegamenu @if(count($cate['son'])<=15) vmegamenu2 @endif">
 									@foreach(cate_all_son(count($cate['son']),$cate['id']) as $son)
 
 											<span>
 												@foreach($son as $mson)
-												<a href='#'>{{$mson['cate']}}</a>
+													<a href='/cate/s_cate/{{$mson['id']}}'>{{$mson['cate']}}</a>
 												@endforeach
 											</span>
 
@@ -493,6 +487,9 @@
 <script src="/homes/js/main.js"></script>
 <!-- layer -->
 <script src="{{asset('/layer/layer.js')}}"></script>
+<script type="text/javascript">
+	$.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
+</script>
 
 @section('js')
 @show
