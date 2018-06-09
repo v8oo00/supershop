@@ -23,6 +23,14 @@ Route::post('/account/updateAvatar', 'UserController@updateAvatar');
 Route::post('/account/updateDetail', 'UserController@updateDetail');
 Route::post('/account/cz', 'UserController@cz');
 
+//分类页面
+Route::get('/cate/f_cate/{id}','CateController@lookfcate');
+Route::get('/cate/s_cate/{id}','CateController@lookscate');
+
+//商品详情页
+Route::get('/commodity/{id}','CommodityController@product');
+Route::post('/commodity/sku','CommodityController@getclicksku');
+
 Route::group(['prefix' => 'admin'], function () {
     //首页
     Route::group(['middleware' => 'auth.admin'], function () {

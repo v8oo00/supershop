@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Picture;
 use App\Commodity;
 use App\Cate;
+use DB;
 class HomeController extends Controller
 {
     /**
@@ -26,24 +27,15 @@ class HomeController extends Controller
 
     public function index()
     {
+        // 轮播图
         $pictures = Picture::get();
-        $commodities = Commodity::where('status','=',1)->orderBy('sale','desc')->limit(5)->get();
 
-        foreach($commodities as $commodity){
-            foreach($commodity->skus as $key=>$sku){
-                if($sku['stock'] != 0){
-                    $commodity['price'] = $sku->price;
-                    break;
-                }
-            }
-            foreach($commodity->compictures as $k=>$pic){
-                if($pic['status'] != 0){
-                    $commodity['picture'] = $pic->image;
-                    break;
-                }
-            }
-        }
+        // 新上架商品
+        $commodities = Commodity::where('status','=',1)->orderBy('created_at','desc')->limit(10)->get();
 
+        $commodities = get_shop_info($commodities);
+
+        // 分类以及分类下的商品
         $cates = Cate::where('pid','=',0)->get();
 
         foreach($cates as $cate){
@@ -53,26 +45,19 @@ class HomeController extends Controller
             }
             $commodities_2 = Commodity::where('status','=',1)->whereIn('cate_id',$arr)->orderBy('sale','desc')->limit(10)->get();
 
-            foreach($commodities_2 as $commodity){
-                foreach($commodity->skus as $key=>$sku){
-                    if($sku['stock'] != 0){
-                        $commodity['price'] = $sku->price;
-                        break;
-                    }
-                }
-                foreach($commodity->compictures as $k=>$pic){
-                    if($pic['status'] != 0){
-                        $commodity['picture'] = $pic->image;
-                        break;
-                    }
-                }
-            }
+            $commodities_2 = get_shop_info($commodities_2);
 
             $cate['commodity'] = $commodities_2;
         }
-        // dd($cates);
+
+        // 热销商品
+        $sale_com = Commodity::select(DB::raw("*,((sale+click_num)/2) as p"))->where('status','=',1)->orderBy('p','desc')->limit(20)->get();
+
+        $sale_com = get_shop_info($sale_com);
+        // dd($sale_com);
+        // 菜单栏是否显示
         $block = 'block';
-        return view('home.index.index',compact('block','pictures','commodities','cates'));
+        return view('home.index.index',compact('block','pictures','commodities','cates','sale_com'));
     }
 
 }
