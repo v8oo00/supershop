@@ -12,7 +12,7 @@ class UserController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     //个人中心页面
     public function index(){
         return view('home.user.index');
@@ -24,5 +24,30 @@ class UserController extends Controller
         if($user->update($_POST)){
             return response()->json(['result'=>'ok','file'=>$_POST['avatar']]);
         };
+    }
+
+    //修改个人信息
+    public function updateDetail(){
+        $user = User::findOrFail(Auth::id());
+        $arr = [
+            $_POST['name']=>$_POST['value']
+        ];
+        if($user->update($arr)){
+            return 'ok';
+        }
+    }
+
+    //充值金额
+    public function cz(){
+        $user = User::findOrFail(Auth::id());
+
+        $arr = [
+            'money'=>$user->money + $_POST['money']
+        ];
+
+        //修改成功返回ok 并返回总余额
+        if($user->update($arr)){
+            return ['result'=>'ok','money'=>$user->money];
+        }
     }
 }
