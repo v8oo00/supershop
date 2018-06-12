@@ -1,7 +1,6 @@
 @extends('layouts.admin')
 
 @section('css')
-    <link href="/admins/vendors/google-code-prettify/bin/prettify.min.css" rel="stylesheet">
 @endsection
 @section('content')
 <div class="">
@@ -31,52 +30,9 @@
                 <div class="x_content">
                     {!! Form::open(['url' => 'admin/commodity/update_com','method' => 'POST','class'=>'form-horizontal form-label-left','novalidate'=>'','enctype'=>"multipart/form-data"]) !!}
                         <input type="hidden" name="id" value="{{$com_one->id}}">
-                            <div class="col-md-12 col-sm-12 col-xs-12" id='detail'>
-                                <div id="alerts"></div>
-                                <div class="btn-toolbar editor" data-role="editor-toolbar" data-target="#editor-one">
-
-                                    <div class="btn-group">
-                                        <a class="btn" data-edit="bold" title="Bold (Ctrl/Cmd+B)"><i class="fa fa-bold"></i></a>
-                                        <a class="btn" data-edit="italic" title="Italic (Ctrl/Cmd+I)"><i class="fa fa-italic"></i></a>
-                                        <a class="btn" data-edit="strikethrough" title="Strikethrough"><i class="fa fa-strikethrough"></i></a>
-                                        <a class="btn" data-edit="underline" title="Underline (Ctrl/Cmd+U)"><i class="fa fa-underline"></i></a>
-                                    </div>
-
-                                    <div class="btn-group">
-                                        <a class="btn" data-edit="insertunorderedlist" title="Bullet list"><i class="fa fa-list-ul"></i></a>
-                                        <a class="btn" data-edit="insertorderedlist" title="Number list"><i class="fa fa-list-ol"></i></a>
-                                        <a class="btn" data-edit="outdent" title="Reduce indent (Shift+Tab)"><i class="fa fa-dedent"></i></a>
-                                        <a class="btn" data-edit="indent" title="Indent (Tab)"><i class="fa fa-indent"></i></a>
-                                    </div>
-
-                                    <div class="btn-group">
-                                        <a class="btn" data-edit="justifyleft" title="Align Left (Ctrl/Cmd+L)"><i class="fa fa-align-left"></i></a>
-                                        <a class="btn" data-edit="justifycenter" title="Center (Ctrl/Cmd+E)"><i class="fa fa-align-center"></i></a>
-                                        <a class="btn" data-edit="justifyright" title="Align Right (Ctrl/Cmd+R)"><i class="fa fa-align-right"></i></a>
-                                        <a class="btn" data-edit="justifyfull" title="Justify (Ctrl/Cmd+J)"><i class="fa fa-align-justify"></i></a>
-                                    </div>
-
-                                    <div class="btn-group">
-                                        <a class="btn" title="Insert picture (or just drag &amp; drop)" id="pictureBtn"><i class="fa fa-picture-o"></i></a>
-                                        <input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" style="display:none;">
-                                    </div>
-
-                                    <div class="btn-group">
-                                        <a class="btn" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="fa fa-undo"></i></a>
-                                        <a class="btn" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="fa fa-repeat"></i></a>
-                                    </div>
-                                </div>
-                                <div id="editor-one" class="editor-wrapper placeholderText" contenteditable="true">{!! $com_one->detail !!}</div>
-                                <textarea name="detail" id="descr" style="display:none;"></textarea>
-                                <br>
-                            </div>
-                        <div class="ln_solid"></div>
-
-                            <div class="col-md-12 col-sm-12 col-xs-12 " style="text-align:center;">
-                                <button type="reset" class="btn btn-primary">Reset</button>
-                                <button type="submit" class="btn btn-success">Submit</button>
-                            </div>
-
+                        <div id="editor">{!! $com_one->detail !!}</div>
+                        <textarea id="text1" name='detail' style="width:100%; height:200px;display:none;"></textarea>
+                        <button type="submit" name="button" class='btn btn-primary' style='float:right;margin-top:20px;'>确定修改</button>
                     {!! Form::close() !!}
                 </div>
             </div>
@@ -86,19 +42,75 @@
 @endsection
 
 @section('js')
-<script src="/admins/vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
-<script src="/admins/vendors/jquery.hotkeys/jquery.hotkeys.js"></script>
-<script src="/admins/vendors/google-code-prettify/src/prettify.js"></script>
+<script type="text/javascript" src='/admins/wangeditor/wangEditor.min.js'></script>
 <script type="text/javascript">
-    $('#pictureBtn').click(function(){
-        $(this).next().click();
-    });
-    $(".btn-success").click(function(){
-        var descr=$('#editor-one').html();
+$.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
+var E = window.wangEditor
+var editor = new E('#editor')
+var $text1 = $('#text1')
+editor.customConfig.onchange = function (html) {
+   // 监控变化，同步更新到 textarea
+   $text1.val(html)
+}
+// 配置服务器端地址
+editor.customConfig.uploadImgHeaders = {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+}
 
-        $("#descr").html(descr);
-        // return false;
-    })
+editor.customConfig.uploadFileName = 'file[]'
+
+editor.customConfig.uploadImgServer = '/admin/commodity/uploadpic'
+
+editor.customConfig.uploadImgHooks = {
+    before: function (xhr, editor, files) {
+        // 图片上传之前触发
+        // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象，files 是选择的图片文件
+
+        // 如果返回的结果是 {prevent: true, msg: 'xxxx'} 则表示用户放弃上传
+        // return {
+        //     prevent: true,
+        //     msg: '放弃上传'
+        // }
+    },
+    success: function (xhr, editor, result) {
+        // 图片上传并返回结果，图片插入成功之后触发
+        // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象，result 是服务器端返回的结果
+    },
+    fail: function (xhr, editor, result) {
+        // 图片上传并返回结果，但图片插入错误时触发
+        // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象，result 是服务器端返回的结果
+    },
+    error: function (xhr, editor) {
+        // 图片上传出错时触发
+        // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象
+    },
+    timeout: function (xhr, editor) {
+        // 图片上传超时时触发
+        // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象
+    },
+
+    // 如果服务器端返回的不是 {errno:0, data: [...]} 这种格式，可使用该配置
+    // （但是，服务器端返回的必须是一个 JSON 格式字符串！！！否则会报错）
+    customInsert: function (insertImg, result, editor) {
+        // 图片上传并返回结果，自定义插入图片的事件（而不是编辑器自动插入图片！！！）
+        // insertImg 是插入图片的函数，editor 是编辑器对象，result 是服务器端返回的结果
+
+        // 举例：假如上传图片成功后，服务器端返回的是 {url:'....'} 这种格式，即可这样插入图片：
+        var url = result.data
+        $(url).each(function( key, val){
+            insertImg(val)
+        })
+
+
+        // result 必须是一个 JSON 格式字符串！！！否则报错
+    }
+}
+
+
+editor.create()
+// 初始化 textarea 的值
+$text1.val(editor.txt.html())
+
 
 @if($errors->has('detail'))
 

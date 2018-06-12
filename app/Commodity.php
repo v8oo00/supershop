@@ -49,8 +49,10 @@ class Commodity extends Model
         return $this->hasMany('App\Sku','c_id','id');
     }
 
-    //和购物车关联
     public function cart(){
         return $this->belongsTo('App\Cart','c_id','id');
+    }
+    public function evaluates(){
+        return $this->hasMany('App\Evaluate','commodity_id','id');
     }
 }
