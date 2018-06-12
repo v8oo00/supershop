@@ -20,11 +20,11 @@ class Address extends Model
     // protected $dateFormat = 'U';
 
     //过滤字段，只有包含的字段才能被更新
-    protected $fillable = ['uid','province','city','county','street','username','userphone','status'];
+    protected $fillable = ['uid','province','city','county','street','username','userphone'];
 
     //隐藏字段
     protected $hidden = ['created_at','updated_at'];
 
-    
+
 
 }

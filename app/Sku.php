@@ -28,4 +28,9 @@ class Sku extends Model
     public function commodity(){
         return $this->belongsTo('App\Commodity','c_id','id');
     }
+
+    //一对一  购物车
+    public function cart(){
+        return $this->belongsTo('App\Cart','sku_id','id');
+    }
 }

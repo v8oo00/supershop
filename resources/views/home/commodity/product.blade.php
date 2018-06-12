@@ -20,6 +20,7 @@
 @endsection
 
 @section('content')
+
 <div class="breadcrumb-area">
 	<div class="container">
 		<ol class="breadcrumb">
@@ -105,7 +106,7 @@
                                                 <span id='sku_num' num="{{$commodity->stock}}" sku_id="{{$commodity->sku_id}}" style='display:block;height:30px;line-height:30px;font-weight:bold;color:#555;'>{{$commodity->stock}}</span>
                                             </div>
                                         </div>
-                                        <button type="button" id='add_carts' class='btn btn-default btn-lg'  name="button" style='background-color:#FF6A6A;border:1px solid #FF6A6A;color:white;padding-right:20px;line-height:60px;height:60px;font-size:18px;border-radius:3%;' > <span style='margin-left:10px;margin-right:10px;' class='glyphicon glyphicon-shopping-cart'></span> 添加到购物车</button>
+                                        <button type="button" id='add_carts' class='btn btn-default btn-lg'  name="button" style='background-color:#FF6A6A;border:1px solid #FF6A6A;color:white;padding-right:20px;line-height:60px;height:60px;font-size:18px;border-radius:3%;'> <span style='margin-left:10px;margin-right:10px;' class='glyphicon glyphicon-shopping-cart'></span> 添加到购物车</button>
                                     </div>
                                 </div>
                             </div>
@@ -499,11 +500,120 @@ $(function(){
 
     //添加购物车
     $('#add_carts').click(function(){
-        var sku_id = $('#sku_num').attr('sku_id');
-        var num = $('#value_shop').val();
-        // console.log(sku_id);
-        // console.log(num);
-    })
+		@if(Auth::check() && Auth::user())
+			var c_id = {{ $commodity->id }};
+			var sku_id = $('#sku_num').attr('sku_id');
+			var num = $('#value_shop').val();
+			$.ajax({
+				url:"{{ action('CartController@add') }}",
+				type:'post',
+				data:{uid:{{Auth::id()}},c_id:c_id,sku_id:sku_id,num:num},
+				success:function(mes){
+					if(mes == 'ok'){
+
+						//获取购物车数据并同步到小购物车中
+						$.ajax({
+							url:"{{action('CommodityController@cart_data')}}",
+							type:"get",
+							success:function(mes){
+								add_small_cart(mes);
+							}
+						});
+
+						layer.msg('添加购物车成功');
+					}else{
+						layer.msg('添加购物车失败');
+					}
+				}
+			});
+		@else
+			layer.msg('请先进行登录');
+		@endif
+
+    });
+
+	//同步到小购物车中
+	function add_small_cart(mes){
+		//先把小购物车中的数据全部删除
+		$('.small_cart').remove();
+		$('#count_item').html(mes.length);
+		for(var i in mes){
+			//如果没有活动
+			if(mes[i]['commodities']['activity_id'] == 0){
+				$(`<li class="small_cart commodity${mes[i]['id']}">
+					<a class="product-image" href="/commodity/${mes[i]['commodities']['id']}">
+						<img alt="" src="${mes[i]['pic']}">
+					</a>
+					<div class="product-details">
+						<p class="cartproduct-name">
+							<a href="/commodity/${mes[i]['commodities']['id']}">${mes[i]['commodities']['name']}</a>
+						</p>
+						<strong class="qty">qty:<span class="small_num">${mes[i]['num']}</span></strong>
+						<span class="sig-price small_price">
+							<span style="color:green">$</span>
+							<span class="amount" style="color:green;">${mes[i]['sku']['price']}</span>
+						</span>
+						<span class="small_total">
+							total:<span class="small_cart_total" style="fonst-size:20px;color:blue;"></span>
+						</span>
+					</div>
+					<div class="pro-action">
+						<a class="btn-remove small_remove_cart" href="javascript:" cart_id="${mes[i]['id']}">remove</a>
+					</div>
+				</li>`).appendTo($('#small_cart_data'));
+			}else if(mes[i]['commodities']['activity_id'] == 1){ //活动一的商品
+				$(`<li class="small_cart commodity${mes[i]['id']}">
+					<a class="product-image" href="/commodity/${mes[i]['commodities']['id']}">
+						<img alt="" src="${mes[i]['pic']}">
+					</a>
+					<div class="product-details">
+						<p class="cartproduct-name">
+							<a href="/commodity/${mes[i]['commodities']['id']}">${mes[i]['commodities']['name']}</a>
+						</p>
+						<strong class="qty">qty:<span class="small_num">${mes[i]['num']}</span></strong>
+						<span class="sig-price small_price">
+							<del style="color:red;">${mes[i]['sku']['price']}</del>
+							<span style="color:green;">$</span>
+							<span class="amount" style="color:green;">${mes[i]['sku']['price'] * 0.5}</span>
+						</span>
+						<span class="small_total">
+							total:<span class="small_cart_total" style="fonst-size:20px;color:blue;"></span>
+						</span>
+					</div>
+					<div class="pro-action">
+						<a class="btn-remove small_remove_cart" href="javascript:" cart_id="${mes[i]['id']}">remove</a>
+					</div>
+				</li>`).appendTo($('#small_cart_data'));
+			}else if(mes[i]['commodities']['activity_id'] == 1){ //活动二的商品
+				$(`<li class="small_cart commodity${mes[i]['id']}">
+					<a class="product-image" href="/commodity/${mes[i]['commodities']['id']}">
+						<img alt="" src="${mes[i]['pic']}">
+					</a>
+					<div class="product-details">
+						<p class="cartproduct-name">
+							<a href="/commodity/${mes[i]['commodities']['id']}">${mes[i]['commodities']['name']}</a>
+						</p>
+						<strong class="qty">qty:<span class="small_num">${mes[i]['num']}</span></strong>
+						<span class="sig-price small_price">
+							<del style="color:red;">${mes[i]['sku']['price']}</del>
+							<span style="color:green;">$</span>
+							<span class="amount" style="color:green;">${mes[i]['sku']['price'] * 0.4}</span>
+						</span>
+						<span class="small_total">
+							total:<span class="small_cart_total" style="fonst-size:20px;color:blue;"></span>
+						</span>
+					</div>
+					<div class="pro-action">
+						<a class="btn-remove small_remove_cart" href="javascript:" cart_id="${mes[i]['id']}">remove</a>
+					</div>
+				</li>`).appendTo($('#small_cart_data'));
+			}
+
+		}
+
+		del_small_cart();
+		small_count();
+	}
 
     // 数量加减
     $('#plus').click(function(){

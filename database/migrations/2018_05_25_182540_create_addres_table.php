@@ -22,7 +22,6 @@ class CreateAddresTable extends Migration
             $table->string('street');
             $table->string('username');
             $table->string('userphone');
-            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }

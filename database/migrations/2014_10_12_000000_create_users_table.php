@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->integer('sex')->default(0);
             $table->integer('money')->default(100000);
             $table->integer('status')->default(1);
+            $table->integer('address_id')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

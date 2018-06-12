@@ -10,7 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/',  'HomeController@index');
 
 Auth::routes();
@@ -30,8 +29,24 @@ Route::get('/cate/s_cate/{id}','CateController@lookscate');
 //商品详情页
 Route::get('/commodity/{id}','CommodityController@product');
 Route::post('/commodity/sku','CommodityController@getclicksku');
+
+Route::get('/commodity/cart/data','CommodityController@cart_data');
+
+//购物车模块
+Route::get('/cart','CartController@index');
+Route::post('/cart/add','CartController@add');
+Route::post('/cart/update','CartController@update');
+Route::post('/cart/del','CartController@del');
+
+//订单模块
+Route::get('/order','OrderController@index');
+Route::post('/order/add','OrderController@add');
+
+//地址模块
+route::post('/address/add','AddressController@add');
 Route::post('/commodity/evaluate_pic','CommodityController@evaluate_pic');
 Route::post('/commodity/evaluate_text','CommodityController@evaluate_text');
+
 
 Route::group(['prefix' => 'admin'], function () {
     //首页
