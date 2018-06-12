@@ -48,4 +48,8 @@ class Commodity extends Model
     public function skus(){
         return $this->hasMany('App\Sku','c_id','id');
     }
+
+    public function evaluates(){
+        return $this->hasMany('App\Evaluate','commodity_id','id');
+    }
 }

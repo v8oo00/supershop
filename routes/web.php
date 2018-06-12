@@ -30,6 +30,8 @@ Route::get('/cate/s_cate/{id}','CateController@lookscate');
 //商品详情页
 Route::get('/commodity/{id}','CommodityController@product');
 Route::post('/commodity/sku','CommodityController@getclicksku');
+Route::post('/commodity/evaluate_pic','CommodityController@evaluate_pic');
+Route::post('/commodity/evaluate_text','CommodityController@evaluate_text');
 
 Route::group(['prefix' => 'admin'], function () {
     //首页
@@ -115,6 +117,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('commodity/create_com','Admin\CommodityController@create_com');
     Route::get('commodity/edit_com/{id}','Admin\CommodityController@edit_com');
     Route::post('commodity/update_com','Admin\CommodityController@update_com');
+    Route::post('commodity/uploadpic','Admin\CommodityController@uploadpic');
 
     //获取标签及标签值
     Route::get('commodity/tags','Admin\CommodityController@tags');

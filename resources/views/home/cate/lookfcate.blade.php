@@ -97,25 +97,25 @@
     									<div class="col-lg-4 col-md-4 col-sm-6">
     										<div class="single-product mb-30  white-bg">
     											<div class="product-img pt-20">
-    												<a href="#"><img src="{{$commodity->picture}}" alt="" /></a>
+    												<a href="/commodity/{{$commodity->id}}"><img src="{{$commodity->picture}}" alt="" /></a>
     											</div>
     											<div class="product-content product-i">
     												<div class="pro-title">
-    													<h4><a href="product-details.html">{{$commodity->name}}</a></h4>
+    													<h4><a href="/commodity/{{$commodity->id}}">{{$commodity->name}}</a></h4>
     												</div>
     												<div class="pro-rating ">
-    													<a href="#"><i class="fa fa-star"></i></a>
-    													<a href="#"><i class="fa fa-star"></i></a>
-    													<a href="#"><i class="fa fa-star"></i></a>
-    													<a href="#"><i class="fa fa-star"></i></a>
-    													<a href="#"><i class="fa fa-star-o"></i></a>
+    													<a><i class="fa fa-star"></i></a>
+    													<a><i class="fa fa-star"></i></a>
+    													<a><i class="fa fa-star"></i></a>
+    													<a><i class="fa fa-star"></i></a>
+    													<a><i class="fa fa-star-o"></i></a>
     												</div>
     												<div class="price-box">
     													<span class="price product-price">${{$commodity->price}}</span>
     												</div>
     												<div class="product-icon">
     													<div class="product-icon-left f-left">
-    														<a href="#"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
+    														<a href="/commodity/{{$commodity->id}}"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
     													</div>
     													<div class="product-icon-right floatright">
     														<a href="#" data-toggle="tooltip" title="Compare"><i class="fa fa-exchange"></i></a>
@@ -142,18 +142,18 @@
 									<div class="col-lg-12">
 										<div class="single-product  shop-single-product mb-30 white-bg">
 											<div class="product-img pt-20">
-												<a href="#"><img src="{{$commodity->picture}}" alt="" /></a>
+												<a href="/commodity/{{$commodity->id}}"><img src="{{$commodity->picture}}" alt="" /></a>
 											</div>
 											<div class="product-content">
 												<div class="pro-title">
-													<h4><a href="product-details.html">{{$commodity->name}}</a></h4>
+													<h4><a href="/commodity/{{$commodity->id}}">{{$commodity->name}}</a></h4>
 												</div>
 												<div class="pro-rating mb-20">
-													<a href="#"><i class="fa fa-star"></i></a>
-													<a href="#"><i class="fa fa-star"></i></a>
-													<a href="#"><i class="fa fa-star"></i></a>
-													<a href="#"><i class="fa fa-star"></i></a>
-													<a href="#"><i class="fa fa-star-o"></i></a>
+													<a><i class="fa fa-star"></i></a>
+													<a><i class="fa fa-star"></i></a>
+													<a><i class="fa fa-star"></i></a>
+													<a><i class="fa fa-star"></i></a>
+													<a><i class="fa fa-star-o"></i></a>
 												</div>
 												<p>{{$commodity->desc}}</p>
 												<div class="price-box">
@@ -161,7 +161,7 @@
 												</div>
 												<div class="product-icon">
 													<div class="product-icon-left f-left">
-														<a href="#"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
+														<a href="/commodity/{{$commodity->id}}"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
 													</div>
 													<div class="product-icon-right floatright">
 														<a href="#" data-toggle="tooltip" title="Compare"><i class="fa fa-exchange"></i></a>

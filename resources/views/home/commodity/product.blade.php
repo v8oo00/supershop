@@ -4,6 +4,19 @@
 <link rel="stylesheet" href="/homes/com/css/style.css">
 <link rel="stylesheet" href="/homes/com/css/jstarbox.css">
 <link rel="stylesheet" href="/homes/com/css/etalage.css">
+<style>
+.product-my>.product-icon-left::before {
+	background: transparent  none repeat scroll 0 0;
+	content: "";
+	height: 1px;
+	position: absolute;
+	top: -12px;
+	width: 60px;
+}
+</style>
+<link href="/homes/upload_com/jquery.filer.css" type="text/css" rel="stylesheet" />
+<link href="/homes/upload_com/jquery.filer-dragdropbox-theme.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet"  href="/homes/zoom/css/zoom.css" media="all" />
 @endsection
 
 @section('content')
@@ -16,7 +29,7 @@
 	</div>
 </div>
 
-<div class="shop-area">
+<div class="shop-area" style='margin-bottom:100px;;'>
     <div class="container">
         <div class="row" style="margin-top:20px;">
             <div class="content details-page">
@@ -99,16 +112,75 @@
                             <div class="clear"> </div>
                         </div>
                         <div class="details-right">
-                            <div class="column mt-55" style='margin-top:0px;'>
-                                <h2 class="title-block">Catalog</h2>
-                                <div class="sidebar-widget">
-                                    <h3 class="sidebar-title">Availability</h3>
-                                    <ul class="sidebar-menu">
-                                        <li><a href="#">In stock <span>(13)</span></a></li>
-                                        <li><a href="#">In stock <span>(13)</span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
+							<div class="bestseller-area dotted-style-2">
+					<div class="section-title">
+						<h3 style="text-align:left;padding-left:5px;">本店热卖</h3>
+					</div>
+					<div class="single-product-items-active border-1">
+						<div class="single-product-items">
+							@foreach($mshops_hsale as $key_o=>$shop_o)
+							@if($key_o< 4)
+							<div class="single-product single-product-sidebar white-bg">
+								<div class="product-img product-img-left">
+									<a href="/commodity/{{$shop_o->id}}"><img src="{{$shop_o->picture}}" alt="" /></a>
+								</div>
+								<div class="product-content product-content-right">
+									<div class="pro-title">
+										<h4><a href="/commodity/{{$shop_o->id}}">{{$shop_o->name}}</a></h4>
+									</div>
+									<div class="pro-rating ">
+										<a><i class="fa fa-star"></i></a>
+										<a><i class="fa fa-star"></i></a>
+										<a><i class="fa fa-star"></i></a>
+										<a><i class="fa fa-star"></i></a>
+										<a><i class="fa fa-star-o"></i></a>
+									</div>
+									<div class="price-box">
+										<span class="price product-price">${{$shop_o->price}}</span>
+									</div>
+									<div class="product-icon product-my">
+										<div class="product-icon-left f-left">
+											<a href="/commodity/{{$shop_o->id}}"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							@endif
+							@endforeach
+						</div>
+						<div class="single-product-items">
+							@foreach($mshops_hsale as $key_o=>$shop_o)
+							@if($key_o>= 4)
+							<div class="single-product single-product-sidebar white-bg">
+								<div class="product-img product-img-left">
+									<a href="/commodity/{{$shop_o->id}}"><img src="{{$shop_o->picture}}" alt="" /></a>
+								</div>
+								<div class="product-content product-content-right">
+									<div class="pro-title">
+										<h4><a href="/commodity/{{$shop_o->id}}">{{$shop_o->name}}</a></h4>
+									</div>
+									<div class="pro-rating ">
+										<a><i class="fa fa-star"></i></a>
+										<a><i class="fa fa-star"></i></a>
+										<a><i class="fa fa-star"></i></a>
+										<a><i class="fa fa-star"></i></a>
+										<a><i class="fa fa-star-o"></i></a>
+									</div>
+									<div class="price-box">
+										<span class="price product-price">${{$shop_o->price}}</span>
+									</div>
+									<div class="product-icon product-my">
+										<div class="product-icon-left f-left" style="::before:background:none;">
+											<a href="/commodity/{{$shop_o->id}}"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							@endif
+							@endforeach
+						</div>
+					</div>
+				</div>
                         </div>
                         <div class="clear"></div>
                     </div>
@@ -118,27 +190,163 @@
                         <div class="wrap" style="width:100%;">
                             <div id="verticalTab">
                                 <ul class="resp-tabs-list">
-                                    <li>Description</li>
-                                    <li>Product tags</li>
-                                    <li>Product reviews</li>
+                                    <li style='text-align:center;'>商品详情</li>
+                                    <li style='text-align:center;'>商品评价 ( {{count($commodity->evaluates)}} )</li>
+                                    <li style='text-align:center;'>本店同类</li>
+
+										<div class="col-md-12" style='padding:0px;border:1px solid #eee;text-align:center;'>
+											<div class="col-md-12" style="font-size:15px;padding-top:5px;padding-bottom:5px;font-weight:bold;border-bottom:1px solid #eee;margin-bottom:5px;">
+												商品店铺
+											</div>
+											<div class="col-md-12" style='border-bottom:1px solid #eee;'>
+												<a href="#">
+													<img src="{{$commodity->shop->avatar}}" alt="" class='img-rounded' style="width:100px;height:100px;">
+												</a>
+											</div>
+											<div class="col-md-12" style="border-bottom:1px solid #eee;padding-top:10px;padding-bottom:10px;">
+												<div class="col-md-6" style='padding:0px;text-align:right;font-size:14px;'>
+													店铺名称 :
+												</div>
+												<div class="col-md-6" style='padding:0px;text-align:left;padding-left:10px;font-size:13px;'>
+													<a href="#" style='color:#ED6F64'>{{$commodity->shop->name}}</a>
+												</div>
+											</div>
+											<div class="col-md-12" style="border-bottom:1px solid #eee;padding-top:10px;padding-bottom:10px;">
+												<div class="col-md-6" style='padding:0px;text-align:right;font-size:14px;'>
+													店铺评分 :
+												</div>
+												<div class="col-md-6" style='padding:0px;text-align:left;padding-left:10px;'>
+													<a><i class="fa fa-star"></i></a>
+													<a><i class="fa fa-star"></i></a>
+													<a><i class="fa fa-star"></i></a>
+													<a><i class="fa fa-star"></i></a>
+													<a><i class="fa fa-star-o"></i></a>
+												</div>
+											</div>
+											<div class="col-md-12" style="border-bottom:1px solid #eee;padding-top:10px;padding-bottom:10px;">
+												<div class="col-md-6" style='padding:0px;text-align:right;font-size:14px;'>
+													<button type="button" name="button" class='btn btn-default btn-xs'>收藏店铺</button>
+												</div>
+												<div class="col-md-6" style='padding:0px;text-align:left;padding-left:10px;'>
+													<a href='#' class='btn btn-default btn-xs'>进入店铺</a>
+												</div>
+											</div>
+										</div>
+
                                 </ul>
                                 <div class="resp-tabs-container vertical-tabs">
                                     <div>
-                                        <h3> Details</h3>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nibh urna, euismod ut ornare non, volutpat vel tortor. Integer laoreet placerat suscipit. Sed sodales scelerisque commodo. Nam porta cursus lectus.Proin nunc erat, gravida a facilisis quis, ornare id lectus. Proin consectetur nibh quis urna gravida mollis.</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nibh urna, euismod ut ornare non, volutpat vel tortor</p>
+                                        {!! $commodity->detail !!}
                                     </div>
+									<!-- 商品评价 -->
                                     <div>
-                                        <h3>Product Tags</h3>
-                                        <h4>Add Your Tags:</h4>
-                                        <form>
-                                            <input type="text"> <input type="submit" value="ADD TAGS" />
-                                            <span>Use spaces to separate tags. Use single quotes (') for phrases.</span>
-                                        </form>
+										@if(Auth::check() && Auth::user())
+										<div class="col-md-12">
+											<div class="col-md-12" style='border-bottom:1px solid #eee;margin-bottom:10px;padding-bottom:10px;'>
+												<div class="">
+													<span>亲爱的 <b style='font-size:14px;font-weight:bold;color:#F4A137;'>向北</b> 请写下您的评价 : </span>
+
+													<span id="click-demo" style="float:right;margin-left:10px;"></span>
+													<span style="float:right">评分:</span>
+													<input type="hidden" name="score" value="" id='score'>
+													<input type="hidden" name="commodity_eval_id" value="{{$commodity->id}}" id='commodity_eval_id'>
+												</div>
+												<textarea id="evalute_text" name="name" rows="3" style='resize:none;margin-top:10px;'></textarea>
+												<form action="" method="post" id='uploadForm' enctype="multipart/form-data">
+													<input type="file" name="files[]" id="filer_input" multiple="multiple">
+													<input type="hidden" id="evaluate" value='1'>
+												</form>
+												<span>注 : 最多上传五张图片哦</span>
+												<button type="button" name="button" id='upload_evaluate' class='btn btn-warning' style='float:right;border-radius:5%;'>确认评价</button>
+											</div>
+										</div>
+										@endif
+										@foreach($evaluates as $evaluate)
+											<div class="col-md-12" style='border-bottom:1px solid #eee;margin-bottom:10px;padding-bottom:10px;'>
+												<div class="col-md-12">
+													<div class="media">
+														<div class="media-left">
+															<a href="#">
+																<img class="media-object img-rounded" src="{{App\User::findOrFail($evaluate->user_id)->avatar}}" style='max-width:50px;height:50px;margin-top:15px;' alt="">
+															</a>
+														</div>
+														<div class="media-body">
+															<h4 class="media-heading">用户 : {{App\User::findOrFail($evaluate->user_id)->name}}
+																<div class="" style='float:right;'>
+																	@for($i=0;$i< 5;$i++)
+																		@if($i<$evaluate->score)
+																			<a><i class="fa fa-star"></i></a>
+																		@else
+																			<a><i class="fa fa-star-o"></i></a>
+																		@endif
+																	@endfor
+																</div>
+
+															</h4>
+																{{$evaluate->text}}
+															<div class="col-md-12" style='padding:0px;margin-top:10px;'>
+																<ul class='gallery'>
+																	@foreach($evaluate->image as $pic)
+																		<li class='pull-left' style='margin-right:5px;;'><a href="{{$pic->image}}"><img src="{{$pic->image}}" class='img-thumbnail' alt="" style='max-width:65px;height:65px;'></a></li>
+																	@endforeach
+																</ul>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										@endforeach
                                     </div>
+									<!-- 同类商品 -->
                                     <div>
-                                        <h3>Customer Reviews</h3>
-                                        <p>There are no customer reviews yet.</p>
+
+										<div class="col-md-12 col-sm-12">
+											<h2 class="page-heading mt-40" style='margin:0px;'>
+												<span class="cat-name">本店同类商品</span>
+											</h2>
+											<div class="shop-page-bar">
+												<div>
+													<!-- Tab panes -->
+													<div class="tab-content">
+														<div role="tabpanel" class="tab-pane active" id="home">
+															<div class="row">
+																@foreach($mshops_bcate as $b_cate)
+																<div class="col-lg-4 col-md-4 col-sm-6">
+																	<div class="single-product mb-30  white-bg">
+																		<div class="product-img pt-20">
+																			<a href="/commodity/{{$b_cate->id}}"><img src="{{$b_cate->picture}}" alt="" /></a>
+																		</div>
+																		<div class="product-content product-i">
+																			<div class="pro-title">
+																				<h4><a href="/commodity/{{$b_cate->id}}">{{$b_cate->name}}</a></h4>
+																			</div>
+																			<div class="pro-rating ">
+																				<a><i class="fa fa-star"></i></a>
+																				<a><i class="fa fa-star"></i></a>
+																				<a><i class="fa fa-star"></i></a>
+																				<a><i class="fa fa-star"></i></a>
+																				<a><i class="fa fa-star-o"></i></a>
+																			</div>
+																			<div class="price-box">
+																				<span class="price product-price">${{$b_cate->price}}</span>
+																			</div>
+																			<div class="product-icon product-my" style='margin-top:40px;'>
+																				<div class="product-icon-left f-left">
+																					<a href="/commodity/{{$b_cate->id}}"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
+																				</div>
+																			</div>
+																		</div>
+																		<span class="new">new</span>
+																	</div>
+																</div>
+																@endforeach
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+
                                     </div>
                                 </div>
                             </div>
@@ -327,4 +535,141 @@ $(function(){
 	});
 })
 </script>
+
+<script type="text/javascript" src="/homes/raty/jquery.raty.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('#click-demo').raty({
+		click: function(score, evt) {
+			$('#score').val(score);
+		},
+		score:function(){
+			return $(this).attr("data-num");
+		},
+		starOn:'/homes/raty/star-on.png',
+		starOff:'/homes/raty/star-off.png',
+		starHalf:'/homes/raty/star-half.png',
+		readOnly:false,
+		halfShow:true,
+		size:15,
+   });
+})
+</script>
+
+<script src="/homes/upload_com/jquery.filer.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#filer_input').filer({
+			changeInput: '<div class="jFiler-input-dragDrop" style="width:100%;margin-bottom:10px;"><div class="jFiler-input-inner"><div class="jFiler-input-icon"><i class="icon-jfi-folder"></i></div><div class="jFiler-input-text"></div></div></div>',
+		    showThumbs: true,
+		    theme: "dragdropbox",
+			limit:5,
+			onRemove:function(){
+					layer.msg('删除成功');
+			},
+		    templates: {
+		        box: '<ul class="jFiler-items-list jFiler-items-grid"></ul>',
+		        item: '<li class="jFiler-item">\
+		                    <div class="jFiler-item-container">\
+		                        <div class="jFiler-item-inner">\
+		                            <div class="jFiler-item-thumb">\
+		                                <div class="jFiler-item-status"></div>\
+		                                <div class="jFiler-item-info">\
+		                                    <span class="jFiler-item-title"><b title="@{{fi-name}}">@{{fi-name | limitTo: 25}}</b></span>\
+		                                    <span class="jFiler-item-others">@{{fi-size2}}</span>\
+		                                </div>\
+		                                @{{fi-image}}\
+		                            </div>\
+		                            <div class="jFiler-item-assets jFiler-row">\
+		                                <ul class="list-inline pull-left">\
+		                                    <li>@{{fi-progressBar}}</li>\
+		                                </ul>\
+		                                <ul class="list-inline pull-right">\
+		                                    <li><a class="icon-jfi-trash jFiler-item-trash-action"></a></li>\
+		                                </ul>\
+		                            </div>\
+		                        </div>\
+		                    </div>\
+		                </li>',
+		        itemAppend: '<li class="jFiler-item">\
+		                        <div class="jFiler-item-container">\
+		                            <div class="jFiler-item-inner">\
+		                                <div class="jFiler-item-thumb">\
+		                                    <div class="jFiler-item-status"></div>\
+		                                    <div class="jFiler-item-info">\
+		                                        <span class="jFiler-item-title"><b title="@{{fi-name}}">@{{fi-name | limitTo: 25}}</b></span>\
+		                                        <span class="jFiler-item-others">@{{fi-size2}}</span>\
+		                                    </div>\
+		                                    @{{fi-image}}\
+		                                </div>\
+		                                <div class="jFiler-item-assets jFiler-row">\
+		                                    <ul class="list-inline pull-left">\
+		                                        <li><span class="jFiler-item-others">@{{fi-icon}}</span></li>\
+		                                    </ul>\
+		                                    <ul class="list-inline pull-right">\
+		                                        <li><a class="icon-jfi-trash jFiler-item-trash-action"></a></li>\
+		                                    </ul>\
+		                                </div>\
+		                            </div>\
+		                        </div>\
+		                    </li>',
+		        itemAppendToEnd: false,
+		        removeConfirmation: false,
+		        _selectors: {
+		            list: '.jFiler-items-list',
+		            item: '.jFiler-item',
+		            remove: '.jFiler-item-trash-action'
+		        }
+		    }
+		});
+	});
+
+	$('#upload_evaluate').click(function(){
+
+		var evalute_text = $('#evalute_text').val();
+		var evalute_score = $('#score').val();
+		var commodity_eval_id = $('#commodity_eval_id').val();
+		console.log(evalute_text);
+		if(evalute_text != ''){
+			if(evalute_score != ''){
+				$.ajax({
+				    url: '/commodity/evaluate_text',
+				    type: 'POST',
+				    data: {text:evalute_text,score:evalute_score,commodity_id:commodity_eval_id},
+					success:function(mes){
+						$('#evaluate').val(mes);
+						var formData = new FormData();
+						$($('#filer_input')[0].files).each(function(key,val){
+							formData.append('file[]', $('#filer_input')[0].files[key]);
+						})
+						formData.append('evaluate', $('#evaluate').val());
+						$.ajax({
+						    url: '/commodity/evaluate_pic',
+						    type: 'POST',
+						    cache: false,
+						    data: formData,
+						    processData: false,
+						    contentType: false,
+							success:function(mes){
+								window.location.reload();
+							},
+							error:function(){
+
+							}
+						});
+					},
+					error:function(){
+						layer.msg('评价失败');
+					}
+				});
+			}else{
+				layer.msg('请选择评分');
+			}
+		}else{
+			layer.msg('请写下评价');
+		}
+	});
+</script>
+
+<script src="/homes/zoom/js/zoom.min.js"></script>
 @endsection
