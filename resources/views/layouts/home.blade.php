@@ -159,56 +159,78 @@
 							<div class="top-cart-wrapper">
 								<div class="block-cart">
 									<div class="top-cart-title">
-										<a href="#">
+										<a href="{{ action('CartController@index') }}">
 											<span class="title-cart">my cart</span>
-											<span class="count-item">2 items</span>
-											<span class="price">$444.00</span>
+											<span class="count-item">
+												@if(Auth::check() && Auth::user())
+													items <span id="count_item">{{$carts_data->count()}}</span>
+												@else
+													items <span id="count_item">0</span>
+												@endif
+											</span>
+											<span class="price small_sub_total">
+												@if(Auth::check() && Auth::user())
+
+												@else
+													$0
+												@endif
+											</span>
 										</a>
 									</div>
 									<div class="top-cart-content">
-										<ol class="mini-products-list">
-											<!-- single item -->
-											<li>
-												<a class="product-image" href="product-details.html">
-													<img alt="" src="/homes/img/cart/1.jpg">
+										<ol class="mini-products-list" id="small_cart_data">
+
+										@if(Auth::check() && Auth::user())
+											@foreach($carts_data as $cart_data)
+											<li class="small_cart commodity{{$cart_data->id}}">
+												<a class="product-image" href="{{action('CommodityController@product',$cart_data->commodities->id)}}">
+													<img alt="" src="{{$cart_data->commodities->compictures->first()->image}}">
 												</a>
 												<div class="product-details">
 													<p class="cartproduct-name">
-														<a href="product-details.html">Pellentesque habitant </a>
+														<a href="{{action('CommodityController@product',$cart_data->commodities->id)}}">{{$cart_data->commodities->name}}</a>
 													</p>
-													<strong class="qty">qty:1</strong>
-													<span class="sig-price">$222.00</span>
+													<strong class="qty">qty:<span class="small_num small_num_{{$cart_data->id}}">{{$cart_data->num}}</span></strong>
+													<span class="sig-price small_price">
+														@if($cart_data->commodities->activity_id == 0)
+				                                        <span style="color:green">$</span>
+				                                        <span class="amount" style="color:green;">{{$cart_data->sku->price}}</span>
+				                                        @elseif($cart_data->commodities->activity_id == 1)
+				                                        <del style="color:red;">${{$cart_data->sku->price}}</del>
+				                                        <span style="color:green;">$</span>
+				                                        <span class="amount" style="color:green;">{{$cart_data->sku->price * 0.5}}</span>
+				                                        @elseif($cart_data->commodities->activity_id == 2)
+				                                        <del style="color:red;">${{$cart_data->sku->price}}</del>
+				                                        <span style="color:green;">$</span>
+				                                        <span class="amount" style="color:green;">{{$cart_data->sku->price * 0.4}}</span>
+				                                        @endif
+													</span>
+													<span class="small_total">
+														total:<span class="small_cart_total" style="fonst-size:20px;color:blue;"></span>
+													</span>
 												</div>
 												<div class="pro-action">
-													<a class="btn-remove" href="#">remove</a>
+													<a class="btn-remove small_remove_cart" href="javascript:" cart_id="{{$cart_data->id}}">remove</a>
 												</div>
 											</li>
-											<!-- single item -->
-											<!-- single item -->
-											<li>
-												<a class="product-image" href="product-details.html">
-													<img alt="" src="/homes/img/cart/2.jpg">
-												</a>
-												<div class="product-details">
-													<p class="cartproduct-name">
-														<a href="product-details.html">New catolog</a>
-													</p>
-													<strong class="qty">qty:1</strong>
-													<span class="sig-price">$222.00</span>
-												</div>
-												<div class="pro-action">
-													<a class="btn-remove" href="#">remove</a>
-												</div>
-											</li>
-											<!-- single item -->
+											@endforeach
+										@endif
 
 										</ol>
+										@if(Auth::user() && Auth::check())
 										<div class="top-subtotal">
-											Subtotal: <span class="sig-price">$444.00</span>
+											Subtotal: <span class="sig-price small_sub_total"></span>
 										</div>
 										<div class="cart-actions">
-											<button><span>Checkout</span></button>
+											<form action="{{action('CartController@index')}}" method="get">
+												<button type="submit"><span>Checkout</span></button>
+											</form>
 										</div>
+										@else
+										<div class="top-subtotal">
+											登录之后才能看到自己的商品喔 - . - !
+										</div>
+										@endif
 									</div>
 								</div>
 							</div>
@@ -255,12 +277,12 @@
 				<div class="mainmenu">
 					<nav>
 						<ul>
-							<li><a href="index.html">Home</a></li>
+							<li><a href="{{ action('HomeController@index') }}">Home</a></li>
 							<li><a href="about.html">About</a></li>
 							<li><a href="shop.html">Shop</a></li>
-							<li><a href="cart.html">Cart</a></li>
-							<li><a href="login.html">Login</a></li>
-							<li><a href="account.html">My Account</a></li>
+							<li><a href="{{ action('CartController@index') }}">Cart</a></li>
+							<li><a href="/login">Login</a></li>
+							<li><a href="{{ action('UserController@index') }}">My Account</a></li>
 							<li><a href="contact-us.html">Contact Us</a></li>
 						</ul>
 					</nav>
@@ -277,12 +299,12 @@
 				<div class="mobile-menu">
 					<nav id="mobile-menu">
 						<ul>
-							<li><a href="index.html">Home</a></li>
+							<li><a href="{{ action('HomeController@index') }}">Home</a></li>
 							<li><a href="about.html">About</a></li>
 							<li><a href="shop.html">Shop</a></li>
-							<li><a href="cart.html">Cart</a></li>
-							<li><a href="login.html">Login</a></li>
-							<li><a href="account.html">My Account</a></li>
+							<li><a href="{{ action('CartController@index') }}">Cart</a></li>
+							<li><a href="/login">Login</a></li>
+							<li><a href="{{ action('UserController@index') }}">My Account</a></li>
 							<li><a href="contact-us.html">Contact Us</a></li>
 						</ul>
 					</nav>
@@ -485,10 +507,89 @@
 <script src="/homes/js/plugins.js"></script>
 <!-- main.js -->
 <script src="/homes/js/main.js"></script>
+<!-- csjl -->
+<script src="/sel/pcasunzip.js" charset="gb2312"></script>
 <!-- layer -->
 <script src="{{asset('/layer/layer.js')}}"></script>
 <script type="text/javascript">
 	$.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
+
+@if(Auth::check() && Auth::user())
+	//小计和总计
+	function small_count(){
+		var count = 0;
+		$('.small_cart').each(function(){
+			var price = parseFloat($(this).find('.product-details').find('.small_price').find('.amount').html());
+			var num = parseInt($(this).find('.product-details').find('.qty').find('.small_num').html());
+
+			//写入小计
+			$(this).find('.product-details').find('.small_total').find('.small_cart_total').html('$'+price*num);
+
+			count += price*num;
+		});
+
+		$('.small_sub_total').html('$'+count);
+	}
+
+	small_count();
+
+	//购物车页面中的小计和总计
+	function cart_count(){
+		var count = 0;
+		$('.a').each(function(){
+			var price = parseFloat($(this).find('td:eq(3)').find('.amount').html());
+			var num = parseInt($(this).find('td:eq(4)').find('input').val());
+
+			//写入小计
+			$(this).find('td:eq(5)').find('span').html('$'+price*num);
+
+			count += price*num;
+		});
+
+		$('#cart_total').html('$'+count);
+	}
+
+	//订单页面的小计和总和
+	function order_count(){
+		var count = 0;
+		$('.ordera').each(function(){
+			var price = parseFloat($(this).find('td:eq(3)').find('.amount').html());
+			var num = parseInt($(this).find('td:eq(4)').html());
+
+			//写入小计
+			$(this).find('td:eq(5)').find('span').html('$'+price*num);
+
+			count += price*num;
+		});
+
+		$('.cart_total').html('$'+count);
+	    $("input[name='total']").val(count);
+	}
+
+	//小购物车中点击删除
+	function del_small_cart(){
+		$('.small_remove_cart').click(function(){
+			let cart_id = $(this).attr('cart_id');
+			$.ajax({
+		        url:"{{action('CartController@del')}}",
+		        type:'post',
+		        data:{id:cart_id},
+		        success:function(mes){
+		            if(mes=='ok'){
+						$('#count_item').html(parseInt($('#count_item').html()) - 1);
+						$('.commodity'+cart_id).remove();
+		                small_count();
+						cart_count();
+						order_count();
+		                layer.msg('清除购物车成功');
+		            }
+		        }
+		    });
+		});
+	}
+
+	del_small_cart();
+@endif
 </script>
 
 @section('js')

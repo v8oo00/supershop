@@ -24,6 +24,11 @@ class Order extends Model
 
     //隐藏字段
     protected $hidden = ['created_at'];
-    
+
+    //一个订单对应一个订单详情表
+    public function details(){
+        return $this->hasMany('App\Order_details');
+    }
+
 
 }
