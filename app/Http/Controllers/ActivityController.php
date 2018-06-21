@@ -9,6 +9,9 @@ class ActivityController extends Controller
 {
     //
     public function catactivity(Request $request){
-        return view('home.activity.catactivity');
+        $activity = Activity::findOrFail($request->id);
+        $commodities = Commodity::where('activity_id','=',$request->id)->where('status','=',1)->orderBy('sale','desc')->get();
+        $commodities = get_shop_info($commodities);
+        return view('home.activity.catactivity',compact(['activity','commodities']));
     }
 }

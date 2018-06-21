@@ -99,8 +99,15 @@
                 }
             }
         }
-
 		return $com;
+	}
+
+	function get_com_by_shop($sho){
+
+		foreach($sho as $shop){
+            $shop['com'] = get_shop_info($shop->commodity);
+        }
+		return $sho;
 	}
 
 	function findcate_byfcate_id($cate_id){

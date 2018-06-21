@@ -84,8 +84,8 @@
 							<li class="slide-toggle-2"><a href="#"><i class="fa fa-skype"></i>网站服务</a>
 								<ul class="show-toggle-2">
 									<li><a href="/shop/admission">商家入驻</a></li>
-									<li><a href="{{ route('register') }}">客服中心</a></li>
-									<li><a href="{{ route('register') }}">问题反馈</a></li>
+									<li><a href="">客服中心</a></li>
+									<li><a href="">问题反馈</a></li>
 									<li><a href="/admin">网站后台</a></li>
 								</ul>
 							</li>
@@ -114,50 +114,14 @@
 						</div>
 						@endif
 						<div class="search-box">
-							<form action="#">
-								<select name="#" id="select">
-									<option value="">All categories</option>
-									<option value="40">Accessories</option>
-									<option value="41">Clothing</option>
-									<option value="42">-Hoodies</option>
-									<option value="47">-T-shirts</option>
-									<option value="43">Men's</option>
-									<option value="50"> -Hats</option>
-									<option value="44">Music</option>
-									<option value="46">-Singles</option>
-									<option value="49">-Albums</option>
-									<option value="45">Posters</option>
-									<option value="48">Women's</option>
-									<option value="51">-Hats</option>
-									<option value="52">----Shoes</option>
-									<option value="53">----Scarves</option>
-									<option value="54">Jewellery</option>
-									<option value="55">---Rings</option>
-									<option value="56">----Gold Ring</option>
-									<option value="57">----platinum ring</option>
-									<option value="58">----Silver Ring</option>
-									<option value="59">----Diamond rings</option>
-									<option value="60">---Necklaces</option>
-									<option value="61">----Diamond necklaces</option>
-									<option value="62">----Pearl necklaces</option>
-									<option value="63">----Silver necklaces</option>
-									<option value="64">----Statement necklaces</option>
-									<option value="65">Equipments</option>
-									<option value="73">---Accessories</option>
-									<option value="78">----headphone</option>
-									<option value="79">----health</option>
-									<option value="80">----camera</option>
-									<option value="74">---beauty</option>
-									<option value="75">----run</option>
-									<option value="76">----evening</option>
-									<option value="77">----coats</option>
-									<option value="66">Watches</option>
-									<option value="67">Books</option>
-									<option value="68">Sports</option>
-									<option value="69">Gifts</option>
+							<form action="/search/catsearch" method='post'>
+								{{ csrf_field() }}
+								<select name="search_dx" id="select">
+									<option value="1">搜商品</option>
+									<option value="2">搜店铺</option>
 								</select>
-								<input type="text" placeholder="Search...">
-								<button><i class="fa fa-search"></i></button>
+								<input type="text" placeholder="Search..." name='search_xx'>
+								<button type='submit'><i class="fa fa-search"></i></button>
 							</form>
 						</div>
 					</div>

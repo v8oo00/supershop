@@ -87,9 +87,12 @@ Route::post('/order/add','OrderController@add');
 Route::get('/order/success/{id}','OrderController@order_suc');
 
 //地址模块
-route::post('/address/add','AddressController@add');
+Route::post('/address/add','AddressController@add');
 Route::post('/commodity/evaluate_pic','CommodityController@evaluate_pic');
 Route::post('/commodity/evaluate_text','CommodityController@evaluate_text');
+
+//搜索模板
+Route::post('/search/catsearch','SearchController@search');
 
 
 Route::group(['prefix' => 'admin'], function () {
