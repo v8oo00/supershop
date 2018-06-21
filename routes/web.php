@@ -21,6 +21,12 @@ Route::get('/account', 'UserController@index');
 Route::post('/account/updateAvatar', 'UserController@updateAvatar');
 Route::post('/account/updateDetail', 'UserController@updateDetail');
 Route::post('/account/cz', 'UserController@cz');
+Route::post('/account/order/changeStatus', 'UserController@changeStatus');
+Route::post('/account/address/add', 'UserController@addAddress');
+Route::post('/account/address/del', 'UserController@delAddress');
+Route::post('/account/address/swmr', 'UserController@swmr');
+Route::post('/account/user/changeOldPass', 'UserController@changeOldPass');
+Route::post('/account/user/changePass', 'UserController@changePass');
 
 //分类页面
 Route::get('/cate/f_cate/{id}','CateController@lookfcate');
@@ -41,6 +47,7 @@ Route::post('/cart/del','CartController@del');
 //订单模块
 Route::get('/order','OrderController@index');
 Route::post('/order/add','OrderController@add');
+Route::get('/order/success/{id}','OrderController@order_suc');
 
 //地址模块
 route::post('/address/add','AddressController@add');

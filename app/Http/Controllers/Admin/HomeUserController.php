@@ -25,6 +25,7 @@ class HomeUserController extends Controller
         $homeUser = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'avatar'=>'/admins/images/img.jpg',
             'password' => bcrypt($request->password)
         ]);
 

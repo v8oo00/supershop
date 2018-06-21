@@ -32,17 +32,27 @@
                     <tr>
                       <th>ID</th>
                       <th>Name</th>
+                      <th>Avatar</th>
+                      <th>Sex</th>
                       <th>Email</th>
+                      <th>Phone</th>
+                      <th>QQ</th>
+                      <th>Money</th>
                       <th style="text-align:center">Status</th>
                     </tr>
                   </thead>
                   <tbody>
                     @foreach($homeUsers as $homeUser)
                         <tr>
-                            <td>{{ $homeUser->id }}</td>
-                            <td>{{ $homeUser->name }}</td>
-                            <td>{{ $homeUser->email }}</td>
-                            <td style="text-align:center"><input type="checkbox" class="js-switch" @if($homeUser->status==1) checked @endif onchange="fun(this)" /></td>
+                            <td style="line-height:50px;">{{ $homeUser->id }}</td>
+                            <td style="line-height:50px;">{{ $homeUser->name }}</td>
+                            <td style="text-align:center"><img src="{{ $homeUser->avatar }}" style="width:50px;height:50px;"></td>
+                            <td style="line-height:50px;">@if($homeUser->sex == 0)女@else男@endif</td>
+                            <td style="line-height:50px;">{{ $homeUser->email }}</td>
+                            <td style="line-height:50px;">{{ $homeUser->phone }}</td>
+                            <td style="line-height:50px;">{{ $homeUser->qq }}</td>
+                            <td style="line-height:50px;">{{ $homeUser->money }}</td>
+                            <td style="line-height:50px;text-align:center"><input type="checkbox" class="js-switch" @if($homeUser->status==1) checked @endif onchange="fun(this)" /></td>
                         </tr>
                     @endforeach
                   </tbody>

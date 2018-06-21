@@ -65,8 +65,7 @@ $(function() {
         var parame_json = eval('(' + parameter + ')');
         var width=parame_json.width;
         var height=parame_json.height;
-        console.log(parame_json.width);
-        console.log(parame_json.height);
+
 
         //控制裁剪图片的大小
         var canvas=$image.cropper('getCroppedCanvas',{width: width,height: height});
