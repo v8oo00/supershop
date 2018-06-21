@@ -42,16 +42,28 @@ Route::get('/shop/admission','ShopController@admission');
 Route::post('/shop/check_name','ShopController@check_name');
 Route::post('/shop/addshop','ShopController@addshop');
 Route::get('/shop/catshop/{id}','ShopController@catshop');
+// 商家改变商品状态
 Route::post('/shop/catshop/status_com','ShopController@status_com');
+// 商家商品详情
 Route::get('/shop/catshop/catdetail/{id}','ShopController@catdetail');
 Route::post('/shop/catshop/updatedetailpic','ShopController@updatedetailpic');
 Route::post('/shop/catshop/updatedetail','ShopController@updatedetail');
+// 商家添加商品
+Route::post('/shop/catshop/shopaddcom','ShopController@shopaddcom');
+// 商家标签管理
 Route::post('/shop/catshop/looktags','ShopController@tags');
 Route::post('/shop/catshop/storetvtags','ShopController@storetv');
 Route::post('/shop/catshop/deletetags','ShopController@delete');
-
-
+// 商家的sku管理
 Route::get('/shop/catshop/catsku/{id}','ShopController@catsku');
+Route::post('/shop/catshop/checksku','ShopController@checksku');
+Route::post('/shop/catshop/createsku','ShopController@createsku');
+Route::get('/shop/catshop/delsku/{id}','ShopController@delsku');
+Route::post('/shop/catshop/updatesku','ShopController@updatesku');
+// 商家的商品图片管理
+Route::get('/shop/catshop/catpic/{id}','ShopController@catpic');
+Route::post('/shop/catshop/shoppicstatus','ShopController@shoppicstatus');
+Route::post('/shop/catshop/shoppicupload','ShopController@shoppicupload');
 
 //购物车模块
 Route::get('/cart','CartController@index');

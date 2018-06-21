@@ -222,7 +222,7 @@ class CommodityController extends Controller
 
         return view('admin.commodity.edit',compact(['com_one']));
     }
-    
+
 
     public function uploadpic(Request $request){
         $arr = ["errno"=>0,"data"=>[]];
