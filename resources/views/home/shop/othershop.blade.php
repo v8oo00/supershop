@@ -101,10 +101,16 @@
             </div>
         </div>
         <div class="col-md-6" style='border-bottom:1px solid #ccc; text-align:center;' id='a_tj'>
-            <button type="button" name="button" class='btn btn-warning btn-lg' style='margin-top:35px;margin-bottom:35px;'><i class='fa fa-plus' style='margin-right:5px'></i>收藏店铺</button>
+
+            @if(Auth::check()&&Auth::user()->followed_shop($shop->id))
+            <button type="button" name="button" class='btn btn-primary btn-lg scshop' shop_id="{{$shop->id}}" style='margin-top:35px;margin-bottom:35px;'>已收藏</button>
+            @else
+            <button type="button" name="button" class='btn btn-warning btn-lg scshop' shop_id="{{$shop->id}}" style='margin-top:35px;margin-bottom:35px;'>收藏店铺</button>
+            @endif
             <a href='/shop/catshop/othershop/{{$shop->id}}/all' class='btn @if($fenlei=="all") btn-warning @else btn-default @endif btn-lg' style='margin-top:35px;margin-bottom:35px;'>所有宝贝</a>
             <a href='/shop/catshop/othershop/{{$shop->id}}/sale' class='btn @if($fenlei=="sale") btn-warning @else btn-default @endif btn-lg' style='margin-top:35px;margin-bottom:35px;'>销量排行</a>
             <a href='/shop/catshop/othershop/{{$shop->id}}/hot' class='btn @if($fenlei=="hot") btn-warning @else btn-default @endif btn-lg' style='margin-top:35px;margin-bottom:35px;'>当季热卖</a>
+
         </div>
         <div class="col-md-12" style='margin-top:50px;'>
 
@@ -179,6 +185,38 @@
             $(this).attr('flag','true');
         }
 
+    });
+
+    //收藏店铺
+    $('.scshop').click(function(){
+        @if(Auth::check() && Auth::user())
+
+            var shop_id = $(this).attr('shop_id');
+            $.ajax({
+                url:"{{action('CollectionShopController@store')}}",
+                data:{shop_id:shop_id},
+                type:'get',
+                success:function(mes){
+                    if(mes == 1){
+                        $(this).removeClass('btn-warning');
+                        $(this).addClass('btn-primary');
+                        $(this).html('已收藏');
+                        $('#collection_wishshop').html(parseInt($('#collection_wishshop').html())+1);
+                        layer.msg('收藏店铺成功');
+                    }else{
+                        $(this).removeClass('btn-primary');
+                        $(this).addClass('btn-warning');
+                        $(this).html('收藏店铺');
+                        $('#collection_wishshop').html(parseInt($('#collection_wishshop').html())-1);
+                        layer.msg('取消该店铺的收藏');
+                    }
+                }.bind(this)
+            });
+
+            return false;
+        @else
+            window.location.href="/login";
+        @endif
     });
 
 </script>
