@@ -102,7 +102,7 @@
 			<div class="row">
 				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 					<div class="logo">
-						<a href="index.html"><img src="/homes/img/logo.png" alt="" /></a>
+						<a href="/"><img src="/homes/img/logo.png" alt="" /></a>
 					</div>
 				</div>
 				<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
