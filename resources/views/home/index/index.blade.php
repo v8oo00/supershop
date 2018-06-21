@@ -45,6 +45,9 @@
 									<div class="product-icon-left f-left">
 										<a href="/commodity/{{$commodity->id}}"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
 									</div>
+									<div class="product-icon-right floatright">
+										<a href="/login" class="wishlist" info_id="{{$commodity->id}}" data-toggle="tooltip" title="Wishlist"><i class="fa fa-heart" style="color:{{Auth::check()&&Auth::user()->followed($commodity->id) ? 'orange' : '#555555'}}"></i></a>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -111,6 +114,9 @@
     										<div class="product-icon-left f-left">
     											<a href="/commodity/{{$sale_one->id}}"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
     										</div>
+											<div class="product-icon-right floatright">
+	    										<a href="/login" class="wishlist" info_id="{{$sale_one->id}}" data-toggle="tooltip" title="Wishlist"><i class="fa fa-heart" style="color:{{Auth::check()&&Auth::user()->followed($sale_one->id) ? 'orange' : '#555555'}}"></i></a>
+	    									</div>
     									</div>
     								</div>
     							</div>
@@ -236,27 +242,5 @@
 @endsection
 
 @section('js')
-<script type="text/javascript">
-	$('.wishlist').click(function(){
-		@if(Auth::check() && Auth::user())
-			var commodity_id = $(this).attr('info_id');
-			$.ajax({
-				url:"{{action('CollectionController@store')}}",
-				data:{commodity_id:commodity_id},
-				type:'get',
-				success:function(mes){
-					if(mes == 1){
-						$(this).find('i').css({'color':'orange'});
-						layer.msg('收藏此商品成功');
-					}else{
-						$(this).find('i').css({'color':'#555555'});
-						layer.msg('取消此商品的收藏');
-					}
-				}.bind(this)
-			});
 
-			return false;
-		@endif
-	});
-</script>
 @endsection

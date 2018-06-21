@@ -188,4 +188,32 @@
 
 		return $str;
 	}
+
+	function checkbug($user_id,$shop_id){
+		$orders = App\Order::where('uid','=',$user_id)->get();
+		$arr = [];
+		foreach($orders as $key=>$val){
+			$details = App\Order_details::where('order_id','=',$val['id'])->get();
+			foreach($details as $k=>$v){
+				if(!in_array($v['sku_id'],$arr)){
+					array_push($arr,$v['sku_id']);
+				}
+
+			}
+		}
+
+		$skus = App\Sku::whereIn('id',$arr)->get();
+		$arr1 = [];
+		foreach($skus as $keys=>$vals){
+			if(!in_array($vals['c_id'],$arr1)){
+				array_push($arr1,$vals['c_id']);
+			}
+		}
+
+		if(in_array($shop_id,$arr1)){
+			return true;
+		}else{
+			return false;
+		}
+	}
 ?>

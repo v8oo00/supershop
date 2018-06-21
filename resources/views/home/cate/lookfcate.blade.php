@@ -58,36 +58,8 @@
 								<li role="presentation" class="active"><a href="#home" data-toggle="tab"><i class="fa fa-th-large" aria-hidden="true"></i></a></li>
 								<li role="presentation"><a href="#profile" data-toggle="tab"><i class="fa fa-th-list" aria-hidden="true"></i></a></li>
 							</ul>
-							<div class="selector-field f-left ml-20 hidden-xs">
-								<form action="#">
-									<label>Sort by</label>
-									<select name="select">
-										<option value="">----</option>
-										<option value="">Price: Lowest first</option>
-										<option value="">Price: Highest first</option>
-										<option value="">Product Name: A to Z</option>
-										<option value="">Product Name: Z to A</option>
-										<option value="">In stock</option>
-										<option value="">Reference: Lowest first</option>
-										<option value="">Reference: Highest first</option>
-									</select>
-								</form>
-							</div>
-							<div class="selector-field f-left ml-30 hidden-xs">
-								<form action="#">
-									<label>Show</label>
-									<select name="select">
-										<option value="">12</option>
-										<option value="">13</option>
-										<option value="">14</option>
-									</select>
-								</form>
-							</div>
-							<div class="selector-field f-right ml-30">
-								<form action="#">
-									<button class="compare">Compare (1)</button>
-								</form>
-							</div>
+
+
 						</div>
 						<!-- Tab panes -->
 						<div class="tab-content">
@@ -117,10 +89,9 @@
     													<div class="product-icon-left f-left">
     														<a href="/commodity/{{$commodity->id}}"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
     													</div>
-    													<div class="product-icon-right floatright">
-    														<a href="#" data-toggle="tooltip" title="Compare"><i class="fa fa-exchange"></i></a>
-    														<a href="#" data-toggle="tooltip" title="Wishlist"><i class="fa fa-heart"></i></a>
-    													</div>
+                                                        <div class="product-icon-right floatright">
+            	    										<a href="/login" class="wishlist" info_id="{{$commodity->id}}" data-toggle="tooltip" title="Wishlist"><i class="fa fa-heart" style="color:{{Auth::check()&&Auth::user()->followed($commodity->id) ? 'orange' : '#555555'}}"></i></a>
+            	    									</div>
     												</div>
     											</div>
                                                 @if($key <=9)
@@ -163,10 +134,9 @@
 													<div class="product-icon-left f-left">
 														<a href="/commodity/{{$commodity->id}}"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
 													</div>
-													<div class="product-icon-right floatright">
-														<a href="#" data-toggle="tooltip" title="Compare"><i class="fa fa-exchange"></i></a>
-														<a href="#" data-toggle="tooltip" title="Wishlist"><i class="fa fa-heart"></i></a>
-													</div>
+                                                    <div class="product-icon-right floatright">
+                                                        <a href="/login" class="wishlist" info_id="{{$commodity->id}}" data-toggle="tooltip" title="Wishlist"><i class="fa fa-heart" style="color:{{Auth::check()&&Auth::user()->followed($commodity->id) ? 'orange' : '#555555'}}"></i></a>
+                                                    </div>
 												</div>
 											</div>
 										</div>

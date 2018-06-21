@@ -10,6 +10,7 @@ use App\Tag;
 use App\Sku;
 use App\Tvalue;
 use App\Compic;
+use App\User;
 use DB;
 use Auth;
 class ShopController extends Controller
@@ -308,6 +309,17 @@ class ShopController extends Controller
         }else{
             $pic->update(['status'=>1]);
         }
+    }
+
+    public function othershop(Request $request){
+        $user = User::findOrFail($request->id);
+        $shop = $user->shops;
+        if($request->fenlei == 'all'){
+            $commodities =$shop->commodity;
+            $commodities = get_shop_info($commodities);
+        }
+
+        return view('home.shop.othershop',compact(['shop','commodities']));
     }
 
 
