@@ -17,7 +17,7 @@ class CreateShopsTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->string('name');
-            $table->string('avatar');
+            $table->longText('avatar');
             $table->text('desc');
             $table->bigInteger('phone');
             $table->string('address');

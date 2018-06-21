@@ -27,8 +27,8 @@ class OrderController extends Controller
                 return 'danger';
             }
         }else if($order['status'] == 1){
-            if($order->update(['id'=>$request->id,'status'=>1])){
-                return 'warning';
+            if($order->update(['status'=>2])){
+                return 'info';
             }else{
                 return 'warning';
             }

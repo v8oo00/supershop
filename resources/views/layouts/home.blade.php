@@ -58,6 +58,7 @@
 				</div>
 				<div class="col-lg-9 col-md-9 col-sm-8">
 					<div class="header-top-right">
+
 						<ul>
 							<li class="slide-toggle"><a href="#"><i class="fa fa-user"></i> My Account</a>
 								<ul class="show-toggle">
@@ -78,6 +79,16 @@
 								</form>
 							</li>
 							@endif
+						</ul>
+						<ul>
+							<li class="slide-toggle-2"><a href="#"><i class="fa fa-skype"></i>网站服务</a>
+								<ul class="show-toggle-2">
+									<li><a href="/shop/admission">商家入驻</a></li>
+									<li><a href="{{ route('register') }}">客服中心</a></li>
+									<li><a href="{{ route('register') }}">问题反馈</a></li>
+									<li><a href="/admin">网站后台</a></li>
+								</ul>
+							</li>
 						</ul>
 					</div>
 				</div>

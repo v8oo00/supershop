@@ -19,6 +19,7 @@ class CreateActivitiesTable extends Migration
             $table->text('rule');
             $table->text('image');
             $table->string('route');
+            $table->string('calculation');
             $table->biginteger('start_time');
             $table->biginteger('end_time');
             $table->timestamps();
