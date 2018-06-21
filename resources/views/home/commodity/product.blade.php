@@ -240,7 +240,7 @@
 											</div>
 											<div class="col-md-12" style="border-bottom:1px solid #eee;padding-top:10px;padding-bottom:10px;">
 												<div class="col-md-6" style='padding:0px;text-align:right;font-size:14px;'>
-													<button type="button" name="button" class='btn btn-default btn-xs scshop' shop_id="{{$commodity->shop->id}}">收藏店铺</button>
+													<button type="button" name="button" class="btn {{Auth::check()&&Auth::user()->followed_shop($commodity->shop->id) ? 'btn-primary' : 'btn-default'}} btn-xs scshop" shop_id="{{$commodity->shop->id}}">{{Auth::check()&&Auth::user()->followed_shop($commodity->shop->id) ? '已收藏' : '收藏店铺'}}</button>
 												</div>
 												<div class="col-md-6" style='padding:0px;text-align:left;padding-left:10px;'>
 													<a href='#' class='btn btn-default btn-xs'>进入店铺</a>
@@ -779,7 +779,31 @@ $(function(){
 
 	//收藏店铺
 	$('.scshop').click(function(){
-		alert(1);
+		@if(Auth::check() && Auth::user())
+			var shop_id = $(this).attr('shop_id');
+			$.ajax({
+				url:"{{action('CollectionShopController@store')}}",
+				data:{shop_id:shop_id},
+				type:'get',
+				success:function(mes){
+					if(mes == 1){
+						$(this).removeClass('btn-default');
+						$(this).addClass('btn-primary');
+						$(this).html('已收藏');
+						$('#collection_wishshop').html(parseInt($('#collection_wishshop').html())+1);
+						layer.msg('收藏店铺成功');
+					}else{
+						$(this).removeClass('btn-primary');
+						$(this).addClass('btn-default');
+						$(this).html('收藏店铺');
+						$('#collection_wishshop').html(parseInt($('#collection_wishshop').html())-1);
+						layer.msg('取消该店铺的收藏');
+					}
+				}.bind(this)
+			});
+
+			return false;
+		@endif
 	});
 </script>
 

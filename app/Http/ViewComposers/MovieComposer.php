@@ -5,6 +5,7 @@ namespace App\Http\ViewComposers;
 use Illuminate\View\View;//**记得引入这个啊（因为在composer函数参数里使用了View类）**
 use App\Cate;
 use App\Cart;
+use App\User;
 use Auth;
 class MovieComposer
 {
@@ -25,8 +26,10 @@ class MovieComposer
 
         //判断是否有用户登录
         if(Auth::check() && Auth::user()){
+            $wishlist = User::findOrFail(Auth::id())->follows()->count();
+            $wishshop = User::findOrFail(Auth::id())->follows_shop()->count();
             $carts_data = Cart::where('uid',Auth::id())->with('commodities','sku')->get();
-            $view->with(['cates'=>$cates,'carts_data'=>$carts_data]);
+            $view->with(['cates'=>$cates,'carts_data'=>$carts_data,'wishlist'=>$wishlist,'wishshop'=>$wishshop]);
         }else{
             $view->with('cates',$cates);
         }
