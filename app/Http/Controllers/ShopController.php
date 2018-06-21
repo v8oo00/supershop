@@ -317,9 +317,15 @@ class ShopController extends Controller
         if($request->fenlei == 'all'){
             $commodities =$shop->commodity;
             $commodities = get_shop_info($commodities);
+        }elseif($request->fenlei == 'sale'){
+            $commodities = Commodity::where('shop_id','=',$shop->id)->orderBy('sale','desc')->get();
+            $commodities = get_shop_info($commodities);
+        }elseif($request->fenlei == 'hot'){
+            $commodities = Commodity::where('shop_id','=',$shop->id)->orderBy('click_num','desc')->get();
+            $commodities = get_shop_info($commodities);
         }
-
-        return view('home.shop.othershop',compact(['shop','commodities']));
+        $fenlei = $request->fenlei;
+        return view('home.shop.othershop',compact(['shop','commodities','fenlei']));
     }
 
 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Picture;
 use App\Commodity;
 use App\Cate;
+use App\Activity;
 use DB;
 class HomeController extends Controller
 {
@@ -29,6 +30,8 @@ class HomeController extends Controller
     {
         // 轮播图
         $pictures = Picture::get();
+
+        $activities = Activity::limit(2)->get();
 
         // 新上架商品
         $commodities = Commodity::where('status','=',1)->orderBy('created_at','desc')->limit(10)->get();
@@ -57,7 +60,7 @@ class HomeController extends Controller
         // dd($sale_com);
         // 菜单栏是否显示
         $block = 'block';
-        return view('home.index.index',compact('block','pictures','commodities','cates','sale_com'));
+        return view('home.index.index',compact('block','pictures','commodities','cates','sale_com','activities'));
     }
 
 }
