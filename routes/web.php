@@ -71,6 +71,9 @@ Route::post('/shop/catshop/shoppicupload','ShopController@shoppicupload');
 //查看其它的店铺
 Route::get('/shop/catshop/othershop/{id}/{fenlei}','ShopController@othershop');
 
+//活动详情页面
+Route::get('/activity/catactivity/{id}','ActivityController@catactivity');
+
 //购物车模块
 Route::get('/cart','CartController@index');
 Route::post('/cart/add','CartController@add');

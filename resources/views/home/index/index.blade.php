@@ -58,16 +58,24 @@
 			<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 				<div class="slider-sidebar">
 					<div class="slider-single-img mb-20">
-						<a href="#">
-							<img class="img_a" src="/homes/img/menu-l/1-1.jpg" alt="" />
-							<img class="img_b" src="/homes/img/menu-l/1-1.jpg" alt="" />
-						</a>
+						@foreach($activities as $key=>$acitivity)
+						@if($key < 1 )
+							<a href="/activity/catactivity/{{$acitivity->id}}">
+								<img class="img_a" src="/homes/img/menu-l/1-1.jpg" alt="" />
+								<img class="img_b" src="/homes/img/menu-l/1-1.jpg" alt="" />
+							</a>
+						@endif
+						@endforeach
 					</div>
 					<div class="slider-single-img none-sm">
-						<a href="#">
-						<img class="img_a" src="/homes/img/menu-l/1-2.jpg" alt="" />
-						<img class="img_b" src="/homes/img/menu-l/1-2.jpg" alt=""/>
+						@foreach($activities as $key=>$acitivity)
+						@if($key >= 1 )
+						<a href="/activity/catactivity/{{$acitivity->id}}">
+							<img class="img_a" src="/homes/img/menu-l/1-2.jpg" alt="" />
+							<img class="img_b" src="/homes/img/menu-l/1-2.jpg" alt=""/>
 						</a>
+						@endif
+						@endforeach
 					</div>
 				</div>
 			</div>
@@ -212,28 +220,6 @@
     				</div>
     			</div>
                 @endforeach
-
-				<!-- banner-area-start -->
-				<div class="banner-area pt-40">
-					<div class="row">
-						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-							<div class="slider-single-img res">
-								<a href="#">
-								<img class="img_a" src="/homes/img/banner/2.jpg" alt="" />
-								<img class="img_b" src="/homes/img/banner/2.jpg" alt="" />
-								</a>
-							</div>
-						</div>
-						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-							<div class="slider-single-img">
-								<a href="#">
-								<img class="img_a" src="/homes/img/banner/3.jpg" alt="" />
-								<img class="img_b" src="/homes/img/banner/3.jpg" alt="" />
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>

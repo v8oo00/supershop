@@ -101,16 +101,70 @@
             </div>
         </div>
         <div class="col-md-6" style='border-bottom:1px solid #ccc; text-align:center;' id='a_tj'>
+
             @if(Auth::check()&&Auth::user()->followed_shop($shop->id))
             <button type="button" name="button" class='btn btn-primary btn-lg scshop' shop_id="{{$shop->id}}" style='margin-top:35px;margin-bottom:35px;'>已收藏</button>
             @else
             <button type="button" name="button" class='btn btn-warning btn-lg scshop' shop_id="{{$shop->id}}" style='margin-top:35px;margin-bottom:35px;'>收藏店铺</button>
             @endif
-            <a href='/shop/catshop/othershop/{{$shop->id}}/all' class='btn btn-default btn-lg' style='margin-top:35px;margin-bottom:35px;'>所有宝贝</a>
-            <a href='/shop/catshop/othershop/{{$shop->id}}/sale' class='btn btn-default btn-lg' style='margin-top:35px;margin-bottom:35px;'>销量排行</a>
-            <a href='/shop/catshop/othershop/{{$shop->id}}/hot' class='btn btn-default btn-lg' style='margin-top:35px;margin-bottom:35px;'>当季热卖</a>
+            <a href='/shop/catshop/othershop/{{$shop->id}}/all' class='btn @if($fenlei=="all") btn-warning @else btn-default @endif btn-lg' style='margin-top:35px;margin-bottom:35px;'>所有宝贝</a>
+            <a href='/shop/catshop/othershop/{{$shop->id}}/sale' class='btn @if($fenlei=="sale") btn-warning @else btn-default @endif btn-lg' style='margin-top:35px;margin-bottom:35px;'>销量排行</a>
+            <a href='/shop/catshop/othershop/{{$shop->id}}/hot' class='btn @if($fenlei=="hot") btn-warning @else btn-default @endif btn-lg' style='margin-top:35px;margin-bottom:35px;'>当季热卖</a>
+
         </div>
         <div class="col-md-12" style='margin-top:50px;'>
+
+						<div class="shop-page-bar">
+							<div>
+
+								<!-- Tab panes -->
+								<div class="tab-content">
+									<div role="tabpanel" class="tab-pane active" id="home">
+										<div class="row">
+                                            @foreach($commodities as $commodity)
+											<div class="col-lg-3 col-md-3">
+												<div class="single-product mb-30  white-bg">
+													<div class="product-img pt-20">
+														<a href="/commodity/{{$commodity->id}}"><img src="{{$commodity->picture}}" alt="" /></a>
+													</div>
+													<div class="product-content product-i">
+														<div class="pro-title">
+															<h4><a href="/commodity/{{$commodity->id}}">{{$commodity->name}}</a></h4>
+														</div>
+														<div class="pro-rating ">
+                                                            @for($i=0;$i< 5;$i++)
+                    											@if($i< commodity_start($commodity->id))
+                    												<a><i class="fa fa-star"></i></a>
+                    											@else
+                    												<a><i class="fa fa-star-o"></i></a>
+                    											@endif
+                    										@endfor
+														</div>
+														<div class="price-box">
+															<span class="price product-price">${{$commodity->price}}</span>
+														</div>
+														<div class="product-icon">
+															<div class="product-icon-left f-left">
+																<a href="/commodity/{{$commodity->id}}"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
+															</div>
+                                                            <div class="product-icon-right floatright">
+                                                                <a href="/login" class="wishlist" info_id="{{$commodity->id}}" data-toggle="tooltip" title="Wishlist"><i class="fa fa-heart" style="color:{{Auth::check()&&Auth::user()->followed($commodity->id) ? 'orange' : '#555555'}}"></i></a>
+                                                            </div>
+														</div>
+													</div>
+													<span class="new">new</span>
+												</div>
+											</div>
+                                            @endforeach
+										</div>
+										<div class="content-sortpagibar">
+
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
 
         </div>
     </div>
