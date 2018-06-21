@@ -812,6 +812,8 @@ $(function(){
 			});
 
 			return false;
+		@else
+			window.location.href="/login";
 		@endif
 	});
 </script>
