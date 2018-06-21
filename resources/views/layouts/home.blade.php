@@ -201,7 +201,10 @@
 													<p class="cartproduct-name">
 														<a href="{{action('CommodityController@product',$cart_data->commodities->id)}}">{{$cart_data->commodities->name}}</a>
 													</p>
-													<strong class="qty">qty:<span class="small_num small_num_{{$cart_data->id}}">{{$cart_data->num}}</span></strong>
+													<strong class="qty">qty:
+														<span class="small_num small_num_{{$cart_data->id}}">{{$cart_data->num}}</span>
+														<span class="small_sku">{{$cart_data->sku->s_value}}</span>
+													</strong>
 													<span class="sig-price small_price">
 														@if($cart_data->commodities->activity_id == 0)
 				                                        <span style="color:green">$</span>
@@ -482,19 +485,6 @@
 	</div>
 </div>
 <!-- copyright-area-end -->
-<!-- social_block-start -->
-<div id="social_block">
-	<ul>
-		<li class="facebook"><a href="#">Facebook</a></li>
-		<li class="twitter"><a href="#">twitter</a></li>
-		<li class="rss"><a href="#">rss</a></li>
-		<li class="youtube"><a href="#">youtube</a></li>
-		<li class="google-plus"><a href="#">google plus</a></li>
-		<li class="pinterest"><a href="#">pinterest</a></li>
-	</ul>
-</div>
-<!-- social_block-end -->
-
 
 <!-- all js here -->
 <!-- jquery-1.12.0 -->

@@ -120,6 +120,26 @@
         }
     }
 
+
+	//得到用户的订单状态
+	function getOrderStatus($sta){
+		switch($sta){
+			case 0:
+				return '新订单';
+			break;
+			case 1:
+				return '已发货';
+			break;
+			case 2:
+				return '已收货';
+			break;
+		}
+	}
+
+	function getSku($id){
+		return App\Sku::findOrFail($id);
+  }
+
 	function commodity_start($id){
 		$evaluates = App\Commodity::findOrFail($id)->evaluates;
 		$str = 0;

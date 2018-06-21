@@ -68,7 +68,8 @@ class OrderController extends Controller
 
             //清空该用户的购物车
             Cart::where('uid',Auth::id())->delete();
-            return back();
+
+            return redirect('/order/success/'.$order->id);
 
         }else{
 
@@ -77,6 +78,13 @@ class OrderController extends Controller
             return back();
         }
 
+    }
+
+    //订单成功页面
+    public function order_suc($id){
+        $order = Order::findOrFail($id);
+        $address = Address::findOrFail($order->address_id);
+        return view('home.order.order_suc',compact('order','address'));
     }
 
     //生成32位随机数

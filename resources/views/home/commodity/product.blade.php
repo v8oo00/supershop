@@ -562,7 +562,10 @@ $(function(){
 						<p class="cartproduct-name">
 							<a href="/commodity/${mes[i]['commodities']['id']}">${mes[i]['commodities']['name']}</a>
 						</p>
-						<strong class="qty">qty:<span class="small_num">${mes[i]['num']}</span></strong>
+						<strong class="qty">qty:
+							<span class="small_num">${mes[i]['num']}</span>
+							<span class="small_sku">${mes[i]['sku']['s_value']}</span>
+						</strong>
 						<span class="sig-price small_price">
 							<span style="color:green">$</span>
 							<span class="amount" style="color:green;">${mes[i]['sku']['price']}</span>
@@ -584,7 +587,10 @@ $(function(){
 						<p class="cartproduct-name">
 							<a href="/commodity/${mes[i]['commodities']['id']}">${mes[i]['commodities']['name']}</a>
 						</p>
-						<strong class="qty">qty:<span class="small_num">${mes[i]['num']}</span></strong>
+						<strong class="qty">qty:
+							<span class="small_num">${mes[i]['num']}</span>
+							<span class="small_sku">${mes[i]['sku']['s_value']}</span>
+						</strong>
 						<span class="sig-price small_price">
 							<del style="color:red;">${mes[i]['sku']['price']}</del>
 							<span style="color:green;">$</span>
@@ -607,7 +613,10 @@ $(function(){
 						<p class="cartproduct-name">
 							<a href="/commodity/${mes[i]['commodities']['id']}">${mes[i]['commodities']['name']}</a>
 						</p>
-						<strong class="qty">qty:<span class="small_num">${mes[i]['num']}</span></strong>
+						<strong class="qty">qty:
+							<span class="small_num">${mes[i]['num']}</span>
+							<span class="small_sku">${mes[i]['sku']['s_value']}</span>
+						</strong>
 						<span class="sig-price small_price">
 							<del style="color:red;">${mes[i]['sku']['price']}</del>
 							<span style="color:green;">$</span>
