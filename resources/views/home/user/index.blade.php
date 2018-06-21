@@ -212,7 +212,15 @@
                                 </td>
                                 <td style="line-height:55px;padding:0px;"><div style="height:0px;overflow:hidden;opacity:0;">{{getSku($detail->sku_id)->commodity->name}} × {{$detail->num}}</div></td>
                                 <td style="line-height:55px;padding:0px;"><div style="height:0px;overflow:hidden;opacity:0;">{{getSku($detail->sku_id)->s_value}}</div></td>
-                                <td style="line-height:55px;padding:0px;"><div style="height:0px;overflow:hidden;opacity:0;">{{getSku($detail->sku_id)->price}}$ × {{$detail->num}} = {{getSku($detail->sku_id)->price * $detail->num}}$</div></td>
+                                <td style="line-height:55px;padding:0px;">
+                                    <div style="height:0px;overflow:hidden;opacity:0;">
+                                        @if(getSku($detail->sku_id)->commodity->activity_id==0)
+                                            {{getSku($detail->sku_id)->price}}$ × {{$detail->num}} = {{getSku($detail->sku_id)->price * $detail->num}}$
+                                        @else
+                                            {{getSku($detail->sku_id)->price / getSku($detail->sku_id)->commodity->activity->calculation}}$ × {{$detail->num}} = {{getSku($detail->sku_id)->price / getSku($detail->sku_id)->commodity->activity->calculation * $detail->num}}$
+                                        @endif
+                                    </div>
+                                </td>
                             </tr>
                         @endforeach
     				@endforeach

@@ -55,4 +55,8 @@ class Commodity extends Model
     public function evaluates(){
         return $this->hasMany('App\Evaluate','commodity_id','id');
     }
+
+    public function follows(){
+        return $this->belongsToMany('App\User','user_commodities')->withTimestamps();
+    }
 }

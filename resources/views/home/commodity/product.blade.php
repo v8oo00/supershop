@@ -240,7 +240,7 @@
 											</div>
 											<div class="col-md-12" style="border-bottom:1px solid #eee;padding-top:10px;padding-bottom:10px;">
 												<div class="col-md-6" style='padding:0px;text-align:right;font-size:14px;'>
-													<button type="button" name="button" class='btn btn-default btn-xs'>收藏店铺</button>
+													<button type="button" name="button" class='btn btn-default btn-xs scshop' shop_id="{{$commodity->shop->id}}">收藏店铺</button>
 												</div>
 												<div class="col-md-6" style='padding:0px;text-align:left;padding-left:10px;'>
 													<a href='#' class='btn btn-default btn-xs'>进入店铺</a>
@@ -578,7 +578,7 @@ $(function(){
 						<a class="btn-remove small_remove_cart" href="javascript:" cart_id="${mes[i]['id']}">remove</a>
 					</div>
 				</li>`).appendTo($('#small_cart_data'));
-			}else if(mes[i]['commodities']['activity_id'] == 1){ //活动一的商品
+			}else{
 				$(`<li class="small_cart commodity${mes[i]['id']}">
 					<a class="product-image" href="/commodity/${mes[i]['commodities']['id']}">
 						<img alt="" src="${mes[i]['pic']}">
@@ -594,33 +594,7 @@ $(function(){
 						<span class="sig-price small_price">
 							<del style="color:red;">${mes[i]['sku']['price']}</del>
 							<span style="color:green;">$</span>
-							<span class="amount" style="color:green;">${mes[i]['sku']['price'] * 0.5}</span>
-						</span>
-						<span class="small_total">
-							total:<span class="small_cart_total" style="fonst-size:20px;color:blue;"></span>
-						</span>
-					</div>
-					<div class="pro-action">
-						<a class="btn-remove small_remove_cart" href="javascript:" cart_id="${mes[i]['id']}">remove</a>
-					</div>
-				</li>`).appendTo($('#small_cart_data'));
-			}else if(mes[i]['commodities']['activity_id'] == 1){ //活动二的商品
-				$(`<li class="small_cart commodity${mes[i]['id']}">
-					<a class="product-image" href="/commodity/${mes[i]['commodities']['id']}">
-						<img alt="" src="${mes[i]['pic']}">
-					</a>
-					<div class="product-details">
-						<p class="cartproduct-name">
-							<a href="/commodity/${mes[i]['commodities']['id']}">${mes[i]['commodities']['name']}</a>
-						</p>
-						<strong class="qty">qty:
-							<span class="small_num">${mes[i]['num']}</span>
-							<span class="small_sku">${mes[i]['sku']['s_value']}</span>
-						</strong>
-						<span class="sig-price small_price">
-							<del style="color:red;">${mes[i]['sku']['price']}</del>
-							<span style="color:green;">$</span>
-							<span class="amount" style="color:green;">${mes[i]['sku']['price'] * 0.4}</span>
+							<span class="amount" style="color:green;">${mes[i]['sku']['price'] / mes[i]['commodities']['activity']['calculation']}</span>
 						</span>
 						<span class="small_total">
 							total:<span class="small_cart_total" style="fonst-size:20px;color:blue;"></span>
@@ -801,6 +775,11 @@ $(function(){
 		}else{
 			layer.msg('请写下评价');
 		}
+	});
+
+	//收藏店铺
+	$('.scshop').click(function(){
+		alert(1);
 	});
 </script>
 

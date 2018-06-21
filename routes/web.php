@@ -36,6 +36,8 @@ Route::get('/cate/s_cate/{id}','CateController@lookscate');
 Route::get('/commodity/{id}','CommodityController@product');
 Route::post('/commodity/sku','CommodityController@getclicksku');
 Route::get('/commodity/cart/data','CommodityController@cart_data');
+//收藏商品
+Route::get('/collection/wishlist', 'CollectionController@store');
 
 //店铺模块
 Route::get('/shop/admission','ShopController@admission');

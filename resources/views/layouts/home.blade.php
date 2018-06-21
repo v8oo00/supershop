@@ -209,14 +209,10 @@
 														@if($cart_data->commodities->activity_id == 0)
 				                                        <span style="color:green">$</span>
 				                                        <span class="amount" style="color:green;">{{$cart_data->sku->price}}</span>
-				                                        @elseif($cart_data->commodities->activity_id == 1)
+				                                        @else
 				                                        <del style="color:red;">${{$cart_data->sku->price}}</del>
 				                                        <span style="color:green;">$</span>
-				                                        <span class="amount" style="color:green;">{{$cart_data->sku->price * 0.5}}</span>
-				                                        @elseif($cart_data->commodities->activity_id == 2)
-				                                        <del style="color:red;">${{$cart_data->sku->price}}</del>
-				                                        <span style="color:green;">$</span>
-				                                        <span class="amount" style="color:green;">{{$cart_data->sku->price * 0.4}}</span>
+				                                        <span class="amount" style="color:green;">{{$cart_data->sku->price/$cart_data->commodities->activity->calculation}}</span>
 				                                        @endif
 													</span>
 													<span class="small_total">
