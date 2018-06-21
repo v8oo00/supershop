@@ -20,7 +20,6 @@
 @endsection
 
 @section('content')
-
 <div class="breadcrumb-area">
 	<div class="container">
 		<ol class="breadcrumb">
@@ -52,7 +51,15 @@
                                 <div class="details-right-head">
                                     <h1>{{$commodity->name}}</h1>
                                     <ul class="pro-rate">
-                                        <li><a class="product-rate" href="#"> <label> </label></a> <span> </span></li>
+
+										@for($i=0;$i< 5;$i++)
+											@if($i< commodity_start($commodity->id))
+												<a><i class="fa fa-star"></i></a>
+											@else
+												<a><i class="fa fa-star-o"></i></a>
+											@endif
+										@endfor
+
                                         <li><a href="#">0 Review(s) Add Review</a></li>
                                     </ul>
                                     <p class="product-detail-info">{{$commodity->desc}}</p>
@@ -71,7 +78,7 @@
                                                 <span id='yuanjia'>${{$commodity->price}}</span>
                                                 @endif
                                                 <label id='zhekou'>$@if($commodity->activity_id ==0){{$commodity->price}}
-                                                @elseif($commodity->activity_id ==1){{$commodity->price*0.5}}
+                                                @else{{$commodity->price/$commodity->activity->calculation}}
                                                 @endif
                                             </label></li>
                                             <div class="clear"> </div>
@@ -130,11 +137,13 @@
 										<h4><a href="/commodity/{{$shop_o->id}}">{{$shop_o->name}}</a></h4>
 									</div>
 									<div class="pro-rating ">
-										<a><i class="fa fa-star"></i></a>
-										<a><i class="fa fa-star"></i></a>
-										<a><i class="fa fa-star"></i></a>
-										<a><i class="fa fa-star"></i></a>
-										<a><i class="fa fa-star-o"></i></a>
+										@for($i=0;$i< 5;$i++)
+											@if($i< commodity_start($shop_o->id))
+												<a><i class="fa fa-star"></i></a>
+											@else
+												<a><i class="fa fa-star-o"></i></a>
+											@endif
+										@endfor
 									</div>
 									<div class="price-box">
 										<span class="price product-price">${{$shop_o->price}}</span>
@@ -161,11 +170,13 @@
 										<h4><a href="/commodity/{{$shop_o->id}}">{{$shop_o->name}}</a></h4>
 									</div>
 									<div class="pro-rating ">
-										<a><i class="fa fa-star"></i></a>
-										<a><i class="fa fa-star"></i></a>
-										<a><i class="fa fa-star"></i></a>
-										<a><i class="fa fa-star"></i></a>
-										<a><i class="fa fa-star-o"></i></a>
+										@for($i=0;$i< 5;$i++)
+											@if($i< commodity_start($shop_o->id))
+												<a><i class="fa fa-star"></i></a>
+											@else
+												<a><i class="fa fa-star-o"></i></a>
+											@endif
+										@endfor
 									</div>
 									<div class="price-box">
 										<span class="price product-price">${{$shop_o->price}}</span>
@@ -217,11 +228,14 @@
 													店铺评分 :
 												</div>
 												<div class="col-md-6" style='padding:0px;text-align:left;padding-left:10px;'>
-													<a><i class="fa fa-star"></i></a>
-													<a><i class="fa fa-star"></i></a>
-													<a><i class="fa fa-star"></i></a>
-													<a><i class="fa fa-star"></i></a>
-													<a><i class="fa fa-star-o"></i></a>
+													@for($i=0;$i< 5;$i++)
+														@if($i< shop_start($commodity->shop->id))
+															<a><i class="fa fa-star"></i></a>
+														@else
+															<a><i class="fa fa-star-o"></i></a>
+														@endif
+													@endfor
+
 												</div>
 											</div>
 											<div class="col-md-12" style="border-bottom:1px solid #eee;padding-top:10px;padding-bottom:10px;">
@@ -481,8 +495,8 @@ $(function(){
                                 $('#yuanjia').html('$ '+price);
                                 @if($commodity->activity_id ==0)
                                     $('#zhekou').html('$ '+price)
-                                @elseif($commodity->activity_id ==1)
-                                    $('#zhekou').html('$ '+parseInt(price)/2)
+                                @else
+                                    $('#zhekou').html('$ '+parseInt(price)/{{$commodity->activity->calculation}})
                                 @endif
                             @else
                                 $('#zhekou').html('$ '+price)

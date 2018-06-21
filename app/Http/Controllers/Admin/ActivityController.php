@@ -40,6 +40,7 @@ class ActivityController extends Controller
              'name'=>$request->name,
              'route'=>$request->route,
              'rule'=>$request->rule,
+             'calculation'=>$request->calculation,
              'image'=>$destinationPath.'/'.$file_name,
              'start_time'=>strtotime($str[0]),
              'end_time'=>strtotime($str[1])
@@ -84,6 +85,7 @@ class ActivityController extends Controller
                 'name'=>$request->name,
                 'route'=>$request->route,
                 'rule'=>$request->rule,
+                'calculation'=>$request->calculation,
                 'image'=>$destinationPath.'/'.$file_name,
                 'start_time'=>strtotime($str[0]),
                 'end_time'=>strtotime($str[1])
@@ -93,6 +95,7 @@ class ActivityController extends Controller
                 'name'=>$request->name,
                 'route'=>$request->route,
                 'rule'=>$request->rule,
+                'calculation'=>$request->calculation,
                 'start_time'=>strtotime($str[0]),
                 'end_time'=>strtotime($str[1])
             ]);

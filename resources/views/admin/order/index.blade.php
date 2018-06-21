@@ -79,13 +79,13 @@ $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('conten
             success:function(data){
                 if(data=='info'){
                     $(this).attr('class','btn btn-round btn-info btn-xs enter_order');
-                    $(this).html('未处理');
+                    $(this).html('已收货');
                 }else if(data=='warning'){
                     $(this).attr('class','btn btn-round btn-warning btn-xs enter_order');
                     $(this).html('已发货');
                 }else if(data=='danger'){
                     $(this).attr('class','btn btn-round btn-danger btn-xs enter_order');
-                    $(this).html('已收货');
+                    $(this).html('未处理');
                 }
             }.bind(this),
             error: function(xhr, type){

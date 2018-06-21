@@ -29,6 +29,6 @@ class User extends Authenticatable
 
     //一个用户可以有多个店铺
     public function shops(){
-        return $this->hasMany('App\Shop');
+        return $this->hasOne('App\Shop','user_id','id');
     }
 }

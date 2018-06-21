@@ -28,6 +28,7 @@
                       <th>活动规则</th>
                       <th >活动宣传图</th>
                       <th>活动地址</th>
+                      <th>活动计算</th>
                       <th>活动开始时间</th>
                       <th>活动结束时间</th>
                       <th>活动操作</th>
@@ -45,6 +46,7 @@
                             <button type="button" name="button" img-src='{{$activity->image}}' class='btn btn-defaut btn-xs pigimg'>点击查看图片</button>
                         </td>
                         <td>{{$activity->route}}</td>
+                        <td>{{$activity->calculation}}</td>
                         <td>{{date('Y-m-d',$activity->start_time)}}</td>
                         <td>{{date('Y-m-d',$activity->end_time)}}</td>
                         <td>

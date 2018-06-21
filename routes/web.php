@@ -29,8 +29,23 @@ Route::get('/cate/s_cate/{id}','CateController@lookscate');
 //商品详情页
 Route::get('/commodity/{id}','CommodityController@product');
 Route::post('/commodity/sku','CommodityController@getclicksku');
-
 Route::get('/commodity/cart/data','CommodityController@cart_data');
+
+//店铺模块
+Route::get('/shop/admission','ShopController@admission');
+Route::post('/shop/check_name','ShopController@check_name');
+Route::post('/shop/addshop','ShopController@addshop');
+Route::get('/shop/catshop/{id}','ShopController@catshop');
+Route::post('/shop/catshop/status_com','ShopController@status_com');
+Route::get('/shop/catshop/catdetail/{id}','ShopController@catdetail');
+Route::post('/shop/catshop/updatedetailpic','ShopController@updatedetailpic');
+Route::post('/shop/catshop/updatedetail','ShopController@updatedetail');
+Route::post('/shop/catshop/looktags','ShopController@tags');
+Route::post('/shop/catshop/storetvtags','ShopController@storetv');
+Route::post('/shop/catshop/deletetags','ShopController@delete');
+
+
+Route::get('/shop/catshop/catsku/{id}','ShopController@catsku');
 
 //购物车模块
 Route::get('/cart','CartController@index');

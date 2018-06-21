@@ -40,6 +40,13 @@
                           <input id="route" class="form-control col-md-7 col-xs-12" name="route" placeholder="请填入活动的地址" required="required" type="text" value="{{$activity->route}}">
                         </div>
                       </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="route">Calculation <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="calculation" class="form-control col-md-7 col-xs-12" name="calculation" placeholder="请填入活动的计算规则" required="required" type="text" value="{{$activity->calculation}}">
+                        </div>
+                      </div>
 
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="input-file-now">image <span class="required">*</span>
@@ -55,6 +62,7 @@
                           <textarea id="textarea" required="required" name="rule" class="form-control col-md-7 col-xs-12" style="resize:none;">{{$activity->rule}}</textarea>
                         </div>
                       </div>
+
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="input-file-now">Time <span class="required">*</span>
                         </label>

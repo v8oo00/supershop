@@ -30,11 +30,13 @@
 									<h4><a href="/commodity/{{$commodity->id}}">{{$commodity->name}}</a></h4>
 								</div>
 								<div class="pro-rating ">
-									<a><i class="fa fa-star"></i></a>
-									<a><i class="fa fa-star"></i></a>
-									<a><i class="fa fa-star"></i></a>
-									<a><i class="fa fa-star"></i></a>
-									<a><i class="fa fa-star-o"></i></a>
+									@for($i=0;$i< 5;$i++)
+				                        @if($i< commodity_start($commodity->id))
+				                            <a><i class="fa fa-star"></i></a>
+				                        @else
+				                            <a><i class="fa fa-star-o"></i></a>
+				                        @endif
+				                    @endfor
 								</div>
 								<div class="price-box">
 									<span class="price product-price">${{$commodity->price}}</span>
@@ -94,11 +96,13 @@
     										<h4><a href="/commodity/{{$sale_one->id}}">{{$sale_one->name}}</a></h4>
     									</div>
     									<div class="pro-rating ">
-    										<a><i class="fa fa-star"></i></a>
-    										<a><i class="fa fa-star"></i></a>
-    										<a><i class="fa fa-star"></i></a>
-    										<a><i class="fa fa-star"></i></a>
-    										<a><i class="fa fa-star-o"></i></a>
+											@for($i=0;$i< 5;$i++)
+						                        @if($i< commodity_start($sale_one->id))
+						                            <a><i class="fa fa-star"></i></a>
+						                        @else
+						                            <a><i class="fa fa-star-o"></i></a>
+						                        @endif
+						                    @endfor
     									</div>
     									<div class="price-box">
     										<span class="price product-price">${{$sale_one->price}}</span>
@@ -125,11 +129,13 @@
     										<h4><a href="/commodity/{{$sale_one->id}}">{{$sale_one->name}}</a></h4>
     									</div>
     									<div class="pro-rating ">
-    										<a><i class="fa fa-star"></i></a>
-    										<a><i class="fa fa-star"></i></a>
-    										<a><i class="fa fa-star"></i></a>
-    										<a><i class="fa fa-star"></i></a>
-    										<a><i class="fa fa-star-o"></i></a>
+											@for($i=0;$i< 5;$i++)
+						                        @if($i< commodity_start($sale_one->id))
+						                            <a><i class="fa fa-star"></i></a>
+						                        @else
+						                            <a><i class="fa fa-star-o"></i></a>
+						                        @endif
+						                    @endfor
     									</div>
     									<div class="price-box">
     										<span class="price product-price">${{$sale_one->price}}</span>
@@ -174,11 +180,13 @@
     									<h4><a href="/commodity/{{$commodity_c->id}}">{{$commodity_c->name}}</a></h4>
     								</div>
     								<div class="pro-rating ">
-    									<a><i class="fa fa-star"></i></a>
-    									<a><i class="fa fa-star"></i></a>
-    									<a><i class="fa fa-star"></i></a>
-    									<a><i class="fa fa-star"></i></a>
-    									<a><i class="fa fa-star-o"></i></a>
+										@for($i=0;$i< 5;$i++)
+											@if($i< commodity_start($commodity_c->id))
+												<a><i class="fa fa-star"></i></a>
+											@else
+												<a><i class="fa fa-star-o"></i></a>
+											@endif
+										@endfor
     								</div>
     								<div class="price-box">
     									<span class="price product-price">${{$commodity_c->price}}</span>

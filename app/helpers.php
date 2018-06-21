@@ -119,4 +119,53 @@
             return false;
         }
     }
+
+	function commodity_start($id){
+		$evaluates = App\Commodity::findOrFail($id)->evaluates;
+		$str = 0;
+		foreach($evaluates as $k=>$v){
+			$str +=$v['score'];
+		}
+
+		if($str != 0){
+			$count = count(App\Commodity::findOrFail($id)->evaluates);
+
+			return $str/$count;
+		}else{
+			return 0;
+		}
+
+	}
+
+	function shop_start($id){
+		$commodity = App\Shop::findOrFail($id)->commodity;
+
+		if(count($commodity)!=0){
+			$str = 0;
+			foreach($commodity as $k=>$v){
+				$str += commodity_start($v['id']);
+			}
+			if($str != 0){
+				$count = count(App\Shop::findOrFail($id)->commodity);
+
+				return $str/$count;
+			}else{
+				return 0;
+			}
+		}else{
+			return 0;
+		}
+	}
+
+	function shop_sale($id){
+		$commodity = App\Shop::findOrFail($id)->commodity;
+
+		$str = 0;
+
+		foreach($commodity as $key=>$v){
+			$str += $v['sale'];
+		}
+
+		return $str;
+	}
 ?>

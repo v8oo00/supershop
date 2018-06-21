@@ -20,7 +20,7 @@ class Activity extends Model
     // protected $dateFormat = 'U';
 
     //过滤字段，只有包含的字段才能被更新
-    protected $fillable = ['name','rule','image','route','start_time','end_time'];
+    protected $fillable = ['name','rule','image','route','start_time','end_time','calculation'];
 
     //隐藏字段
     protected $hidden = ['updated_at','created_at'];
