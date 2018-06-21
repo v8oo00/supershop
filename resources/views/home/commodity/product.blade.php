@@ -28,7 +28,6 @@
 		</ol>
 	</div>
 </div>
-
 <div class="shop-area" style='margin-bottom:100px;;'>
     <div class="container">
         <div class="row" style="margin-top:20px;">
@@ -147,11 +146,15 @@
 									</div>
 									<div class="price-box">
 										<span class="price product-price">${{$shop_o->price}}</span>
+										<div class="product-icon-right floatright" style='margin-right:10px;margin-top:5px;margin-left:0px;width:20px;'>
+											<a href="/login" style='padding:0px;' class="wishlist" info_id="{{$shop_o->id}}" data-toggle="tooltip" title="Wishlist"><i class="fa fa-heart" style="color:{{Auth::check()&&Auth::user()->followed($shop_o->id) ? 'orange' : '#555555'}}"></i></a>
+										</div>
 									</div>
-									<div class="product-icon product-my">
+									<div class="product-icon product-my" style='margin-top:40px;'>
 										<div class="product-icon-left f-left">
 											<a href="/commodity/{{$shop_o->id}}"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
 										</div>
+
 									</div>
 								</div>
 							</div>
@@ -180,6 +183,9 @@
 									</div>
 									<div class="price-box">
 										<span class="price product-price">${{$shop_o->price}}</span>
+										<div class="product-icon-right floatright" style='margin-right:10px;margin-top:5px;margin-left:0px;width:20px;'>
+											<a href="/login" style='padding:0px;' class="wishlist" info_id="{{$shop_o->id}}" data-toggle="tooltip" title="Wishlist"><i class="fa fa-heart" style="color:{{Auth::check()&&Auth::user()->followed($shop_o->id) ? 'orange' : '#555555'}}"></i></a>
+										</div>
 									</div>
 									<div class="product-icon product-my">
 										<div class="product-icon-left f-left" style="::before:background:none;">
@@ -211,7 +217,7 @@
 												商品店铺
 											</div>
 											<div class="col-md-12" style='border-bottom:1px solid #eee;'>
-												<a href="#">
+												<a href="/shop/catshop/othershop/{{$commodity->shop->id}}/all">
 													<img src="{{$commodity->shop->avatar}}" alt="" class='img-rounded' style="width:100px;height:100px;">
 												</a>
 											</div>
@@ -220,7 +226,7 @@
 													店铺名称 :
 												</div>
 												<div class="col-md-6" style='padding:0px;text-align:left;padding-left:10px;font-size:13px;'>
-													<a href="#" style='color:#ED6F64'>{{$commodity->shop->name}}</a>
+													<a href="/shop/catshop/othershop/{{$commodity->shop->id}}/all" style='color:#ED6F64'>{{$commodity->shop->name}}</a>
 												</div>
 											</div>
 											<div class="col-md-12" style="border-bottom:1px solid #eee;padding-top:10px;padding-bottom:10px;">
@@ -243,7 +249,9 @@
 													<button type="button" name="button" class="btn {{Auth::check()&&Auth::user()->followed_shop($commodity->shop->id) ? 'btn-primary' : 'btn-default'}} btn-xs scshop" shop_id="{{$commodity->shop->id}}">{{Auth::check()&&Auth::user()->followed_shop($commodity->shop->id) ? '已收藏' : '收藏店铺'}}</button>
 												</div>
 												<div class="col-md-6" style='padding:0px;text-align:left;padding-left:10px;'>
-													<a href="{{action('ShopController@catshop',$commodity->shop->id)}}" class='btn btn-default btn-xs'>进入店铺</a>
+
+													<a href='/shop/catshop/othershop/{{$commodity->shop->id}}/all' class='btn btn-default btn-xs'>进入店铺</a>
+
 												</div>
 											</div>
 										</div>
@@ -255,11 +263,11 @@
                                     </div>
 									<!-- 商品评价 -->
                                     <div>
-										@if(Auth::check() && Auth::user())
+										@if(Auth::check() && Auth::user() && checkbug(Auth::id(),$commodity->id))
 										<div class="col-md-12">
 											<div class="col-md-12" style='border-bottom:1px solid #eee;margin-bottom:10px;padding-bottom:10px;'>
 												<div class="">
-													<span>亲爱的 <b style='font-size:14px;font-weight:bold;color:#F4A137;'>向北</b> 请写下您的评价 : </span>
+													<span>亲爱的 <b style='font-size:14px;font-weight:bold;color:#F4A137;'>{{Auth::user()->name}}</b> 请写下您的评价 : </span>
 
 													<span id="click-demo" style="float:right;margin-left:10px;"></span>
 													<span style="float:right">评分:</span>
@@ -348,6 +356,9 @@
 																			<div class="product-icon product-my" style='margin-top:40px;'>
 																				<div class="product-icon-left f-left">
 																					<a href="/commodity/{{$b_cate->id}}"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
+																				</div>
+																				<div class="product-icon-right floatright">
+																					<a href="/login" class="wishlist" info_id="{{$b_cate->id}}" data-toggle="tooltip" title="Wishlist"><i class="fa fa-heart" style="color:{{Auth::check()&&Auth::user()->followed($b_cate->id) ? 'orange' : '#555555'}}"></i></a>
 																				</div>
 																			</div>
 																		</div>

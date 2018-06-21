@@ -45,6 +45,9 @@
 									<div class="product-icon-left f-left">
 										<a href="/commodity/{{$commodity->id}}"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
 									</div>
+									<div class="product-icon-right floatright">
+										<a href="/login" class="wishlist" info_id="{{$commodity->id}}" data-toggle="tooltip" title="Wishlist"><i class="fa fa-heart" style="color:{{Auth::check()&&Auth::user()->followed($commodity->id) ? 'orange' : '#555555'}}"></i></a>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -111,6 +114,9 @@
     										<div class="product-icon-left f-left">
     											<a href="/commodity/{{$sale_one->id}}"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
     										</div>
+											<div class="product-icon-right floatright">
+	    										<a href="/login" class="wishlist" info_id="{{$sale_one->id}}" data-toggle="tooltip" title="Wishlist"><i class="fa fa-heart" style="color:{{Auth::check()&&Auth::user()->followed($sale_one->id) ? 'orange' : '#555555'}}"></i></a>
+	    									</div>
     									</div>
     								</div>
     							</div>
