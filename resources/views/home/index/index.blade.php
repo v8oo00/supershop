@@ -196,8 +196,7 @@
     										<a href="/commodity/{{$commodity_c->id}}"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
     									</div>
     									<div class="product-icon-right floatright">
-    										<a href="#" data-toggle="tooltip" title="Compare"><i class="fa fa-exchange"></i></a>
-    										<a href="#" data-toggle="tooltip" title="Wishlist"><i class="fa fa-heart"></i></a>
+    										<a href="/login" class="wishlist" info_id="{{$commodity_c->id}}" data-toggle="tooltip" title="Wishlist"><i class="fa fa-heart" style="color:{{Auth::check()&&Auth::user()->followed($commodity_c->id) ? 'orange' : '#555555'}}"></i></a>
     									</div>
     								</div>
     							</div>
@@ -237,5 +236,27 @@
 @endsection
 
 @section('js')
+<script type="text/javascript">
+	$('.wishlist').click(function(){
+		@if(Auth::check() && Auth::user())
+			var commodity_id = $(this).attr('info_id');
+			$.ajax({
+				url:"{{action('CollectionController@store')}}",
+				data:{commodity_id:commodity_id},
+				type:'get',
+				success:function(mes){
+					if(mes == 1){
+						$(this).find('i').css({'color':'orange'});
+						layer.msg('收藏此商品成功');
+					}else{
+						$(this).find('i').css({'color':'#555555'});
+						layer.msg('取消此商品的收藏');
+					}
+				}.bind(this)
+			});
 
+			return false;
+		@endif
+	});
+</script>
 @endsection

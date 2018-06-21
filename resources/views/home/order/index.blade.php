@@ -250,14 +250,10 @@ a:hover,a:focus{
                                             @if($cart->commodities->activity_id == 0)
                                             <span style="font-weight:bold;font-size:15px;">$</span>
                                             <span class="amount">{{$cart->sku->price}}</span>
-                                            @elseif($cart->commodities->activity_id == 1)
+                                            @else
                                             <del style="color:red;">${{$cart->sku->price}}</del>
                                             <span style="font-weight:bold;font-size:15px;">$</span>
-                                            <span class="amount">{{$cart->sku->price * 0.5}}</span>
-                                            @elseif($cart->commodities->activity_id == 2)
-                                            <del style="color:red;">${{$cart->sku->price}}</del>
-                                            <span style="font-weight:bold;font-size:15px;">$</span>
-                                            <span class="amount">{{$cart->sku->price * 0.4}}</span>
+                                            <span class="amount">{{$cart->sku->price / $cart->commodities->activity->calculation}}</span>
                                             @endif
                                         </td>
                                         <td class="product-quantity" style="font-weight:bold;font-size:15px;line-height:50px;">
@@ -266,10 +262,8 @@ a:hover,a:focus{
                                         <td class="product-subtotal" style="line-height:50px;">
                                             @if($cart->commodities->activity_id == 0)
                                                 <span>${{$cart->sku->price * $cart->num}}</span>
-                                            @elseif($cart->commodities->activity_id == 1)
-                                                <span>${{$cart->sku->price * 0.5 * $cart->num}}</span>
-                                            @elseif($cart->commodities->activity_id == 1)
-                                                <span>${{$cart->sku->price * 0.4 * $cart->num}}</span>
+                                            @else
+                                                <span>${{$cart->sku->price / $cart->commodities->activity->calculation * $cart->num}}</span>
                                             @endif
                                         </td>
                                     </tr>

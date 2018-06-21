@@ -32,4 +32,8 @@ class Shop extends Model
     public function commodity(){
         return $this->hasMany('App\Commodity','shop_id','id');
     }
+
+    public function follows(){
+        return $this->belongsToMany('App\User','user_shops')->withTimestamps();
+    }
 }

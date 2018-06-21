@@ -66,7 +66,7 @@ class CommodityController extends Controller
 
     //获取登录用户的购物车数据
     public function cart_data(){
-        $carts = Cart::where('uid',Auth::id())->with('commodities','sku')->get();
+        $carts = Cart::where('uid',Auth::id())->with('commodities','sku','commodities.activity')->get();
 
         foreach($carts as $key=>$cart){
             $carts[$key]['pic'] = $cart->commodities->compictures->first()->image;
