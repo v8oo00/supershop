@@ -45,7 +45,7 @@
                                 <td>{{$order['total']}} 元</td>
                                 <td>{{$order['updated_at']}}</td>
                                 <td>
-                                    <a href="#">查看订单</a>
+                                    <a href="order/cat_com/{{$order['id']}}">查看订单</a>
                                 </td>
                                 <td>
                                     @if($order['status'] == 0)

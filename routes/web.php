@@ -151,6 +151,7 @@ Route::group(['prefix' => 'admin'], function () {
     //订单管理模块
     Route::get('order','Admin\OrderController@index');
     Route::post('order/check_status','Admin\OrderController@check_status');
+    Route::get('order/cat_com/{id}','Admin\OrderController@cat_com');
 
     //活动管理模块
     Route::get('activity','Admin\ActivityController@index');

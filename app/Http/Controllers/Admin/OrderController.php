@@ -37,4 +37,12 @@ class OrderController extends Controller
         }
 
     }
+
+    public function cat_com(Request $request){
+        $order = Order::findOrFail($request->id);
+
+        $order_details = $order->details;
+
+        return view('admin.order.catcom',compact('order_details'));
+    }
 }
