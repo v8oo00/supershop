@@ -243,7 +243,7 @@
 													<button type="button" name="button" class="btn {{Auth::check()&&Auth::user()->followed_shop($commodity->shop->id) ? 'btn-primary' : 'btn-default'}} btn-xs scshop" shop_id="{{$commodity->shop->id}}">{{Auth::check()&&Auth::user()->followed_shop($commodity->shop->id) ? '已收藏' : '收藏店铺'}}</button>
 												</div>
 												<div class="col-md-6" style='padding:0px;text-align:left;padding-left:10px;'>
-													<a href='#' class='btn btn-default btn-xs'>进入店铺</a>
+													<a href="{{action('ShopController@catshop',$commodity->shop->id)}}" class='btn btn-default btn-xs'>进入店铺</a>
 												</div>
 											</div>
 										</div>
@@ -501,8 +501,6 @@ $(function(){
                             @else
                                 $('#zhekou').html('$ '+price)
                             @endif
-
-                            // console.log(price);
 
                         }
 					}

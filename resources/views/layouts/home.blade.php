@@ -107,10 +107,12 @@
 				</div>
 				<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
 					<div class="header-bottom-middle">
+						@if(Auth::check() && Auth::user())
 						<div class="top-search">
-							<span class="tex_top_skype"><i class="fa fa-skype"></i>Skype: <span class="">Support.skype</span></span>
-							<span class="tex_top_email"><i class="fa fa-envelope"></i>Email: <span class="">demo@towerthemes.com</span></span>
+							<span class="tex_top_skype"><i class="glyphicon glyphicon-user"></i> Account: <span class="">{{ Auth::user()->name }}</span></span>
+							<span class="tex_top_email"><i class="fa fa-envelope"></i>Email: <span class="">{{ Auth::user()->email }}</span></span>
 						</div>
+						@endif
 						<div class="search-box">
 							<form action="#">
 								<select name="#" id="select">
