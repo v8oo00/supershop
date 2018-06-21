@@ -27,6 +27,7 @@ Route::post('/account/address/del', 'UserController@delAddress');
 Route::post('/account/address/swmr', 'UserController@swmr');
 Route::post('/account/user/changeOldPass', 'UserController@changeOldPass');
 Route::post('/account/user/changePass', 'UserController@changePass');
+Route::get('/wishlist', 'UserController@wishlist');
 
 //分类页面
 Route::get('/cate/f_cate/{id}','CateController@lookfcate');

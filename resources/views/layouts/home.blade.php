@@ -129,8 +129,8 @@
 						@if(Auth::check() && Auth::user())
 						<div class="left-cart">
 							<div class="header-compire">
-								<a href="#"><i class="fa fa-heart"></i> Wish List <span id="collection_wishlist">{{ $wishlist }}</span> </a>
-								<a href="#"><i class="glyphicon glyphicon-th-list"></i> Wish Shop  <span id="collection_wishshop">{{ $wishshop }}</span> </a>
+								<a href="{{ action('UserController@wishlist') }}"><i class="fa fa-heart"></i> Wish List <span id="collection_wishlist">{{ $wishlist }}</span> </a>
+								<a href="{{ action('UserController@index') }}"><i class="glyphicon glyphicon-th-list"></i> Wish Shop  <span id="collection_wishshop">{{ $wishshop }}</span> </a>
 							</div>
 						</div>
 						@endif

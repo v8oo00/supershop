@@ -124,4 +124,10 @@ class UserController extends Controller
             return 'no';
         }
     }
+
+    //心愿单
+    public function wishlist(){
+        $wishlists = User::findOrFail(Auth::id())->follows()->get();
+        return view('home.user.wishlist',compact('wishlists'));
+    }
 }
