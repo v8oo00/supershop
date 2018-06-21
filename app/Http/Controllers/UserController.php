@@ -20,7 +20,10 @@ class UserController extends Controller
     public function index(){
         $orders = Order::where('uid',Auth::id())->get();
         $AllAddress = Address::where('uid',Auth::id())->get();
-        return view('home.user.index',compact('orders','AllAddress'));
+
+        //查询关注的店铺
+        $shops = User::findOrFail(Auth::id())->follows_shop()->get();
+        return view('home.user.index',compact('orders','AllAddress','shops'));
     }
 
     //修改头像页面

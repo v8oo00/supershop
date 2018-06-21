@@ -173,8 +173,41 @@
     	</div>
     </a>
 
+    <!-- blog-area-start -->
+	<div class="blog-area dotted-style-2  pb-60" style="margin-top:30px;">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="section-title">
+					<h3>我收藏的店铺</h3>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="blog-active">
+                @foreach($shops as $shop)
+				<div class="col-lg-12">
+					<div class="single-blog">
+						<div class="blog-img">
+							<img src="{{ $shop->avatar }}" style="width:110px;height:110px;" />
+						</div>
+						<div class="blog-content-inner">
+							<div class="blog-content white-bg">
+								<a href="{{ action('ShopController@catshop',$shop->id) }}"><h4>{{ $shop->name }}</h4></a>
+								<p class="mb-0">{{mb_substr($shop->desc,0,45,'utf-8').' · · ·'}}</p>
+								<a href="{{ action('ShopController@catshop',$shop->id) }}" class="read-more text-capitalize">Read more <i class="fa fa-arrow-circle-right"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+                @endforeach
+
+			</div>
+		</div>
+	</div>
+	<!-- blog-area-end -->
+
     <a name="wodedingdan">
-        <div class="panel panel-default" style="margin-top:30px;">
+        <div class="panel panel-default">
     		<div class="panel-heading">
     			<h3>订单管理</h3>
     		</div>

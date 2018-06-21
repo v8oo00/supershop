@@ -107,10 +107,12 @@
 				</div>
 				<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
 					<div class="header-bottom-middle">
+						@if(Auth::check() && Auth::user())
 						<div class="top-search">
-							<span class="tex_top_skype"><i class="fa fa-skype"></i>Skype: <span class="">Support.skype</span></span>
-							<span class="tex_top_email"><i class="fa fa-envelope"></i>Email: <span class="">demo@towerthemes.com</span></span>
+							<span class="tex_top_skype"><i class="glyphicon glyphicon-user"></i> Account: <span class="">{{ Auth::user()->name }}</span></span>
+							<span class="tex_top_email"><i class="fa fa-envelope"></i>Email: <span class="">{{ Auth::user()->email }}</span></span>
 						</div>
+						@endif
 						<div class="search-box">
 							<form action="#">
 								<select name="#" id="select">
@@ -160,12 +162,14 @@
 						</div>
 					</div>
 					<div class="header-bottom-right">
+						@if(Auth::check() && Auth::user())
 						<div class="left-cart">
 							<div class="header-compire">
-								<a href="#"><i class="fa fa-heart"></i> Wish List 0 </a>
-								<a href="#"><i class="fa fa-refresh"></i> Compare  0 </a>
+								<a href="#"><i class="fa fa-heart"></i> Wish List <span id="collection_wishlist">{{ $wishlist }}</span> </a>
+								<a href="#"><i class="glyphicon glyphicon-th-list"></i> Wish Shop  <span id="collection_wishshop">{{ $wishshop }}</span> </a>
 							</div>
 						</div>
+						@endif
 						<div class="shop-cart-area">
 							<div class="top-cart-wrapper">
 								<div class="block-cart">
@@ -587,6 +591,32 @@
 
 	del_small_cart();
 @endif
+</script>
+
+<script type="text/javascript">
+$('.wishlist').click(function(){
+	@if(Auth::check() && Auth::user())
+		var commodity_id = $(this).attr('info_id');
+		$.ajax({
+			url:"{{action('CollectionController@store')}}",
+			data:{commodity_id:commodity_id},
+			type:'get',
+			success:function(mes){
+				if(mes == 1){
+					$(this).find('i').css({'color':'orange'});
+					$('#collection_wishlist').html(parseInt($('#collection_wishlist').html())+1)
+					layer.msg('收藏此商品成功');
+				}else{
+					$(this).find('i').css({'color':'#555555'});
+					$('#collection_wishlist').html(parseInt($('#collection_wishlist').html())-1)
+					layer.msg('取消此商品的收藏');
+				}
+			}.bind(this)
+		});
+
+		return false;
+	@endif
+});
 </script>
 
 @section('js')
