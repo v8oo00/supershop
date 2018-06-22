@@ -192,9 +192,9 @@
 						</div>
 						<div class="blog-content-inner">
 							<div class="blog-content white-bg">
-								<a href="{{ action('ShopController@catshop',$shop->id) }}"><h4>{{ $shop->name }}</h4></a>
+								<a href="/shop/catshop/othershop/{{$shop->id}}/all"><h4>{{ $shop->name }}</h4></a>
 								<p class="mb-0">{{mb_substr($shop->desc,0,45,'utf-8').' · · ·'}}</p>
-								<a href="{{ action('ShopController@catshop',$shop->id) }}" class="read-more text-capitalize">Read more <i class="fa fa-arrow-circle-right"></i></a>
+								<a href="/shop/catshop/othershop/{{$shop->id}}/all" class="read-more text-capitalize">Read more <i class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
 					</div>
