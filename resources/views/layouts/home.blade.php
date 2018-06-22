@@ -233,7 +233,7 @@
 						<ul>
 							@foreach($cates as $cate)
 							<li>
-								<a href="/cate/f_cate/{{$cate->id}}"  class="hover-icon"><img src="/homes/img/menu-l/22.png" alt="" style="width:42px;height:42px;"/>{{$cate['cate']}}</a>
+								<a href="/cate/f_cate/{{$cate->id}}"  class="hover-icon" style='margin-top:3px;'><img src="/homes/img/menu-l/22.png" alt="" style="width:42px;height:42px;"/>{{$cate['cate']}}</a>
 								<div class="vmegamenu @if(count($cate['son'])<=15) vmegamenu2 @endif">
 									@foreach(cate_all_son(count($cate['son']),$cate['id']) as $son)
 
